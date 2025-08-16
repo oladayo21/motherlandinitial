@@ -1,0 +1,211 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  badge?: string;
+  stats?: Array<{
+    value: string | number;
+    label: string;
+    highlight?: boolean;
+  }>;
+  backgroundImage?: string;
+  showLiveBadge?: boolean;
+}
+
+const {
+  title,
+  subtitle,
+  badge = "2024/25 Season",
+  stats = [],
+  backgroundImage = "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070",
+  showLiveBadge = false,
+} = Astro.props;
+---
+
+<!-- Consistent Hero Section for All Team Pages -->
+<section class="relative h-[70vh] min-h-[600px] overflow-hidden bg-black">
+  <!-- Background Pattern Animation -->
+  <div class="absolute inset-0 opacity-10">
+    <div
+      class="animate-meshMove absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,yellow_25%,yellow_26%,transparent_26%,transparent_75%,yellow_75%,yellow_76%,transparent_76%)] bg-[length:30px_30px]"
+    >
+    </div>
+  </div>
+
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img
+      src={backgroundImage}
+      alt="Stadium atmosphere"
+      class="h-full w-full object-cover opacity-40"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black"
+    >
+    </div>
+  </div>
+
+  <!-- Decorative Elements -->
+  <div
+    class="via-yellow/50 absolute top-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent"
+  >
+  </div>
+  <div
+    class="via-yellow/50 absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent to-transparent"
+  >
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 container mx-auto h-full px-4">
+    <div class="flex h-full flex-col justify-center">
+      <div class="max-w-4xl">
+        <!-- Season/Section Badge -->
+        <div
+          class="border-yellow/30 animate-fadeInDown mb-6 inline-flex items-center gap-3 border bg-black/50 px-6 py-3 backdrop-blur-sm"
+        >
+          <span class="relative flex h-2 w-2">
+            <span
+              class="bg-yellow absolute inline-flex h-full w-full animate-ping opacity-75"
+            ></span>
+            <span class="bg-yellow relative inline-flex h-2 w-2"></span>
+          </span>
+          <span class="text-yellow text-sm font-medium tracking-wider uppercase"
+            >{badge}</span
+          >
+        </div>
+
+        <!-- Main Title -->
+        <h1
+          class="font-display mb-6 text-6xl leading-none font-black text-white uppercase md:text-7xl lg:text-8xl"
+        >
+          <span class="animate-slideInLeft block">{title.split(" ")[0]}</span>
+          {
+            title.split(" ")[1] && (
+              <span
+                class="text-yellow animate-slideInLeft mt-2 block"
+                style="animation-delay: 0.1s"
+              >
+                {title.split(" ").slice(1).join(" ")}
+              </span>
+            )
+          }
+        </h1>
+
+        <!-- Subtitle -->
+        {
+          subtitle && (
+            <p
+              class="animate-fadeInUp mb-8 max-w-2xl text-xl text-white/80 md:text-2xl"
+              style="animation-delay: 0.2s"
+            >
+              {subtitle}
+            </p>
+          )
+        }
+
+        <!-- Stats Bar -->
+        {
+          stats.length > 0 && (
+            <div
+              class="animate-fadeInUp flex flex-wrap gap-8"
+              style="animation-delay: 0.3s"
+            >
+              {stats.map((stat) => (
+                <div class="relative">
+                  <div
+                    class={`text-3xl font-black md:text-4xl ${stat.highlight ? "text-yellow" : "text-white"}`}
+                  >
+                    {stat.value}
+                  </div>
+                  <div class="mt-1 text-xs text-white/70 uppercase">
+                    {stat.label}
+                  </div>
+                  {stat.highlight && (
+                    <div class="bg-yellow/50 absolute top-0 bottom-0 -left-4 w-px" />
+                  )}
+                </div>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+    <svg
+      class="text-yellow h-6 w-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="square"
+        stroke-linejoin="miter"
+        stroke-width="2"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<style>
+  @keyframes meshMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 30px 30px;
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-meshMove {
+    animation: meshMove 10s linear infinite;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  .animate-fadeInDown {
+    animation: fadeInDown 0.6s ease-out forwards;
+  }
+
+  .animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+</style>

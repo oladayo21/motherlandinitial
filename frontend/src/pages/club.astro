@@ -1,0 +1,935 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+import SectionHeader from "../components/ui/SectionHeader.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<BaseLayout
+  title="Club - Motherland Berlin SC"
+  description="Learn about Motherland Berlin SC - our history, values, stadium, and the people who make our club special."
+>
+  <!-- Cinematic Hero Section with Diagonal Split -->
+  <section class="relative h-screen min-h-[800px] w-full overflow-hidden bg-black">
+    <!-- Background Video/Image with Parallax -->
+    <div class="absolute inset-0" data-parallax>
+      <img
+        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=2070"
+        alt="Motherland Berlin SC Stadium"
+        class="h-[120%] w-full object-cover opacity-60"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black"></div>
+    </div>
+
+    <!-- Diagonal Overlay Design -->
+    <div class="absolute inset-0 z-10">
+      <div class="relative h-full">
+        <!-- Top Diagonal Section -->
+        <div class="absolute inset-x-0 top-0 h-[60%] overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-yellow/20 to-transparent" 
+               style="clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%)">
+          </div>
+        </div>
+        
+        <!-- Bottom Diagonal Section -->
+        <div class="absolute inset-x-0 bottom-0 h-[60%] overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-tr from-black to-transparent" 
+               style="clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-20 flex h-full items-center">
+      <Container>
+        <div class="max-w-5xl">
+          <!-- Animated Ticker -->
+          <div class="mb-8 overflow-hidden">
+            <div class="animate-slide-right inline-flex whitespace-nowrap">
+              <span class="font-mono text-xs uppercase tracking-[0.3em] text-yellow">
+                Est. 2010 • Berlin • Pride of the Motherland • 
+              </span>
+              <span class="font-mono text-xs uppercase tracking-[0.3em] text-yellow">
+                Est. 2010 • Berlin • Pride of the Motherland • 
+              </span>
+            </div>
+          </div>
+
+          <!-- Main Title with Split Animation -->
+          <h1 class="font-display mb-8 text-6xl font-black uppercase leading-none lg:text-8xl">
+            <span class="block overflow-hidden">
+              <span class="block animate-slide-up text-white">More Than</span>
+            </span>
+            <span class="block overflow-hidden">
+              <span class="block animate-slide-up animation-delay-200 bg-gradient-to-r from-yellow via-gold to-yellow bg-clip-text text-transparent">
+                A Club
+              </span>
+            </span>
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="font-body mb-12 max-w-2xl text-xl text-white/90 animate-fade-in animation-delay-400 lg:text-2xl">
+            Discover the heritage, passion, and ambition that drives Motherland Berlin SC 
+            to greatness on and off the pitch.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap gap-4 animate-fade-in animation-delay-600">
+            <Button href="#history" variant="primary" size="large">
+              Explore Our Legacy
+            </Button>
+            <Button href="#stadium" variant="outline" size="large">
+              Visit Our Stadium
+            </Button>
+          </div>
+
+          <!-- Scroll Indicator -->
+          <div class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="h-6 w-6 text-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
+        </div>
+      </Container>
+    </div>
+
+    <!-- Decorative Elements -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-yellow to-transparent opacity-50"></div>
+    <div class="absolute left-0 top-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-yellow to-transparent opacity-50"></div>
+  </section>
+
+  <!-- Magazine-Style About Section -->
+  <Section background="black">
+    <Container>
+      <!-- Editorial Header -->
+      <div class="mb-16 border-l-4 border-yellow pl-8">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-yellow mb-4">Chapter 01</p>
+        <h2 class="font-display text-5xl font-black uppercase text-white lg:text-6xl">
+          Our Identity
+        </h2>
+      </div>
+      
+      <!-- Magazine Grid Layout -->
+      <div class="grid grid-cols-12 gap-8 lg:gap-12">
+        <!-- Main Article Column -->
+        <div class="col-span-12 lg:col-span-7">
+          <!-- Drop Cap Introduction -->
+          <div class="mb-8">
+            <p class="font-body text-lg leading-relaxed text-white/90 first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-7xl first-letter:font-black first-letter:text-yellow first-letter:leading-none">
+              Founded in the heart of Berlin, Motherland Berlin SC represents more than just a football club. 
+              We are a symbol of unity, passion, and the relentless pursuit of excellence that defines our city. 
+              Our journey from humble beginnings to becoming a force in German football is a testament to the 
+              power of community, dedication, and unwavering belief in our vision.
+            </p>
+          </div>
+
+          <!-- Pull Quote -->
+          <blockquote class="relative my-12 border-l-4 border-yellow pl-8 py-4">
+            <p class="font-display text-2xl font-bold text-white lg:text-3xl">
+              "We don't just play for victories, we play for the pride of our people 
+              and the future of our youth."
+            </p>
+            <cite class="mt-4 block font-body text-sm uppercase tracking-wider text-yellow">
+              — Marcus Weber, Club President
+            </cite>
+          </blockquote>
+
+          <!-- Article Content -->
+          <div class="space-y-6 text-lg text-white/80">
+            <p class="font-body">
+              Every match, every training session, and every moment represents our commitment to the values 
+              that make us who we are. Our academy nurtures tomorrow's stars, our community programs touch 
+              thousands of lives, and our first team carries the hopes and dreams of an entire city.
+            </p>
+            <p class="font-body">
+              The black and yellow that adorns our crest isn't just a color scheme—it's a declaration of 
+              identity. Black represents our strength and determination, while yellow symbolizes the bright 
+              future we're building together.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar Stats & Values -->
+        <div class="col-span-12 lg:col-span-5">
+          <!-- Club Stats Card -->
+          <div class="bg-gradient-to-br from-black-800 to-black-700 border border-yellow/20 p-8 mb-8">
+            <h3 class="font-display text-2xl font-bold text-yellow mb-6 uppercase">
+              By The Numbers
+            </h3>
+            
+            <div class="space-y-6">
+              <div class="flex justify-between items-end border-b border-white/10 pb-3">
+                <span class="font-body text-sm uppercase text-white/60">Founded</span>
+                <span class="font-display text-3xl font-black text-yellow">2010</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-white/10 pb-3">
+                <span class="font-body text-sm uppercase text-white/60">Members</span>
+                <span class="font-display text-3xl font-black text-yellow">25K+</span>
+              </div>
+              <div class="flex justify-between items-end border-b border-white/10 pb-3">
+                <span class="font-body text-sm uppercase text-white/60">Trophies</span>
+                <span class="font-display text-3xl font-black text-yellow">12</span>
+              </div>
+              <div class="flex justify-between items-end">
+                <span class="font-body text-sm uppercase text-white/60">Academy Players</span>
+                <span class="font-display text-3xl font-black text-yellow">200+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Core Values Grid -->
+          <div class="bg-black-900 border border-white/10 p-8">
+            <h3 class="font-display text-xl font-bold text-white mb-6 uppercase">Core Values</h3>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-yellow/10 border border-yellow/20 p-4 text-center hover:bg-yellow/20 transition-colors">
+                <div class="font-display text-lg font-bold text-yellow">Excellence</div>
+              </div>
+              <div class="bg-yellow/10 border border-yellow/20 p-4 text-center hover:bg-yellow/20 transition-colors">
+                <div class="font-display text-lg font-bold text-yellow">Unity</div>
+              </div>
+              <div class="bg-yellow/10 border border-yellow/20 p-4 text-center hover:bg-yellow/20 transition-colors">
+                <div class="font-display text-lg font-bold text-yellow">Respect</div>
+              </div>
+              <div class="bg-yellow/10 border border-yellow/20 p-4 text-center hover:bg-yellow/20 transition-colors">
+                <div class="font-display text-lg font-bold text-yellow">Passion</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Dramatic Timeline Section -->
+  <Section background="custom" className="bg-gradient-to-b from-black via-black-900 to-black py-24" id="history">
+    <Container>
+      <!-- Editorial Header -->
+      <div class="mb-16 border-l-4 border-gold pl-8">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">Chapter 02</p>
+        <h2 class="font-display text-5xl font-black uppercase text-white lg:text-6xl">
+          Our Journey
+        </h2>
+      </div>
+      
+      <!-- Interactive Timeline -->
+      <div class="relative pb-12">
+        <!-- Timeline Path - Desktop Center, Mobile Left -->
+        <div class="absolute left-8 md:left-12 lg:left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-yellow via-gold to-yellow lg:-translate-x-1/2"></div>
+        
+        <!-- Timeline Events -->
+        <div class="space-y-16 md:space-y-20">
+          <!-- 2010 - Foundation -->
+          <div class="relative">
+            <!-- Timeline Node -->
+            <div class="absolute left-8 md:left-12 lg:left-1/2 w-6 h-6 bg-yellow border-4 border-black -translate-x-1/2 z-20">
+              <div class="absolute inset-0 bg-yellow animate-ping"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="pl-20 md:pl-28 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-12">
+              <div class="lg:text-right lg:pr-12">
+                <div class="mb-4">
+                  <span class="font-display text-5xl md:text-6xl font-black bg-gradient-to-r from-yellow to-gold bg-clip-text text-transparent">2010</span>
+                </div>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">The Beginning</h3>
+                <p class="font-body text-base md:text-lg text-white/80">
+                  A group of visionaries came together with a dream to create a football club 
+                  that would represent the heart and soul of Berlin's diverse communities.
+                </p>
+              </div>
+              <div class="hidden lg:block"></div>
+            </div>
+          </div>
+
+          <!-- 2014 - First Trophy -->
+          <div class="relative">
+            <!-- Timeline Node -->
+            <div class="absolute left-8 md:left-12 lg:left-1/2 w-6 h-6 bg-yellow border-4 border-black -translate-x-1/2 z-20">
+              <div class="absolute inset-0 bg-yellow animate-ping" style="animation-delay: 200ms;"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="pl-20 md:pl-28 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-12">
+              <div class="hidden lg:block"></div>
+              <div class="lg:pl-12">
+                <div class="mb-4">
+                  <span class="font-display text-5xl md:text-6xl font-black bg-gradient-to-r from-yellow to-gold bg-clip-text text-transparent">2014</span>
+                </div>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">First Championship</h3>
+                <p class="font-body text-base md:text-lg text-white/80">
+                  Our breakthrough season culminated in winning the Regional League Championship, 
+                  marking the beginning of our rise through German football.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2018 - New Stadium -->
+          <div class="relative">
+            <!-- Timeline Node -->
+            <div class="absolute left-8 md:left-12 lg:left-1/2 w-6 h-6 bg-yellow border-4 border-black -translate-x-1/2 z-20">
+              <div class="absolute inset-0 bg-yellow animate-ping" style="animation-delay: 400ms;"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="pl-20 md:pl-28 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-12">
+              <div class="lg:text-right lg:pr-12">
+                <div class="mb-4">
+                  <span class="font-display text-5xl md:text-6xl font-black bg-gradient-to-r from-yellow to-gold bg-clip-text text-transparent">2018</span>
+                </div>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">New Home</h3>
+                <p class="font-body text-base md:text-lg text-white/80">
+                  The inauguration of our state-of-the-art stadium provided a fortress for our team 
+                  and a cathedral of football for our supporters.
+                </p>
+              </div>
+              <div class="hidden lg:block"></div>
+            </div>
+          </div>
+
+          <!-- 2023 - European Debut -->
+          <div class="relative">
+            <!-- Timeline Node -->
+            <div class="absolute left-8 md:left-12 lg:left-1/2 w-6 h-6 bg-yellow border-4 border-black -translate-x-1/2 z-20">
+              <div class="absolute inset-0 bg-yellow animate-ping" style="animation-delay: 600ms;"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="pl-20 md:pl-28 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-12">
+              <div class="hidden lg:block"></div>
+              <div class="lg:pl-12">
+                <div class="mb-4">
+                  <span class="font-display text-5xl md:text-6xl font-black bg-gradient-to-r from-yellow to-gold bg-clip-text text-transparent">2023</span>
+                </div>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">European Nights</h3>
+                <p class="font-body text-base md:text-lg text-white/80">
+                  Qualifying for European competition marked our arrival on the continental stage, 
+                  bringing prestigious opponents to Berlin.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Future -->
+          <div class="relative">
+            <!-- Timeline Node -->
+            <div class="absolute left-8 md:left-12 lg:left-1/2 w-6 h-6 bg-gradient-to-r from-gold to-yellow border-4 border-black -translate-x-1/2 z-20">
+              <div class="absolute inset-0 bg-gold animate-pulse"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="pl-20 md:pl-28 lg:pl-0 lg:grid lg:grid-cols-2 lg:gap-12">
+              <div class="lg:text-right lg:pr-12">
+                <div class="mb-4">
+                  <span class="font-display text-5xl md:text-6xl font-black bg-gradient-to-r from-gold to-yellow bg-clip-text text-transparent">2025+</span>
+                </div>
+                <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-4">The Future Awaits</h3>
+                <p class="font-body text-base md:text-lg text-white/80">
+                  With ambitious plans for expansion and a commitment to excellence, 
+                  we're building a legacy that will inspire generations to come.
+                </p>
+              </div>
+              <div class="hidden lg:block"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Training Ground Section -->
+  <Section background="black" id="stadium">
+    <Container>
+      <!-- Editorial Header -->
+      <div class="mb-16 border-l-4 border-yellow pl-8">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-yellow mb-4">Chapter 03</p>
+        <h2 class="font-display text-5xl font-black uppercase text-white lg:text-6xl">
+          Our Fortress
+        </h2>
+      </div>
+      
+      <!-- Training Ground Info -->
+      <div class="grid grid-cols-12 gap-8 lg:gap-12">
+        <!-- Main Visual -->
+        <div class="col-span-12 lg:col-span-7">
+          <div class="relative group overflow-hidden mb-8">
+            <img
+              src="https://images.unsplash.com/photo-1459865264687-595d652de67e?q=80&w=2069"
+              alt="Motherland Training Ground"
+              class="w-full aspect-video object-cover transform transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+            
+            <!-- Overlay Info -->
+            <div class="absolute bottom-0 left-0 right-0 p-8">
+              <h3 class="font-display text-4xl font-black text-white mb-2">Motherland Training Complex</h3>
+              <p class="font-body text-lg text-white/90">Where champions are forged</p>
+            </div>
+          </div>
+
+          <!-- Location Card -->
+          <div class="bg-black-900 border border-yellow/20 p-8">
+            <h4 class="font-display text-2xl font-bold text-yellow mb-6 uppercase">Location</h4>
+            <div class="space-y-4">
+              <div class="flex items-start space-x-4">
+                <div class="text-yellow text-2xl">📍</div>
+                <div>
+                  <p class="font-display text-lg font-bold text-white">Sportplatz am Poststadion</p>
+                  <p class="font-body text-white/70">Lehrter Str. 59, 10557 Berlin</p>
+                  <p class="font-body text-white/70 mt-2">Moabit District, Central Berlin</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-4 mt-6">
+                <div class="text-yellow text-2xl">🚇</div>
+                <div>
+                  <p class="font-display text-lg font-bold text-white mb-2">Public Transport</p>
+                  <p class="font-body text-white/70">U-Bahn: U9 (Birkenstraße)</p>
+                  <p class="font-body text-white/70">S-Bahn: S3, S5, S7, S9 (Hauptbahnhof)</p>
+                  <p class="font-body text-white/70">Bus: 123, 142, M27</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Training Schedule -->
+        <div class="col-span-12 lg:col-span-5">
+          <!-- Training Times Card -->
+          <div class="bg-gradient-to-br from-black-800 to-black-700 border border-yellow/20 p-8 mb-8">
+            <h4 class="font-display text-2xl font-bold text-yellow mb-6 uppercase">Training Schedule</h4>
+            
+            <div class="space-y-6">
+              <!-- First Team -->
+              <div class="border-b border-white/10 pb-4">
+                <h5 class="font-display text-lg font-bold text-white mb-3">First Team</h5>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">Monday - Friday</span>
+                    <span class="font-display font-bold text-yellow">10:00 - 12:00</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">Tuesday & Thursday</span>
+                    <span class="font-display font-bold text-yellow">16:00 - 18:00</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">Saturday</span>
+                    <span class="font-display font-bold text-yellow">Match Day</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Youth Academy -->
+              <div class="border-b border-white/10 pb-4">
+                <h5 class="font-display text-lg font-bold text-white mb-3">Youth Academy</h5>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">U19 - U17</span>
+                    <span class="font-display font-bold text-yellow">15:30 - 17:30</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">U15 - U13</span>
+                    <span class="font-display font-bold text-yellow">16:00 - 18:00</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">U11 - U9</span>
+                    <span class="font-display font-bold text-yellow">16:30 - 18:00</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Women's Team -->
+              <div>
+                <h5 class="font-display text-lg font-bold text-white mb-3">Women's Team</h5>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">Monday, Wednesday, Friday</span>
+                    <span class="font-display font-bold text-yellow">18:30 - 20:30</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-body text-white/70">Sunday</span>
+                    <span class="font-display font-bold text-yellow">10:00 - 12:00</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Open Training Info -->
+          <div class="bg-yellow/10 border border-yellow/30 p-6">
+            <div class="flex items-start space-x-3">
+              <div class="text-yellow text-2xl">👥</div>
+              <div>
+                <h5 class="font-display text-lg font-bold text-yellow mb-2">Open Training Sessions</h5>
+                <p class="font-body text-sm text-white/80">
+                  Fans are welcome to watch training sessions every Wednesday from 10:00-12:00. 
+                  Free entry - come support your team!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Editorial-Style Leadership Section -->
+  <Section background="custom" className="bg-gradient-to-b from-black via-black-900 to-black">
+    <Container>
+      <!-- Editorial Header -->
+      <div class="mb-16 border-l-4 border-gold pl-8">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">Chapter 04</p>
+        <h2 class="font-display text-5xl font-black uppercase text-white lg:text-6xl">
+          Leadership
+        </h2>
+      </div>
+      
+      <!-- Leadership Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <!-- President Card -->
+        <div class="group relative overflow-hidden">
+          <div class="aspect-[3/4] relative">
+            <img
+              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070"
+              alt="Marcus Weber"
+              class="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+            
+            <!-- Content Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="font-mono text-xs uppercase tracking-[0.3em] text-yellow mb-2">President</p>
+                <h3 class="font-display text-2xl font-black text-white uppercase mb-1">
+                  Marcus Weber
+                </h3>
+                <p class="font-body text-sm text-white/70">Since 2018</p>
+              </div>
+              
+              <!-- Hidden bio that appears on hover -->
+              <div class="mt-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <p class="font-body text-sm text-white/90">
+                  Leading the club's strategic vision and global expansion.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Accent border -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow to-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Head Coach Card -->
+        <div class="group relative overflow-hidden">
+          <div class="aspect-[3/4] relative">
+            <img
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2069"
+              alt="Thomas Müller"
+              class="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+            
+            <!-- Content Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="font-mono text-xs uppercase tracking-[0.3em] text-yellow mb-2">Head Coach</p>
+                <h3 class="font-display text-2xl font-black text-white uppercase mb-1">
+                  Thomas Müller
+                </h3>
+                <p class="font-body text-sm text-white/70">Since 2022</p>
+              </div>
+              
+              <!-- Hidden bio that appears on hover -->
+              <div class="mt-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <p class="font-body text-sm text-white/90">
+                  Tactical mastermind bringing modern football philosophy.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Accent border -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow to-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+          </div>
+        </div>
+
+        <!-- Sporting Director Card -->
+        <div class="group relative overflow-hidden">
+          <div class="aspect-[3/4] relative">
+            <img
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070"
+              alt="Stefan Koch"
+              class="absolute inset-0 h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+            
+            <!-- Content Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-6">
+              <div class="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                <p class="font-mono text-xs uppercase tracking-[0.3em] text-yellow mb-2">Sporting Director</p>
+                <h3 class="font-display text-2xl font-black text-white uppercase mb-1">
+                  Stefan Koch
+                </h3>
+                <p class="font-body text-sm text-white/70">Since 2020</p>
+              </div>
+              
+              <!-- Hidden bio that appears on hover -->
+              <div class="mt-4 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <p class="font-body text-sm text-white/90">
+                  Building world-class squads through smart recruitment.
+                </p>
+              </div>
+            </div>
+            
+            <!-- Accent border -->
+            <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow to-gold transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Dynamic Achievements Showcase -->
+  <Section background="black">
+    <Container>
+      <!-- Editorial Header -->
+      <div class="mb-16 border-l-4 border-yellow pl-8">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-yellow mb-4">Chapter 05</p>
+        <h2 class="font-display text-5xl font-black uppercase text-white lg:text-6xl">
+          Trophy Cabinet
+        </h2>
+      </div>
+      
+      <!-- Trophy Display Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <!-- Trophy Card 1 -->
+        <div class="group relative bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 p-8 text-center hover:from-gold/30 hover:to-gold/10 transition-all duration-300 hover:scale-105">
+          <div class="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">🏆</div>
+          <h4 class="font-display text-lg font-bold text-gold mb-2 uppercase">Regional League</h4>
+          <p class="font-body text-sm text-white/70">Champions</p>
+          <p class="font-display text-xl font-black text-gold mt-2">2×</p>
+        </div>
+
+        <!-- Trophy Card 2 -->
+        <div class="group relative bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 p-8 text-center hover:from-gold/30 hover:to-gold/10 transition-all duration-300 hover:scale-105">
+          <div class="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">🥇</div>
+          <h4 class="font-display text-lg font-bold text-gold mb-2 uppercase">City Cup</h4>
+          <p class="font-body text-sm text-white/70">Winners</p>
+          <p class="font-display text-xl font-black text-gold mt-2">3×</p>
+        </div>
+
+        <!-- Trophy Card 3 -->
+        <div class="group relative bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 p-8 text-center hover:from-gold/30 hover:to-gold/10 transition-all duration-300 hover:scale-105">
+          <div class="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">🏅</div>
+          <h4 class="font-display text-lg font-bold text-gold mb-2 uppercase">Youth League</h4>
+          <p class="font-body text-sm text-white/70">Champions</p>
+          <p class="font-display text-xl font-black text-gold mt-2">3×</p>
+        </div>
+
+        <!-- Trophy Card 4 -->
+        <div class="group relative bg-gradient-to-br from-gold/20 to-gold/5 border border-gold/30 p-8 text-center hover:from-gold/30 hover:to-gold/10 transition-all duration-300 hover:scale-105">
+          <div class="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">⭐</div>
+          <h4 class="font-display text-lg font-bold text-gold mb-2 uppercase">Fair Play</h4>
+          <p class="font-body text-sm text-white/70">Award</p>
+          <p class="font-display text-xl font-black text-gold mt-2">3×</p>
+        </div>
+      </div>
+
+      <!-- Achievement Timeline -->
+      <div class="mt-16 bg-black-900 border border-white/10 p-8">
+        <h3 class="font-display text-2xl font-bold text-white mb-8 text-center uppercase">
+          Recent Achievements
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="font-display text-4xl font-black text-yellow mb-2">2023</div>
+            <p class="font-body text-white/80">European Competition Debut</p>
+          </div>
+          <div class="text-center">
+            <div class="font-display text-4xl font-black text-yellow mb-2">2022</div>
+            <p class="font-body text-white/80">Record 15-Match Unbeaten Run</p>
+          </div>
+          <div class="text-center">
+            <div class="font-display text-4xl font-black text-yellow mb-2">2021</div>
+            <p class="font-body text-white/80">Academy Graduate Debuts</p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Join Us Section -->
+  <Section background="custom" className="bg-gradient-to-b from-black to-black-900">
+    <Container>
+      <!-- Editorial Header -->
+      <div class="mb-16 border-l-4 border-gold pl-8">
+        <p class="font-mono text-xs uppercase tracking-[0.3em] text-gold mb-4">Chapter 06</p>
+        <h2 class="font-display text-5xl font-black uppercase text-white lg:text-6xl">
+          Join The Family
+        </h2>
+      </div>
+      
+      <!-- Join Options Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+        <!-- Join as Player -->
+        <div class="relative group">
+          <div class="bg-gradient-to-br from-yellow/10 to-transparent border border-yellow/30 p-10 h-full hover:from-yellow/20 hover:border-yellow/50 transition-all duration-300">
+            <div class="flex items-center mb-6">
+              <div class="bg-yellow text-black p-4 mr-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                </svg>
+              </div>
+              <h3 class="font-display text-3xl font-black text-yellow uppercase">Become a Player</h3>
+            </div>
+            
+            <p class="font-body text-lg text-white/90 mb-8">
+              Join our ranks and wear the black and yellow with pride. We're always looking for talented 
+              players who share our passion and commitment to excellence.
+            </p>
+
+            <div class="space-y-6 mb-8">
+              <div>
+                <h4 class="font-display text-lg font-bold text-white mb-3">Open Trials</h4>
+                <ul class="space-y-2 text-white/80">
+                  <li class="font-body flex items-start">
+                    <span class="text-yellow mr-2">▶</span>
+                    <span>First Team: June & December</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-yellow mr-2">▶</span>
+                    <span>Women's Team: May & November</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-yellow mr-2">▶</span>
+                    <span>Youth Academy: Year-round intake (ages 6-18)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-display text-lg font-bold text-white mb-3">Requirements</h4>
+                <ul class="space-y-2 text-white/80">
+                  <li class="font-body flex items-start">
+                    <span class="text-yellow mr-2">✓</span>
+                    <span>Valid player registration or transfer certificate</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-yellow mr-2">✓</span>
+                    <span>Medical fitness certificate</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-yellow mr-2">✓</span>
+                    <span>Commitment to training schedule</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-black/50 border border-yellow/20 p-6">
+              <p class="font-display text-sm font-bold text-yellow uppercase mb-2">Contact Trials Coordinator</p>
+              <p class="font-body text-white">trials@motherlandsc.de</p>
+              <p class="font-body text-white/70">+49 30 1234 5678</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Join as Volunteer -->
+        <div class="relative group">
+          <div class="bg-gradient-to-br from-gold/10 to-transparent border border-gold/30 p-10 h-full hover:from-gold/20 hover:border-gold/50 transition-all duration-300">
+            <div class="flex items-center mb-6">
+              <div class="bg-gold text-black p-4 mr-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                </svg>
+              </div>
+              <h3 class="font-display text-3xl font-black text-gold uppercase">Volunteer With Us</h3>
+            </div>
+            
+            <p class="font-body text-lg text-white/90 mb-8">
+              Be part of something special. From match days to community events, our volunteers are the 
+              heartbeat of Motherland SC. No experience necessary - just passion!
+            </p>
+
+            <div class="space-y-6 mb-8">
+              <div>
+                <h4 class="font-display text-lg font-bold text-white mb-3">Volunteer Opportunities</h4>
+                <ul class="space-y-2 text-white/80">
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">▶</span>
+                    <span>Match Day Support (stewards, hospitality)</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">▶</span>
+                    <span>Youth Coaching Assistants</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">▶</span>
+                    <span>Community Outreach Programs</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">▶</span>
+                    <span>Social Media & Photography</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">▶</span>
+                    <span>Event Organization & Administration</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-display text-lg font-bold text-white mb-3">Benefits</h4>
+                <ul class="space-y-2 text-white/80">
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">✓</span>
+                    <span>Free match tickets for volunteers</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">✓</span>
+                    <span>Official volunteer merchandise</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">✓</span>
+                    <span>Training and skill development</span>
+                  </li>
+                  <li class="font-body flex items-start">
+                    <span class="text-gold mr-2">✓</span>
+                    <span>Certificate of volunteer service</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-black/50 border border-gold/20 p-6">
+              <p class="font-display text-sm font-bold text-gold uppercase mb-2">Volunteer Coordinator</p>
+              <p class="font-body text-white">volunteer@motherlandsc.de</p>
+              <p class="font-body text-white/70">+49 30 1234 5679</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Application CTA -->
+      <div class="text-center bg-gradient-to-r from-yellow/5 via-yellow/10 to-yellow/5 border-y border-yellow/20 py-12">
+        <h3 class="font-display text-3xl font-black text-white mb-6 uppercase">
+          Ready to Join?
+        </h3>
+        <p class="font-body text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+          Take the first step towards becoming part of the Motherland SC family. 
+          Whether on the pitch or behind the scenes, every contribution matters.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <Button href="/player-application" variant="primary" size="large">
+            Apply as Player
+          </Button>
+          <Button href="/volunteer-application" variant="outline" size="large">
+            Volunteer Sign Up
+          </Button>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+
+</BaseLayout>
+
+<style>
+  /* Animations */
+  @keyframes slide-right {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+  }
+  
+  @keyframes slide-up {
+    from { 
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to { 
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .animate-slide-right {
+    animation: slide-right 20s linear infinite;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  
+  /* Timeline Item Animation */
+  [data-timeline-item] {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  [data-timeline-item].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  // Parallax effect for hero background
+  const parallaxElement = document.querySelector('[data-parallax]') as HTMLElement;
+  if (parallaxElement) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const rate = scrolled * -0.5;
+      parallaxElement.style.transform = `translateY(${rate}px)`;
+    });
+  }
+
+  // Timeline animation on scroll
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, index * 150);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('[data-timeline-item]').forEach(item => {
+    observer.observe(item);
+  });
+</script>

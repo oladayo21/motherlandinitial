@@ -1,0 +1,369 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+
+// Mock match data - in production this would come from an API
+const matchData = {
+  homeTeam: "Motherland SC",
+  awayTeam: "City United",
+  homeScore: 2,
+  awayScore: 1,
+  status: "live", // "upcoming", "live", "finished"
+  kickoffTime: new Date().toISOString(),
+  venue: "National Stadium",
+  competition: "Premier League",
+  matchday: 15,
+  attendance: "45,230",
+  referee: "Michael Thompson",
+  isLive: true,
+  liveStreamUrl: "https://www.youtube.com/embed/ieOon483mnY?si=034PNy-WBkVBsvVG",
+  currentTime: "73'",
+  homeFormation: "4-3-3",
+  awayFormation: "4-2-3-1"
+};
+
+const homeLineup = [
+  { name: "James Wilson", number: 1, position: "GK" },
+  { name: "Marcus Johnson", number: 2, position: "RB" },
+  { name: "David Smith", number: 5, position: "CB" },
+  { name: "Alex Brown", number: 6, position: "CB" },
+  { name: "Carlos Rodriguez", number: 3, position: "LB" },
+  { name: "Michael Chen", number: 8, position: "CM" },
+  { name: "Ahmed Hassan", number: 10, position: "CAM", captain: true },
+  { name: "Tom Williams", number: 7, position: "CM" },
+  { name: "Robert Taylor", number: 9, position: "ST" },
+  { name: "Sergio Martinez", number: 11, position: "LW" },
+  { name: "Kevin O'Connor", number: 19, position: "RW" }
+];
+
+const homeSubstitutes = [
+  { name: "Daniel Park", number: 21, position: "GK" },
+  { name: "John Davies", number: 15, position: "DF" },
+  { name: "Luis Garcia", number: 22, position: "MF" },
+  { name: "Andre Silva", number: 14, position: "FW" },
+  { name: "Ryan Foster", number: 23, position: "MF" },
+  { name: "Mohammed Ali", number: 25, position: "DF" },
+  { name: "Patrick O'Brien", number: 27, position: "FW" }
+];
+
+const awayLineup = [
+  { name: "Peter Anderson", number: 1, position: "GK" },
+  { name: "Jake Thompson", number: 2, position: "RB" },
+  { name: "Luis Fernandez", number: 4, position: "CB" },
+  { name: "Chris Davis", number: 5, position: "CB" },
+  { name: "Ryan Murphy", number: 3, position: "LB" },
+  { name: "Sam Wilson", number: 6, position: "CDM" },
+  { name: "Marco Silva", number: 8, position: "CDM" },
+  { name: "Ben Clarke", number: 10, position: "RAM" },
+  { name: "Diego Lopez", number: 7, position: "CAM", captain: true },
+  { name: "Josh Miller", number: 11, position: "LAM" },
+  { name: "Antonio Rossi", number: 9, position: "ST" }
+];
+
+const awaySubstitutes = [
+  { name: "Matt Johnson", number: 13, position: "GK" },
+  { name: "Oliver Brown", number: 16, position: "DF" },
+  { name: "Felix Santos", number: 20, position: "MF" },
+  { name: "Ricardo Torres", number: 17, position: "FW" },
+  { name: "James Lee", number: 18, position: "MF" },
+  { name: "David Wilson", number: 24, position: "DF" },
+  { name: "Carlos Mendez", number: 26, position: "FW" }
+];
+
+const matchEvents = [
+  { time: "12'", type: "goal", team: "home", player: "Robert Taylor" },
+  { time: "28'", type: "yellow", team: "away", player: "Luis Fernandez" },
+  { time: "35'", type: "goal", team: "away", player: "Antonio Rossi" },
+  { time: "58'", type: "goal", team: "home", player: "Ahmed Hassan" },
+  { time: "65'", type: "substitution", team: "home", playerOut: "Kevin O'Connor", playerIn: "Daniel Park" },
+  { time: "70'", type: "yellow", team: "home", player: "Michael Chen" },
+  { time: "72'", type: "substitution", team: "away", playerOut: "Josh Miller", playerIn: "Felix Santos" }
+];
+---
+
+<BaseLayout title="Match Center - Motherland SC vs City United" description="Live match center with stream and lineups">
+  <!-- Hero Header -->
+  <section class="relative bg-black pt-20 pb-0 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black"></div>
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070"
+        alt="Stadium atmosphere"
+        class="w-full h-full object-cover opacity-20"
+      />
+    </div>
+    
+    <div class="relative z-10">
+      <Container className="max-w-[1920px]">
+        <!-- Match Header -->
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-3 bg-black/50 backdrop-blur-md border border-yellow/30 px-6 py-3 mb-6">
+            {matchData.isLive ? (
+              <>
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                </span>
+                <span class="font-display text-red-500 font-black uppercase tracking-widest">LIVE MATCH</span>
+                <span class="font-body text-white/60">{matchData.currentTime}</span>
+              </>
+            ) : (
+              <span class="font-display text-yellow font-bold uppercase tracking-widest">MATCH CENTER</span>
+            )}
+          </div>
+          
+          <!-- Score Display -->
+          <div class="grid grid-cols-3 items-center max-w-4xl mx-auto mb-8">
+            <div>
+              <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase">
+                {matchData.homeTeam}
+              </h1>
+              <p class="font-body text-white/60 mt-2">{matchData.homeFormation}</p>
+            </div>
+            
+            <div>
+              <div class="font-display text-6xl md:text-7xl lg:text-8xl font-black">
+                <span class="text-yellow">{matchData.homeScore}</span>
+                <span class="text-white/30 mx-4">-</span>
+                <span class="text-white">{matchData.awayScore}</span>
+              </div>
+            </div>
+            
+            <div>
+              <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase">
+                {matchData.awayTeam}
+              </h1>
+              <p class="font-body text-white/60 mt-2">{matchData.awayFormation}</p>
+            </div>
+          </div>
+          
+          <!-- Match Info Bar -->
+          <div class="flex flex-wrap justify-center items-center gap-6 text-white/60 text-sm">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-yellow" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+              </svg>
+              {matchData.competition} - Matchday {matchData.matchday}
+            </span>
+            <span>{matchData.venue}</span>
+            <span>Attendance: {matchData.attendance}</span>
+            <span>Referee: {matchData.referee}</span>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <!-- Live Stream Section -->
+  <Section background="black" className="border-t border-yellow/10">
+    <Container className="max-w-[1400px]">
+      <!-- Stream Container -->
+      <div class="bg-gradient-to-r from-yellow via-gold to-yellow p-[1px]">
+        <div class="bg-black">
+          <div class="aspect-video relative bg-black">
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src={matchData.liveStreamUrl}
+              title="YouTube video player" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin" 
+              allowfullscreen
+              class="absolute inset-0 h-full w-full"
+            ></iframe>
+          </div>
+          
+          <!-- Stream Info Bar -->
+          <div class="bg-black-900 p-4 border-t border-yellow/20">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-4">
+                <span class="font-body text-white/60 text-sm">Live Stream • HD Quality</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <button class="text-white/60 hover:text-white transition-colors">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Match Events Timeline -->
+      <div class="mt-12 bg-black-900 border border-yellow/20 p-8">
+        <h3 class="font-display text-2xl font-bold text-white mb-6">Match Events</h3>
+        
+        <div class="grid gap-4">
+          {matchEvents.map((event) => (
+            <div class="flex items-center gap-6 p-4 bg-black-800 border border-white/10">
+              <span class="font-display text-yellow text-xl font-bold min-w-[4rem]">
+                {event.time}
+              </span>
+              
+              <div class="flex items-center gap-3">
+                {event.type === 'goal' && (
+                  <div class="bg-yellow text-black px-3 py-1 text-xs font-bold uppercase">Goal</div>
+                )}
+                {event.type === 'yellow' && (
+                  <div class="bg-yellow text-black px-3 py-1 text-xs font-bold uppercase">Yellow</div>
+                )}
+                {event.type === 'substitution' && (
+                  <div class="bg-blue-600 text-white px-3 py-1 text-xs font-bold uppercase">Sub</div>
+                )}
+              </div>
+              
+              <div class="flex-1">
+                <p class="font-body text-white">
+                  {event.type === 'goal' && `⚽ ${event.player}`}
+                  {event.type === 'yellow' && `${event.player}`}
+                  {event.type === 'substitution' && `${event.playerOut} ➔ ${event.playerIn}`}
+                </p>
+              </div>
+              
+              <div class="text-right">
+                <p class="font-body text-white/60 text-sm">
+                  {event.team === 'home' ? matchData.homeTeam : matchData.awayTeam}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Team Lineups Section -->
+  <Section background="black" className="border-t border-yellow/10">
+    <Container className="max-w-[1400px]">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <h2 class="font-display text-4xl md:text-5xl font-black text-white uppercase">
+          Team <span class="text-yellow">Lineups</span>
+        </h2>
+        <div class="h-1 w-20 bg-yellow mx-auto mt-4"></div>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Home Team Lineup -->
+        <div>
+          <div class="bg-gradient-to-r from-yellow via-gold to-yellow p-[1px]">
+            <div class="bg-black p-6">
+              <h3 class="font-display text-2xl font-bold text-white text-center">
+                {matchData.homeTeam}
+              </h3>
+            </div>
+          </div>
+          
+          <!-- Starting XI -->
+          <div class="bg-black-900 border border-yellow/20 mt-4">
+            <div class="bg-black-800 p-4 border-b border-yellow/20">
+              <h4 class="font-display text-lg font-bold text-yellow">Starting XI</h4>
+            </div>
+            <div class="p-4">
+              {homeLineup.map((player) => (
+                <div class="flex items-center justify-between py-3 border-b border-white/10 hover:bg-black-800 transition-colors px-4 -mx-4">
+                  <div class="flex items-center gap-4">
+                    <span class="font-display text-2xl font-bold text-yellow w-10 text-center">
+                      {player.number}
+                    </span>
+                    <div>
+                      <p class="font-body text-white font-medium">
+                        {player.name}
+                        {player.captain && <span class="text-yellow ml-2">©</span>}
+                      </p>
+                      <p class="font-body text-white/60 text-sm">{player.position}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Substitutes -->
+          <div class="bg-black-900 border border-yellow/20 mt-4">
+            <div class="bg-black-800 p-4 border-b border-yellow/20">
+              <h4 class="font-display text-lg font-bold text-white/80">Substitutes</h4>
+            </div>
+            <div class="p-4">
+              {homeSubstitutes.map((player) => (
+                <div class="flex items-center gap-4 py-2 border-b border-white/5">
+                  <span class="font-display text-lg text-yellow/60 w-10 text-center">
+                    {player.number}
+                  </span>
+                  <span class="font-body text-white/70">
+                    {player.name}
+                  </span>
+                  <span class="font-body text-white/40 text-sm ml-auto">
+                    {player.position}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Away Team Lineup -->
+        <div>
+          <div class="bg-gradient-to-r from-white/20 via-white/30 to-white/20 p-[1px]">
+            <div class="bg-black p-6">
+              <h3 class="font-display text-2xl font-bold text-white text-center">
+                {matchData.awayTeam}
+              </h3>
+            </div>
+          </div>
+          
+          <!-- Starting XI -->
+          <div class="bg-black-900 border border-white/20 mt-4">
+            <div class="bg-black-800 p-4 border-b border-white/20">
+              <h4 class="font-display text-lg font-bold text-white">Starting XI</h4>
+            </div>
+            <div class="p-4">
+              {awayLineup.map((player) => (
+                <div class="flex items-center justify-between py-3 border-b border-white/10 hover:bg-black-800 transition-colors px-4 -mx-4">
+                  <div class="flex items-center gap-4">
+                    <span class="font-display text-2xl font-bold text-white/80 w-10 text-center">
+                      {player.number}
+                    </span>
+                    <div>
+                      <p class="font-body text-white font-medium">
+                        {player.name}
+                        {player.captain && <span class="text-white/60 ml-2">©</span>}
+                      </p>
+                      <p class="font-body text-white/60 text-sm">{player.position}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Substitutes -->
+          <div class="bg-black-900 border border-white/20 mt-4">
+            <div class="bg-black-800 p-4 border-b border-white/20">
+              <h4 class="font-display text-lg font-bold text-white/80">Substitutes</h4>
+            </div>
+            <div class="p-4">
+              {awaySubstitutes.map((player) => (
+                <div class="flex items-center gap-4 py-2 border-b border-white/5">
+                  <span class="font-display text-lg text-white/50 w-10 text-center">
+                    {player.number}
+                  </span>
+                  <span class="font-body text-white/70">
+                    {player.name}
+                  </span>
+                  <span class="font-body text-white/40 text-sm ml-auto">
+                    {player.position}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>

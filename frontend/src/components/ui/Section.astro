@@ -1,0 +1,44 @@
+---
+export interface Props {
+  background?:
+    | "white"
+    | "black"
+    | "yellow"
+    | "gold"
+    | "gradient-gold"
+    | "gradient-yellow"
+    | "custom";
+  className?: string;
+  id?: string;
+  animate?: boolean;
+  noPadding?: boolean;
+}
+
+const {
+  background = "white",
+  className = "",
+  id,
+  animate = false,
+  noPadding = false,
+} = Astro.props;
+
+const backgroundClasses = {
+  white: "bg-white text-black",
+  black: "bg-black text-white",
+  yellow: "bg-yellow text-black",
+  gold: "bg-gold text-black",
+  "gradient-gold":
+    "from-black via-black-800 to-black bg-gradient-to-br text-white",
+  "gradient-yellow":
+    "from-yellow via-gold to-yellow-600 bg-gradient-to-br text-black",
+  custom: "",
+};
+
+const bgClass = backgroundClasses[background] || "";
+const paddingClass = noPadding ? "" : "py-16 md:py-24 lg:py-32";
+const animateClass = animate ? "scroll-animate" : "";
+---
+
+<section id={id} class:list={[bgClass, paddingClass, animateClass, className]}>
+  <slot />
+</section>

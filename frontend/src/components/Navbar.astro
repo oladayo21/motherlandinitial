@@ -1,0 +1,158 @@
+---
+const navItems = [
+  { label: "News", href: "/news" },
+  {
+    label: "Men's Team",
+    href: "/teams/mens",
+    dropdown: [
+      { label: "Team Overview", href: "/teams/mens" },
+      { label: "Squad & Players", href: "/teams/men/players-staff" },
+      { label: "Stats & Standings", href: "/teams/men/stats" },
+      { label: "Fixtures & Results", href: "/teams/men/fixtures-results" },
+    ],
+  },
+  {
+    label: "Women's Team",
+    href: "#",
+    dropdown: [
+      { label: "Players & Staff", href: "/teams/women/players-staff" },
+      { label: "Fixtures & Results", href: "/teams/women/fixtures-results" },
+    ],
+  },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Club", href: "/club" },
+  { label: "Shop", href: "/shop" },
+];
+---
+
+<header
+  class="sticky top-0 z-50 border-b border-white/10 bg-black bg-black/95 backdrop-blur-md"
+>
+  <nav class="container mx-auto px-4">
+    <div class="flex h-16 items-center justify-between lg:h-20">
+      <!-- Logo Section -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-3">
+          <img
+            src="/motherland-logo.png"
+            alt="Motherland SC Logo"
+            class="h-10 w-10 object-contain lg:h-12 lg:w-12"
+          />
+          <span
+            class="text-yellow hidden text-2xl sm:block lg:text-3xl"
+            style="font-family: 'Caveat', cursive; font-weight: 700;"
+          >
+            Motherland Berlin SC
+          </span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden items-center space-x-1 lg:flex">
+        {
+          navItems.map((item) => (
+            <div class="group relative">
+              <a
+                href={item.href}
+                class="font-body hover:text-yellow flex items-center px-4 py-2 font-medium text-white transition-colors duration-200"
+              >
+                {item.label}
+                {item.dropdown && (
+                  <svg
+                    class="ml-1 h-4 w-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                )}
+              </a>
+
+              {item.dropdown && (
+                <div class="bg-black-800 border-yellow/20 invisible absolute top-full left-0 w-56 border opacity-0 shadow-2xl transition-all duration-200 group-hover:visible group-hover:opacity-100">
+                  <div class="py-2">
+                    {item.dropdown.map((subItem) => (
+                      <a
+                        href={subItem.href}
+                        class="font-body text-black-200 hover:bg-yellow block px-4 py-3 font-medium transition-all duration-200 hover:font-bold hover:text-black"
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Right Section -->
+      <div class="flex items-center space-x-4">
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="hover:bg-black-800 p-2 transition-colors duration-200 lg:hidden"
+        >
+          <svg
+            class="h-6 w-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden">
+      <div class="space-y-1 py-4">
+        {
+          navItems.map((item) => (
+            <div>
+              <a
+                href={item.href}
+                class="font-body hover:bg-yellow block px-4 py-2 font-medium text-white transition-colors duration-200 hover:text-black"
+              >
+                {item.label}
+              </a>
+              {item.dropdown && (
+                <div class="space-y-1 pl-8">
+                  {item.dropdown.map((subItem) => (
+                    <a
+                      href={subItem.href}
+                      class="font-body text-black-300 hover:text-yellow block px-4 py-1 text-sm transition-colors duration-200"
+                    >
+                      {subItem.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  mobileMenuButton?.addEventListener("click", () => {
+    mobileMenu?.classList.toggle("hidden");
+  });
+</script>

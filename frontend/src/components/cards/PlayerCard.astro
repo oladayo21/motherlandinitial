@@ -1,0 +1,92 @@
+---
+export interface Props {
+  name: string;
+  number: string;
+  position: string;
+  nationality: string;
+  image: string;
+  animate?: boolean;
+}
+
+const {
+  name,
+  number,
+  position,
+  nationality,
+  image,
+  animate = false,
+} = Astro.props;
+---
+
+<div
+  class={`
+    group relative bg-black-700 border border-black-600 overflow-hidden transition-all duration-300
+    hover:border-yellow hover:scale-105 hover:shadow-xl hover:shadow-yellow/10
+    ${animate ? "opacity-0 animate-fadeInUp" : ""}
+  `}
+>
+  <div class="bg-black-900 aspect-[3/4] overflow-hidden">
+    <img
+      src={image}
+      alt={name}
+      class="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+      loading="lazy"
+    />
+  </div>
+
+  <div
+    class="absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black via-black/95 to-transparent p-4 pt-12"
+  >
+    <div class="mb-2 flex items-start justify-between">
+      <div class="flex-1">
+        <div class="font-display text-yellow mb-1 text-3xl font-black">
+          {number}
+        </div>
+        <h3
+          class="font-display group-hover:text-yellow mb-1 text-lg font-bold text-white transition-colors"
+        >
+          {name}
+        </h3>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between text-sm">
+      <span class="text-text-muted text-xs tracking-wider uppercase">
+        {position}
+      </span>
+      <div class="flex items-center gap-1">
+        <img
+          src={`https://flagcdn.com/24x18/${nationality.toLowerCase()}.png`}
+          alt={nationality}
+          class="h-4 w-5 object-cover"
+          onerror="this.style.display='none'"
+        />
+        <span class="text-text-secondary text-xs uppercase">
+          {nationality}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="bg-yellow/0 group-hover:bg-yellow/5 pointer-events-none absolute inset-0 transition-colors"
+  >
+  </div>
+</div>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+</style>

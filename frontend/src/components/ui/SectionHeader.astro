@@ -1,0 +1,78 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+  align?: "left" | "center" | "right";
+  animate?: boolean;
+  underlineColor?: "yellow" | "gold" | "black" | "white";
+}
+
+const {
+  title,
+  subtitle,
+  ctaText,
+  ctaHref,
+  align = "left",
+  animate = true,
+  underlineColor = "yellow",
+} = Astro.props;
+
+const alignClasses = {
+  left: "justify-between",
+  center: "justify-center",
+  right: "justify-end",
+};
+
+const underlineColors = {
+  yellow: "bg-yellow",
+  gold: "bg-gold",
+  black: "bg-black",
+  white: "bg-white",
+};
+
+const alignClass = alignClasses[align];
+const underlineColorClass = underlineColors[underlineColor];
+const animateClass = animate ? "scroll-animate" : "";
+---
+
+<div class:list={["mb-12 flex items-center", alignClass, animateClass]}>
+  <div class={align === "center" ? "text-center" : ""}>
+    <h2
+      class="font-display text-3xl font-bold text-white uppercase sm:text-4xl"
+    >
+      {title}
+    </h2>
+    {
+      subtitle && (
+        <p class="font-body text-black-300 mt-2 text-lg">{subtitle}</p>
+      )
+    }
+    <div class:list={["title-underline mt-3 h-0.5", underlineColorClass]}></div>
+  </div>
+
+  {
+    ctaText && ctaHref && align === "left" && (
+      <a
+        href={ctaHref}
+        class="font-body text-yellow font-medium transition-colors hover:text-yellow-400"
+      >
+        {ctaText} →
+      </a>
+    )
+  }
+</div>
+
+{
+  ctaText && ctaHref && align === "center" && (
+    <div class="mt-6 text-center">
+      <a
+        href={ctaHref}
+        class="font-body text-yellow font-medium transition-colors hover:text-yellow-400"
+      >
+        {ctaText} →
+      </a>
+    </div>
+  )
+}

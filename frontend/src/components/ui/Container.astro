@@ -1,0 +1,21 @@
+---
+export interface Props {
+  className?: string;
+  size?: "default" | "wide" | "narrow" | "full";
+}
+
+const { className = "", size = "default" } = Astro.props;
+
+const sizeClasses = {
+  default: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8",
+  wide: "mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8",
+  narrow: "mx-auto max-w-4xl px-4 sm:px-6 lg:px-8",
+  full: "w-full px-4 sm:px-6 lg:px-8",
+};
+
+const containerClass = sizeClasses[size];
+---
+
+<div class:list={[containerClass, className]}>
+  <slot />
+</div>

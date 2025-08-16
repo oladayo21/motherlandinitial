@@ -1,0 +1,25 @@
+{
+  "name": "motherlandsc-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Motherland SC monorepo with Payload CMS and Astro frontend",
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "dev:cms": "pnpm --filter cms dev",
+    "dev:frontend": "pnpm --filter frontend dev",
+    "build": "pnpm run --recursive build",
+    "build:cms": "pnpm --filter cms build",
+    "build:frontend": "pnpm --filter frontend build",
+    "lint": "pnpm run --recursive lint",
+    "format": "pnpm run --recursive format",
+    "test": "pnpm run --recursive test",
+    "clean": "pnpm run --recursive clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

@@ -1,0 +1,66 @@
+---
+export interface Props {
+  variant?: "primary" | "secondary" | "outline" | "ghost";
+  size?: "small" | "medium" | "large";
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  className?: string;
+  fullWidth?: boolean;
+}
+
+const {
+  variant = "primary",
+  size = "medium",
+  href,
+  type = "button",
+  className = "",
+  fullWidth = false,
+} = Astro.props;
+
+const variantClasses = {
+  primary:
+    "bg-yellow font-body text-black hover:bg-yellow-400 hover:shadow-lg hover:shadow-yellow/50 font-bold",
+  secondary:
+    "bg-black-800 font-body text-yellow hover:bg-black-700 border border-yellow/20 hover:border-yellow",
+  outline:
+    "border-yellow font-body text-yellow hover:bg-yellow border-2 bg-black/50 backdrop-blur-sm hover:text-black hover:shadow-lg hover:shadow-yellow/50",
+  ghost:
+    "font-body text-yellow hover:text-yellow-400 bg-transparent hover:bg-yellow/10",
+};
+
+const sizeClasses = {
+  small: "px-4 py-2 text-sm",
+  medium: "px-6 py-3 text-base",
+  large: "px-8 py-4 text-lg",
+};
+
+const baseClasses =
+  "font-medium transition-all inline-block uppercase tracking-wider";
+const variantClass = variantClasses[variant];
+const sizeClass = sizeClasses[size];
+const widthClass = fullWidth ? "w-full text-center" : "";
+
+const classes = [
+  baseClasses,
+  variantClass,
+  sizeClass,
+  widthClass,
+  className,
+].join(" ");
+
+// If href is provided, render as a link, otherwise as a button
+const Tag = href ? "a" : "button";
+const props = href ? { href, class: classes } : { type, class: classes };
+---
+
+{
+  href ? (
+    <a href={href} class={classes}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes}>
+      <slot />
+    </button>
+  )
+}

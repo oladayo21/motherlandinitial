@@ -1,0 +1,615 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Container from "../../../components/ui/Container.astro";
+import TeamHero from "../../../components/TeamHero.astro";
+
+// Mock data for fixtures and results with more details
+const allMatches = [
+  // Upcoming matches
+  {
+    id: 1,
+    homeTeam: "Motherland SC",
+    awayTeam: "Bayern Munich",
+    homeTeamLogo: "/motherland-logo.png",
+    awayTeamLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg/200px-FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg.png",
+    competition: "Bundesliga",
+    date: "2025-01-18",
+    time: "15:30",
+    status: "upcoming",
+    venue: "Olympiastadion Berlin",
+    isHighlighted: true,
+    ticketsAvailable: true,
+    tvChannel: "Sky Sports",
+    referee: "Felix Brych",
+  },
+  {
+    id: 2,
+    homeTeam: "Borussia Dortmund",
+    awayTeam: "Motherland SC",
+    homeTeamLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Borussia_Dortmund_logo.svg/200px-Borussia_Dortmund_logo.svg.png",
+    awayTeamLogo: "/motherland-logo.png",
+    competition: "DFB-Pokal",
+    date: "2025-01-22",
+    time: "20:45",
+    status: "upcoming",
+    venue: "Signal Iduna Park",
+    round: "Round of 16",
+    tvChannel: "ARD",
+  },
+  {
+    id: 3,
+    homeTeam: "Motherland SC",
+    awayTeam: "RB Leipzig",
+    homeTeamLogo: "/motherland-logo.png",
+    awayTeamLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/RB_Leipzig_2014_logo.svg/200px-RB_Leipzig_2014_logo.svg.png",
+    competition: "Bundesliga",
+    date: "2025-01-25",
+    time: "15:30",
+    status: "upcoming",
+    venue: "Olympiastadion Berlin",
+    ticketsAvailable: true,
+  },
+  // Live match
+  {
+    id: 4,
+    homeTeam: "Motherland SC",
+    awayTeam: "Bayer Leverkusen",
+    homeTeamLogo: "/motherland-logo.png",
+    awayTeamLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bayer_04_Leverkusen_logo.svg/200px-Bayer_04_Leverkusen_logo.svg.png",
+    homeScore: 2,
+    awayScore: 1,
+    competition: "Bundesliga",
+    date: "2025-01-15",
+    time: "20:30",
+    status: "live",
+    venue: "Olympiastadion Berlin",
+    minute: "78",
+    events: [
+      { minute: "23", type: "goal", team: "home", player: "E. Nkrumah" },
+      { minute: "45+2", type: "goal", team: "away", player: "F. Wirtz" },
+      { minute: "67", type: "goal", team: "home", player: "L. Rodriguez" },
+      { minute: "71", type: "yellow", team: "away", player: "J. Frimpong" },
+    ],
+    possession: { home: 52, away: 48 },
+    shots: { home: 14, away: 11 },
+  },
+  // Recent results
+  {
+    id: 5,
+    homeTeam: "Motherland SC",
+    awayTeam: "Eintracht Frankfurt",
+    homeTeamLogo: "/motherland-logo.png",
+    awayTeamLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Eintracht_Frankfurt_Logo.svg/200px-Eintracht_Frankfurt_Logo.svg.png",
+    homeScore: 3,
+    awayScore: 1,
+    competition: "Bundesliga",
+    date: "2025-01-11",
+    status: "finished",
+    venue: "Olympiastadion Berlin",
+    attendance: "68,450",
+    goalScorers: {
+      home: ["Nkrumah 12'", "Rodriguez 45'", "Santos 78'"],
+      away: ["Marmoush 67'"],
+    },
+  },
+  {
+    id: 6,
+    homeTeam: "FC Köln",
+    awayTeam: "Motherland SC",
+    homeTeamLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/FC_Cologne_logo.svg/200px-FC_Cologne_logo.svg.png",
+    awayTeamLogo: "/motherland-logo.png",
+    homeScore: 0,
+    awayScore: 2,
+    competition: "Bundesliga",
+    date: "2025-01-08",
+    status: "finished",
+    venue: "RheinEnergieStadion",
+    attendance: "50,000",
+    goalScorers: {
+      home: [],
+      away: ["Mbappé 34'", "Nkrumah 89'"],
+    },
+  },
+];
+
+// Group matches by month for calendar view
+const monthGroups = {
+  "January 2025": allMatches.filter(m => m.date.startsWith("2025-01")),
+  "February 2025": [],
+  "March 2025": [],
+};
+
+// Filter options
+const competitions = ["All", "Bundesliga", "DFB-Pokal", "Europa League", "Friendly"];
+const months = ["All Months", "January 2025", "February 2025", "March 2025"];
+
+// Separate by status
+const liveMatches = allMatches.filter(m => m.status === "live");
+const upcomingMatches = allMatches.filter(m => m.status === "upcoming");
+const finishedMatches = allMatches.filter(m => m.status === "finished");
+---
+
+<BaseLayout
+  title="Fixtures & Results - Men's Team - Motherland SC"
+  description="View Motherland SC fixtures, results, and match information"
+>
+  <!-- Hero Section -->
+  <TeamHero
+    title="Fixtures Results"
+    subtitle="Every match. Every moment. Every victory."
+    backgroundImage="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2070"
+    stats={[
+      { value: "15", label: "Matches Played", highlight: true },
+      { value: "10", label: "Wins" },
+      { value: "3", label: "Draws" },
+      { value: "2", label: "Losses" },
+      { value: "33", label: "Points", highlight: true },
+    ]}
+  />
+
+  <!-- Live Match Section -->
+  {liveMatches.length > 0 && (
+    <section class="bg-black relative overflow-hidden border-y border-yellow/30">
+      <!-- Animated background pattern -->
+      <div class="absolute inset-0 opacity-20">
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,yellow_1px,transparent_1px),linear-gradient(180deg,yellow_1px,transparent_1px)] bg-[size:20px_20px] animate-pulse"></div>
+      </div>
+      
+      <Container>
+        <div class="relative py-12">
+          {liveMatches.map((match) => (
+            <div class="bg-black-900/90 backdrop-blur-sm border border-yellow/20 shadow-[0_0_50px_rgba(255,214,2,0.2)]">
+              <!-- Live Match Header -->
+              <div class="bg-gradient-to-r from-black via-black-900 to-black border-b border-yellow/20 px-6 py-4">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-2 bg-red-600 px-3 py-1">
+                      <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full bg-white opacity-75"></span>
+                        <span class="relative inline-flex h-2 w-2 bg-white"></span>
+                      </span>
+                      <span class="text-white font-bold text-sm uppercase tracking-wider">LIVE</span>
+                    </div>
+                    <span class="text-white font-black text-lg">{match.minute}'</span>
+                    <span class="text-white/60 text-sm">{match.competition}</span>
+                  </div>
+                  <button class="bg-yellow text-black px-6 py-2 font-bold uppercase hover:shadow-[0_0_30px_rgba(255,214,2,0.5)] transition-all">
+                    Watch Live
+                  </button>
+                </div>
+              </div>
+              
+              <!-- Match Score Section -->
+              <div class="p-8">
+                <div class="grid md:grid-cols-3 gap-8 items-center">
+                  <!-- Home Team -->
+                  <div class="text-center md:text-right">
+                    <div class={`font-display text-2xl font-bold mb-3 ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                      {match.homeTeam}
+                    </div>
+                    <div class="text-7xl font-black text-white">{match.homeScore}</div>
+                  </div>
+                  
+                  <!-- Match Stats -->
+                  <div class="text-center">
+                    <div class="text-white/30 text-lg font-light mb-6">VS</div>
+                    <div class="grid grid-cols-2 gap-4">
+                      <div class="bg-black/50 p-3 border border-white/10">
+                        <div class="text-white/60 text-xs uppercase mb-1">Possession</div>
+                        <div class="flex items-center justify-center gap-2">
+                          <div class="text-yellow font-bold">{match.possession.home}%</div>
+                          <div class="text-white/30">|</div>
+                          <div class="text-white font-bold">{match.possession.away}%</div>
+                        </div>
+                      </div>
+                      <div class="bg-black/50 p-3 border border-white/10">
+                        <div class="text-white/60 text-xs uppercase mb-1">Shots</div>
+                        <div class="flex items-center justify-center gap-2">
+                          <div class="text-yellow font-bold">{match.shots.home}</div>
+                          <div class="text-white/30">-</div>
+                          <div class="text-white font-bold">{match.shots.away}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-4 text-white/50 text-sm">
+                      <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      </svg>
+                      {match.venue}
+                    </div>
+                  </div>
+                  
+                  <!-- Away Team -->
+                  <div class="text-center md:text-left">
+                    <div class={`font-display text-2xl font-bold mb-3 ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                      {match.awayTeam}
+                    </div>
+                    <div class="text-7xl font-black text-white">{match.awayScore}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Match Events Timeline -->
+              <div class="bg-black/50 border-t border-white/10 px-6 py-4">
+                <div class="flex items-center justify-between">
+                  <div class="text-xs text-white/50 uppercase tracking-wider">Latest Events</div>
+                  <div class="flex gap-6">
+                    {match.events.slice(-3).map((event) => (
+                      <div class="flex items-center gap-2 text-sm">
+                        <span class="text-yellow font-bold">{event.minute}'</span>
+                        {event.type === "goal" && (
+                          <span class="flex items-center gap-1">
+                            <span class="text-white">⚽</span>
+                            <span class="text-white/80">{event.player}</span>
+                          </span>
+                        )}
+                        {event.type === "yellow" && (
+                          <span class="flex items-center gap-1">
+                            <span class="text-yellow">▪</span>
+                            <span class="text-white/80">{event.player}</span>
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </section>
+  )}
+
+  <!-- Filters and View Toggle -->
+  <section class="bg-black border-b border-white/10 sticky top-20 z-40">
+    <Container>
+      <div class="py-4">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <!-- Filters -->
+          <div class="flex flex-wrap gap-2">
+            <select class="bg-black-900 border border-white/20 px-4 py-2 text-white focus:border-yellow focus:outline-none">
+              {competitions.map((comp) => <option>{comp}</option>)}
+            </select>
+            <select class="bg-black-900 border border-white/20 px-4 py-2 text-white focus:border-yellow focus:outline-none">
+              {months.map((month) => <option>{month}</option>)}
+            </select>
+            <select class="bg-black-900 border border-white/20 px-4 py-2 text-white focus:border-yellow focus:outline-none">
+              <option>All Venues</option>
+              <option>Home</option>
+              <option>Away</option>
+            </select>
+          </div>
+          
+          <!-- View Toggle -->
+          <div class="flex gap-1 bg-black-900 p-1">
+            <button class="bg-yellow text-black px-4 py-2 font-medium">
+              List View
+            </button>
+            <button class="bg-transparent text-white px-4 py-2 font-medium hover:bg-white/10">
+              Calendar
+            </button>
+            <button class="bg-transparent text-white px-4 py-2 font-medium hover:bg-white/10">
+              Timeline
+            </button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Upcoming Matches -->
+  <section class="bg-black py-16">
+    <Container>
+      <div class="mb-8">
+        <h2 class="font-display text-3xl md:text-4xl font-black text-white uppercase mb-2">
+          Upcoming Fixtures
+        </h2>
+        <div class="h-1 w-20 bg-yellow"></div>
+      </div>
+      
+      <div class="space-y-4">
+        {upcomingMatches.map((match, index) => (
+          <div 
+            class={`group relative bg-black-900 border transition-all hover:shadow-[0_0_30px_rgba(255,214,2,0.1)] animate-slideInUp ${
+              match.isHighlighted ? 'border-yellow/50' : 'border-white/10 hover:border-yellow/30'
+            }`}
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            {match.isHighlighted && (
+              <div class="absolute -top-3 left-8 bg-yellow text-black px-3 py-1 text-xs font-bold uppercase">
+                Next Match
+              </div>
+            )}
+            
+            <div class="p-6">
+              <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                <!-- Match Info -->
+                <div class="flex-1">
+                  <div class="flex items-center gap-4 mb-4">
+                    <span class="text-yellow text-sm font-medium uppercase">{match.competition}</span>
+                    {match.round && <span class="text-white/50 text-sm">• {match.round}</span>}
+                  </div>
+                  
+                  <div class="flex items-center gap-8">
+                    <!-- Teams -->
+                    <div class="flex items-center gap-6 flex-1">
+                      <div class="text-right flex-1">
+                        <div class={`font-display text-xl font-bold ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                          {match.homeTeam}
+                        </div>
+                      </div>
+                      
+                      <div class="text-center">
+                        <div class="text-white/30 text-2xl font-light">VS</div>
+                      </div>
+                      
+                      <div class="flex-1">
+                        <div class={`font-display text-xl font-bold ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                          {match.awayTeam}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Match Details -->
+                  <div class="flex flex-wrap items-center gap-6 mt-4 text-sm">
+                    <div class="flex items-center gap-2 text-white/70">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                      </svg>
+                      <span>{new Date(match.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-white/70">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <span>{match.time}</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-white/70">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      </svg>
+                      <span>{match.venue}</span>
+                    </div>
+                    {match.tvChannel && (
+                      <div class="flex items-center gap-2 text-white/70">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <span>{match.tvChannel}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex gap-3">
+                  {match.ticketsAvailable && (
+                    <button class="bg-yellow text-black px-6 py-3 font-bold uppercase hover:shadow-[0_0_20px_rgba(255,214,2,0.5)] transition-all">
+                      Buy Tickets
+                    </button>
+                  )}
+                  <button class="border border-white/30 text-white px-6 py-3 font-medium hover:border-yellow hover:text-yellow transition-all">
+                    Details
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Hover accent line -->
+            <div class="absolute left-0 top-0 h-full w-1 bg-yellow transform scale-y-0 group-hover:scale-y-100 transition-transform origin-top"></div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- Recent Results -->
+  <section class="bg-gradient-to-b from-black to-black-900 py-16">
+    <Container>
+      <div class="mb-8">
+        <h2 class="font-display text-3xl md:text-4xl font-black text-white uppercase mb-2">
+          Recent Results
+        </h2>
+        <div class="h-1 w-20 bg-yellow"></div>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {finishedMatches.map((match, index) => (
+          <div 
+            class="group bg-black-900 border border-white/10 overflow-hidden hover:border-yellow/30 transition-all animate-fadeInUp"
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <!-- Result Badge -->
+            <div class={`py-2 px-4 text-center font-bold text-xs uppercase tracking-wider ${
+              match.homeTeam === "Motherland SC" 
+                ? match.homeScore > match.awayScore ? "bg-green-500/20 text-green-400 border-b border-green-500/30" : match.homeScore < match.awayScore ? "bg-red-500/20 text-red-400 border-b border-red-500/30" : "bg-yellow/20 text-yellow border-b border-yellow/30"
+                : match.awayScore > match.homeScore ? "bg-green-500/20 text-green-400 border-b border-green-500/30" : match.awayScore < match.homeScore ? "bg-red-500/20 text-red-400 border-b border-red-500/30" : "bg-yellow/20 text-yellow border-b border-yellow/30"
+            }`}>
+              {match.homeTeam === "Motherland SC" 
+                ? match.homeScore > match.awayScore ? "Victory" : match.homeScore < match.awayScore ? "Defeat" : "Draw"
+                : match.awayScore > match.homeScore ? "Victory" : match.awayScore < match.homeScore ? "Defeat" : "Draw"}
+            </div>
+            
+            <div class="p-6">
+              <!-- Competition & Date -->
+              <div class="flex justify-between items-center mb-4">
+                <span class="text-yellow text-xs font-medium uppercase">{match.competition}</span>
+                <span class="text-white/50 text-xs">{new Date(match.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+              </div>
+              
+              <!-- Score -->
+              <div class="text-center mb-4">
+                <div class="flex items-center justify-center gap-4 mb-2">
+                  <div class="text-right flex-1">
+                    <div class={`text-sm font-medium mb-1 ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white/80"}`}>
+                      {match.homeTeam}
+                    </div>
+                    <div class="text-3xl font-black text-white">{match.homeScore}</div>
+                  </div>
+                  <div class="text-white/30 text-xl">-</div>
+                  <div class="text-left flex-1">
+                    <div class={`text-sm font-medium mb-1 ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white/80"}`}>
+                      {match.awayTeam}
+                    </div>
+                    <div class="text-3xl font-black text-white">{match.awayScore}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Goal Scorers -->
+              {match.goalScorers && (
+                <div class="pt-4 border-t border-white/10">
+                  <div class="space-y-1">
+                    {match.goalScorers.home.length > 0 && match.homeTeam === "Motherland SC" && (
+                      <div class="text-xs text-white/60">
+                        ⚽ {match.goalScorers.home.join(", ")}
+                      </div>
+                    )}
+                    {match.goalScorers.away.length > 0 && match.awayTeam === "Motherland SC" && (
+                      <div class="text-xs text-white/60">
+                        ⚽ {match.goalScorers.away.join(", ")}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              
+              <!-- Match Details -->
+              <div class="flex justify-between items-center mt-4 pt-4 border-t border-white/10">
+                <span class="text-white/50 text-xs">{match.venue}</span>
+                {match.attendance && <span class="text-white/50 text-xs">👥 {match.attendance}</span>}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div class="text-center mt-8">
+        <button class="border border-white/30 text-white px-8 py-3 font-medium hover:border-yellow hover:text-yellow transition-all">
+          View All Results
+        </button>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Season Calendar -->
+  <section class="bg-black border-t border-white/10 py-16">
+    <Container>
+      <div class="mb-8 flex items-center justify-between">
+        <div>
+          <h2 class="font-display text-3xl md:text-4xl font-black text-white uppercase mb-2">
+            Season Calendar
+          </h2>
+          <div class="h-1 w-20 bg-yellow"></div>
+        </div>
+        <button class="bg-yellow text-black px-6 py-3 font-bold uppercase hover:shadow-[0_0_20px_rgba(255,214,2,0.5)] transition-all">
+          Download Calendar
+        </button>
+      </div>
+      
+      <div class="bg-black-900 border border-white/10 p-8">
+        <div class="grid gap-8">
+          {Object.entries(monthGroups).map(([month, matches]) => (
+            <div>
+              <h3 class="text-yellow font-display text-xl font-bold uppercase mb-4">{month}</h3>
+              {matches.length > 0 ? (
+                <div class="grid gap-2">
+                  {matches.map((match) => (
+                    <div class="flex items-center justify-between p-4 bg-black hover:bg-white/5 transition-colors">
+                      <div class="flex items-center gap-6">
+                        <div class="text-white/50 text-sm w-20">
+                          {new Date(match.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' })}
+                        </div>
+                        <div class="flex items-center gap-4">
+                          <span class={match.homeTeam === "Motherland SC" ? "text-yellow font-bold" : "text-white"}>
+                            {match.homeTeam}
+                          </span>
+                          <span class="text-white/30">vs</span>
+                          <span class={match.awayTeam === "Motherland SC" ? "text-yellow font-bold" : "text-white"}>
+                            {match.awayTeam}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="flex items-center gap-4">
+                        <span class="text-white/50 text-sm">{match.competition}</span>
+                        <span class="text-white/70">{match.time}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div class="text-white/30 text-center py-8">No matches scheduled</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes gridMove {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 50px 50px;
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-gridMove {
+    animation: gridMove 20s linear infinite;
+  }
+  
+  .animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+  
+  .animate-slideInUp {
+    opacity: 0;
+    animation: slideInUp 0.6s ease-out forwards;
+  }
+  
+  .animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+</style>

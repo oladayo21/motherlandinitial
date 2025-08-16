@@ -1,0 +1,256 @@
+---
+const currentYear = new Date().getFullYear();
+
+const footerLinks = {
+  club: [
+    { label: "About Us", href: "/about" },
+    { label: "History & Heritage", href: "/history" },
+    { label: "Stadium Tour", href: "/stadium-tour" },
+    { label: "Board & Leadership", href: "/leadership" },
+    { label: "Partners & Sponsors", href: "/partners" },
+    { label: "Careers", href: "/careers" },
+  ],
+  teams: [
+    { label: "Men's First Team", href: "/teams/mens" },
+    { label: "Women's Team", href: "/teams/womens" },
+    { label: "Academy", href: "/teams/academy" },
+    { label: "Legends", href: "/teams/legends" },
+    { label: "Player Profiles", href: "/players" },
+    { label: "Coaching Staff", href: "/staff" },
+  ],
+  fans: [
+    { label: "Membership", href: "/membership" },
+    { label: "Season Tickets", href: "/season-tickets" },
+    { label: "Hospitality", href: "/hospitality" },
+    { label: "Fan Zone", href: "/fanzone" },
+    { label: "Supporters Club", href: "/supporters" },
+    { label: "Travel & Away Games", href: "/travel" },
+  ],
+  connect: [
+    { label: "Latest News", href: "/news" },
+    { label: "Newsletter Signup", href: "/newsletter" },
+    { label: "Contact Us", href: "/contact" },
+    { label: "FAQs", href: "/faqs" },
+    { label: "Media Center", href: "/media" },
+    { label: "Press Releases", href: "/press" },
+  ],
+};
+
+const socialLinks = [
+  { name: "Twitter", icon: "twitter", href: "#" },
+  { name: "Facebook", icon: "facebook", href: "#" },
+  { name: "Instagram", icon: "instagram", href: "#" },
+  { name: "YouTube", icon: "youtube", href: "#" },
+  { name: "TikTok", icon: "tiktok", href: "#" },
+];
+
+const sponsors = [
+  "Main Sponsor",
+  "Kit Partner",
+  "Official Partner 1",
+  "Official Partner 2",
+  "Official Partner 3",
+];
+
+const legalLinks = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Use", href: "/terms" },
+  { label: "Cookie Policy", href: "/cookies" },
+  { label: "Accessibility", href: "/accessibility" },
+  { label: "Site Map", href: "/sitemap" },
+];
+---
+
+<footer class="bg-black-800 text-white">
+  <!-- Main Footer Content -->
+  <div class="container mx-auto px-4 py-12 lg:py-16">
+    <!-- Top Section - Main Links -->
+    <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Club Column -->
+      <div>
+        <h3 class="font-display text-yellow mb-4 text-lg font-bold">Club</h3>
+        <ul class="space-y-2">
+          {
+            footerLinks.club.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="font-body text-black-200 hover:text-yellow transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Teams Column -->
+      <div>
+        <h3 class="font-display text-yellow mb-4 text-lg font-bold">Teams</h3>
+        <ul class="space-y-2">
+          {
+            footerLinks.teams.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="font-body text-black-200 hover:text-yellow transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Fans Column -->
+      <div>
+        <h3 class="font-display text-yellow mb-4 text-lg font-bold">Fans</h3>
+        <ul class="space-y-2">
+          {
+            footerLinks.fans.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="font-body text-black-200 hover:text-yellow transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Connect Column -->
+      <div>
+        <h3 class="font-display text-yellow mb-4 text-lg font-bold">Connect</h3>
+        <ul class="space-y-2">
+          {
+            footerLinks.connect.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="font-body text-black-200 hover:text-yellow transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Middle Section - Social & Newsletter -->
+    <div class="mb-8 border-t border-white/10 pt-8">
+      <div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+        <!-- Newsletter Signup -->
+        <div>
+          <h3 class="font-display text-yellow mb-4 text-lg font-bold">
+            Stay Connected
+          </h3>
+          <form class="flex flex-col gap-3 sm:flex-row">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="bg-black-900 border-black-700 placeholder-black-400 focus:border-yellow flex-1 border px-4 py-2 text-white transition-colors duration-200 focus:outline-none"
+            />
+            <button
+              type="submit"
+              class="bg-yellow font-body px-6 py-2 font-medium text-black transition-colors duration-200 hover:bg-yellow-600"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        <!-- Social Media & Apps -->
+        <div class="flex flex-col lg:items-end">
+          <div class="mb-4 flex items-center gap-4">
+            {
+              socialLinks.map((social) => (
+                <a
+                  href={social.href}
+                  aria-label={social.name}
+                  class="bg-black-900 hover:bg-yellow flex h-10 w-10 items-center justify-center transition-all duration-200 hover:text-black"
+                >
+                  <span class="text-sm font-bold">
+                    {social.icon[0].toUpperCase()}
+                  </span>
+                </a>
+              ))
+            }
+          </div>
+          <div class="flex gap-3">
+            <a
+              href="#"
+              class="bg-black-900 font-body hover:bg-black-700 px-4 py-2 text-sm transition-colors duration-200"
+            >
+              Download iOS App
+            </a>
+            <a
+              href="#"
+              class="bg-black-900 font-body hover:bg-black-700 px-4 py-2 text-sm transition-colors duration-200"
+            >
+              Download Android App
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sponsors Section -->
+    <div class="mb-8 border-t border-white/10 pt-8">
+      <h3 class="font-display text-yellow mb-4 text-lg font-bold">
+        Our Partners
+      </h3>
+      <div class="flex flex-wrap items-center gap-8">
+        {
+          sponsors.map((sponsor) => (
+            <div class="bg-black-900 px-6 py-3">
+              <span class="font-body text-black-300">{sponsor}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Bottom Section - Legal & Copyright -->
+    <div class="border-t border-white/10 pt-8">
+      <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+        <!-- Copyright -->
+        <div class="flex items-center gap-3">
+          <img
+            src="/motherland-logo.png"
+            alt="Motherland SC Logo"
+            class="h-8 w-8 object-contain"
+          />
+          <p class="font-body text-black-300">
+            © {currentYear} Motherland SC. All rights reserved.
+          </p>
+        </div>
+
+        <!-- Legal Links -->
+        <nav class="flex flex-wrap justify-center gap-4">
+          {
+            legalLinks.map((link, index) => (
+              <>
+                <a
+                  href={link.href}
+                  class="font-body text-black-300 hover:text-yellow text-sm transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+                {index < legalLinks.length - 1 && (
+                  <span class="text-black-600">|</span>
+                )}
+              </>
+            ))
+          }
+        </nav>
+      </div>
+    </div>
+  </div>
+</footer>

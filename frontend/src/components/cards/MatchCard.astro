@@ -1,0 +1,140 @@
+---
+export interface Props {
+  homeTeam: string;
+  awayTeam: string;
+  homeScore?: number;
+  awayScore?: number;
+  status: "upcoming" | "live" | "finished";
+  date: string;
+  time?: string;
+  competition: string;
+  venue?: string;
+  variant?: "default" | "highlighted" | "compact";
+  animate?: boolean;
+  animateDelay?: number;
+}
+
+const {
+  homeTeam,
+  awayTeam,
+  homeScore,
+  awayScore,
+  status,
+  date,
+  time,
+  competition,
+  venue,
+  variant = "default",
+  animate = false,
+  animateDelay = 0,
+} = Astro.props;
+
+const statusLabels = {
+  upcoming: time || "Upcoming",
+  live: "LIVE",
+  finished: "Full Time",
+};
+
+const statusColors = {
+  upcoming: "text-yellow",
+  live: "text-red-500 animate-pulse",
+  finished: "text-black-300",
+};
+
+const variantClasses = {
+  default:
+    "border-yellow/20 border bg-black-700 p-6 hover:border-yellow transition-all hover:shadow-[0_10px_30px_rgba(255,214,2,0.2)]",
+  highlighted:
+    "bg-gradient-to-br from-yellow via-yellow-500 to-gold border-2 border-black p-6 shadow-2xl shadow-yellow/30",
+  compact:
+    "border-yellow/10 border bg-black-700 p-4 hover:border-yellow/50 transition-all",
+};
+
+const animateClass = animate ? "scroll-animate" : "";
+const animateDelayClass =
+  animate && animateDelay > 0 ? `animate-stagger-${animateDelay}` : "";
+---
+
+<div class:list={[variantClasses[variant], animateClass, animateDelayClass]}>
+  <div class="mb-4 text-center">
+    <span
+      class:list={[
+        "font-body text-xs font-medium tracking-wider uppercase",
+        variant === "highlighted" ? "text-black" : statusColors[status],
+      ]}
+    >
+      {statusLabels[status]}
+      {status === "upcoming" && venue ? `- ${venue}` : ""}
+    </span>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <div class="flex-1 text-center">
+      <p
+        class:list={[
+          "font-display text-lg font-bold",
+          variant === "highlighted" ? "text-black" : "text-white",
+        ]}
+      >
+        {homeTeam}
+      </p>
+    </div>
+
+    <div class="px-4">
+      {
+        status === "finished" ? (
+          <p
+            class:list={[
+              "font-display text-3xl font-bold",
+              variant === "highlighted" ? "text-black" : "text-yellow",
+            ]}
+          >
+            {homeScore} - {awayScore}
+          </p>
+        ) : (
+          <p
+            class:list={[
+              "font-display text-2xl font-bold",
+              variant === "highlighted" ? "text-black" : "text-white",
+            ]}
+          >
+            VS
+          </p>
+        )
+      }
+    </div>
+
+    <div class="flex-1 text-center">
+      <p
+        class:list={[
+          "font-display text-lg font-bold",
+          variant === "highlighted" ? "text-black" : "text-white",
+        ]}
+      >
+        {awayTeam}
+      </p>
+    </div>
+  </div>
+
+  <p
+    class:list={[
+      "font-body mt-4 text-center text-sm",
+      variant === "highlighted" ? "text-black" : "text-black-300",
+    ]}
+  >
+    {competition} - {date}
+  </p>
+
+  {
+    variant === "highlighted" && (
+      <div class="mt-4 text-center">
+        <a
+          href="/matches"
+          class="font-body text-yellow hover:bg-black-800 inline-block bg-black px-6 py-2 text-sm font-medium transition-colors"
+        >
+          Match Info
+        </a>
+      </div>
+    )
+  }
+</div>

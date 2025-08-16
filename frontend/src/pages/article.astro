@@ -1,0 +1,675 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+import NewsCard from "../components/cards/NewsCard.astro";
+
+// This would normally come from a CMS or database based on the article ID/slug
+const article = {
+  title: "Historic Victory: Motherland SC Wins National Championship",
+  subtitle:
+    "An unforgettable night as the team secures the title with a commanding 4-1 victory in the final match of the season",
+  category: "Club News",
+  author: {
+    name: "John Smith",
+    role: "Senior Sports Journalist",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200",
+    bio: "Covering Motherland SC for over 10 years",
+  },
+  photographer: "Michael Brown / Motherland SC",
+  date: "March 15, 2024",
+  readTime: "5 min read",
+  views: "12.5k",
+  shares: "458",
+  heroImage:
+    "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070",
+  paragraphs: [
+    "In what will be remembered as one of the most spectacular nights in the club's history, Motherland SC clinched the National Championship with a resounding 4-1 victory over defending champions City United at the packed National Stadium.",
+    "The atmosphere was electric from the first whistle, with over 45,000 fans creating an intimidating wall of sound that carried the team through 90 minutes of breathtaking football. Captain Marcus Johnson opened the scoring in the 15th minute with a thunderous strike from outside the box, setting the tone for what would become a masterclass performance.",
+    "The team's pressing game was relentless in the opening 45 minutes. Young sensation David Martinez doubled the lead just before halftime with a perfectly placed header from a corner kick, sending the home crowd into raptures. The statistics told the story: 68% possession, 12 shots on target, and complete control of the midfield battle.",
+    "The second half saw City United attempt a comeback, pulling one back through their striker James Wilson in the 55th minute. For a brief moment, the stadium held its breath as the visitors pushed for an equalizer. However, Motherland SC's response was swift and decisive.",
+    "Substitute striker Ahmed Hassan made an immediate impact, scoring within two minutes of coming on in the 70th minute. His pace and movement caused constant problems for the tired City defense. The final nail in the coffin came in the 85th minute when Martinez completed his brace with a stunning solo effort, dribbling past three defenders before calmly slotting home.",
+    "As the final whistle blew, scenes of jubilation erupted around the stadium. Players, staff, and fans united in celebration of a championship that had been 15 years in the making. The victory parade is scheduled for this Sunday, with the entire city expected to turn out to celebrate with the champions.",
+    "This championship win marks the beginning of what the club hopes will be a period of sustained success. With a young, talented squad and ambitious ownership, Motherland SC is already looking ahead to next season's campaigns, including their first appearance in international competition.",
+    "For now, though, it's time to celebrate. The champions of the nation have earned their moment in the spotlight, and what a moment it has been.",
+  ],
+  pullQuote:
+    "This championship win marks the beginning of what the club hopes will be a period of sustained success.",
+  keyStats: [
+    { label: "Possession", value: "68%" },
+    { label: "Shots on Target", value: "12" },
+    { label: "Pass Accuracy", value: "89%" },
+    { label: "Goals Scored", value: "4" },
+  ],
+  tags: ["Championship", "Victory", "Match Report", "Season 2023/24"],
+};
+
+// Related articles (would normally be fetched based on category/tags)
+const relatedArticles = [
+  {
+    title: "Manager's Post-Match Reaction: 'This is Just the Beginning'",
+    image:
+      "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070",
+    category: "Interviews",
+    date: "2 hours ago",
+    href: "/article",
+    description:
+      "The manager shares his thoughts on the historic victory and what it means for the club's future.",
+  },
+  {
+    title: "Player Ratings: Martinez and Johnson Star in Title Win",
+    image:
+      "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?q=80&w=2071",
+    category: "Match Analysis",
+    date: "3 hours ago",
+    href: "/article",
+    description:
+      "Breaking down every player's performance in the championship-winning match.",
+  },
+  {
+    title: "Fans Celebrate Historic Championship Victory",
+    image:
+      "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2070",
+    category: "Fan Zone",
+    date: "4 hours ago",
+    href: "/article",
+    description:
+      "Thousands take to the streets as the city erupts in celebration.",
+  },
+];
+---
+
+<BaseLayout
+  title={`${article.title} - Motherland Berlin SC`}
+  description={article.subtitle}
+>
+  {/* Magazine-Style Article Header */}
+  <section class="article-hero relative bg-black">
+    {/* Full-width Hero Image */}
+    <div
+      class="hero-image-container relative h-[70vh] min-h-[500px] overflow-hidden"
+    >
+      <img
+        src={article.heroImage}
+        alt={article.title}
+        class="hero-img h-full w-full object-cover"
+      />
+      {/* Gradient Overlays */}
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"
+      >
+      </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent"
+      >
+      </div>
+
+      {/* Article Header Content */}
+      <div class="absolute right-0 bottom-0 left-0 p-8 lg:p-16">
+        <Container>
+          <div class="max-w-5xl">
+            {/* Category Badge */}
+            <div class="mb-6 inline-flex items-center gap-3">
+              <span
+                class="bg-yellow font-body px-4 py-2 text-xs font-black tracking-wider text-black uppercase"
+              >
+                {article.category}
+              </span>
+              <span
+                class="font-body text-xs tracking-wider text-white/60 uppercase"
+              >
+                {article.date}
+              </span>
+            </div>
+
+            {/* Title */}
+            <h1
+              class="article-title font-display text-4xl leading-tight font-black text-white sm:text-5xl lg:text-6xl xl:text-7xl"
+            >
+              {article.title}
+            </h1>
+
+            {/* Subtitle */}
+            <p
+              class="article-subtitle font-body mt-4 max-w-3xl text-xl text-white/80 lg:text-2xl"
+            >
+              {article.subtitle}
+            </p>
+          </div>
+        </Container>
+      </div>
+
+      {/* Photo Credit */}
+      <div class="absolute top-8 right-8 hidden lg:block">
+        <p class="font-body text-xs tracking-wider text-white/40 uppercase">
+          Photo: {article.photographer}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Article Meta Bar */}
+  <section class="article-meta-bar bg-black-900 border-b border-white/10">
+    <Container>
+      <div class="py-6">
+        <div class="flex flex-wrap items-center justify-between gap-6">
+          {/* Author Info */}
+          <div class="author-info flex items-center gap-4">
+            <img
+              src={article.author.avatar}
+              alt={article.author.name}
+              class="h-12 w-12 object-cover"
+            />
+            <div>
+              <p class="font-body text-sm font-medium text-white">
+                {article.author.name}
+              </p>
+              <p class="font-body text-xs text-white/60">
+                {article.author.role}
+              </p>
+            </div>
+          </div>
+
+          {/* Article Stats */}
+          <div class="article-stats flex items-center gap-6">
+            <div class="stat-item flex items-center gap-2">
+              <svg
+                class="h-4 w-4 text-white/60"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                <path
+                  fill-rule="evenodd"
+                  d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-body text-sm text-white/60"
+                >{article.views} views</span
+              >
+            </div>
+            <div class="stat-item flex items-center gap-2">
+              <svg
+                class="h-4 w-4 text-white/60"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                <path
+                  fill-rule="evenodd"
+                  d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 100 4h2a2 2 0 100-4h-.5a1 1 0 000-2H8a2 2 0 012-2z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span class="font-body text-sm text-white/60"
+                >{article.readTime}</span
+              >
+            </div>
+            <div class="stat-item flex items-center gap-2">
+              <svg
+                class="h-4 w-4 text-white/60"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a3 3 0 10-4.732-2.684m4.732 2.684a3 3 0 00-4.732-2.684M6.316 10.658a3 3 0 10-4.732 2.684"
+                ></path>
+              </svg>
+              <span class="font-body text-sm text-white/60"
+                >{article.shares} shares</span
+              >
+            </div>
+          </div>
+
+          {/* Share Buttons */}
+          <div class="share-buttons flex items-center gap-3">
+            <button
+              class="share-btn hover:bg-yellow flex h-10 w-10 items-center justify-center bg-black text-white/60 transition-all hover:text-black"
+              aria-label="Share on Twitter"
+            >
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="share-btn hover:bg-yellow flex h-10 w-10 items-center justify-center bg-black text-white/60 transition-all hover:text-black"
+              aria-label="Share on Facebook"
+            >
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+                ></path>
+              </svg>
+            </button>
+            <button
+              class="share-btn hover:bg-yellow flex h-10 w-10 items-center justify-center bg-black text-white/60 transition-all hover:text-black"
+              aria-label="Copy link"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  {/* Main Article Content - Magazine Layout */}
+  <Section background="black" className="py-16">
+    <Container>
+      <div class="article-layout mx-auto max-w-6xl">
+        <div class="grid gap-16 lg:grid-cols-3">
+          {/* Main Content - Takes up 2/3 of space */}
+          <article class="lg:col-span-2">
+            {/* Drop Cap First Paragraph */}
+            <p
+              class="first-paragraph font-body mb-10 text-xl leading-loose text-white/90 lg:text-2xl"
+            >
+              <span
+                class="drop-cap font-display text-yellow float-left mt-3 mr-4 text-8xl leading-none font-black"
+                >I</span
+              >
+              {article.paragraphs[0].substring(1)}
+            </p>
+
+            {/* Regular Paragraphs */}
+            {
+              article.paragraphs
+                .slice(1, 4)
+                .map((paragraph, index) => (
+                  <p class="font-body mb-10 text-lg leading-loose text-white/80 lg:text-xl">
+                    {paragraph}
+                  </p>
+                ))
+            }
+
+            {/* Pull Quote */}
+            <blockquote
+              class="pull-quote border-yellow my-16 border-l-4 py-8 pl-8"
+            >
+              <p
+                class="font-display text-yellow text-2xl font-bold italic lg:text-3xl"
+              >
+                "{article.pullQuote}"
+              </p>
+              <cite
+                class="font-body mt-4 block text-sm text-white/60 not-italic"
+              >
+                — {article.author.name}
+              </cite>
+            </blockquote>
+
+            {/* Remaining Paragraphs */}
+            {
+              article.paragraphs
+                .slice(4)
+                .map((paragraph, index) => (
+                  <p class="font-body mb-10 text-lg leading-loose text-white/80 lg:text-xl">
+                    {paragraph}
+                  </p>
+                ))
+            }
+
+            {/* Article Footer */}
+            <div class="article-footer mt-16 border-t border-white/10 pt-8">
+              {/* Tags */}
+              <div class="tags mb-8">
+                <h4
+                  class="font-body mb-4 text-xs font-bold tracking-wider text-white/40 uppercase"
+                >
+                  Topics
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  {
+                    article.tags.map((tag) => (
+                      <a
+                        href={`/news?tag=${tag}`}
+                        class="tag-pill bg-black-900 hover:bg-black-800 font-body hover:text-yellow px-4 py-2 text-sm text-white/80 transition-all"
+                      >
+                        {tag}
+                      </a>
+                    ))
+                  }
+                </div>
+              </div>
+
+              {/* Author Bio */}
+              <div class="author-bio bg-black-900 p-6">
+                <div class="flex items-start gap-4">
+                  <img
+                    src={article.author.avatar}
+                    alt={article.author.name}
+                    class="h-16 w-16 object-cover"
+                  />
+                  <div class="flex-1">
+                    <h4 class="font-display mb-1 text-lg font-bold text-white">
+                      {article.author.name}
+                    </h4>
+                    <p class="font-body mb-2 text-sm text-white/60">
+                      {article.author.role}
+                    </p>
+                    <p class="font-body text-sm text-white/80">
+                      {article.author.bio}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* Right Sidebar - Narrower */}
+          <aside class="lg:col-span-1">
+            <div class="sticky top-24">
+              <h3 class="font-display mb-6 text-xl font-bold text-white">
+                Related Stories
+              </h3>
+              <div class="space-y-6">
+                {
+                  relatedArticles.map((related) => (
+                    <a href={related.href} class="related-article group block">
+                      <div class="bg-black-900 relative mb-3 h-32 overflow-hidden">
+                        <img
+                          src={related.image}
+                          alt={related.title}
+                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent" />
+                      </div>
+                      <span class="font-body text-yellow text-xs tracking-wider uppercase">
+                        {related.category}
+                      </span>
+                      <h4 class="font-display group-hover:text-yellow mt-1 mb-2 text-sm font-bold text-white transition-colors">
+                        {related.title}
+                      </h4>
+                      <p class="font-body line-clamp-2 text-xs text-white/60">
+                        {related.description}
+                      </p>
+                      <time class="font-body mt-2 block text-xs text-white/40">
+                        {related.date}
+                      </time>
+                    </a>
+                  ))
+                }
+              </div>
+
+              {/* Newsletter CTA */}
+              <div
+                class="newsletter-cta bg-black-900 border-yellow/20 mt-8 border p-6"
+              >
+                <h4 class="font-display text-yellow mb-2 text-lg font-bold">
+                  Never Miss a Story
+                </h4>
+                <p class="font-body mb-4 text-sm text-white/60">
+                  Get the latest news delivered to your inbox
+                </p>
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  class="font-body focus:border-yellow mb-3 w-full border border-white/20 bg-black px-4 py-2 text-sm text-white focus:outline-none"
+                />
+                <button
+                  class="bg-yellow font-body w-full py-2 text-sm font-bold tracking-wider text-black uppercase transition-colors hover:bg-yellow-400"
+                >
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </Container>
+
+    {/* More Articles Section */}
+    <section class="more-articles bg-black-900 py-16">
+      <Container>
+        <div class="section-header mb-8 flex items-center justify-between">
+          <h2 class="font-display text-3xl font-black text-white uppercase">
+            More Stories
+          </h2>
+          <a
+            href="/news"
+            class="font-body text-yellow text-sm font-bold tracking-wider uppercase transition-colors hover:text-yellow-400"
+          >
+            View All News →
+          </a>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {
+            relatedArticles
+              .concat(relatedArticles.slice(0, 1))
+              .map((article, index) => (
+                <div class="article-card group">
+                  <a
+                    href={article.href}
+                    class="block h-full overflow-hidden bg-black"
+                  >
+                    <div class="relative h-48 overflow-hidden">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                      <div class="absolute right-4 bottom-4 left-4">
+                        <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
+                          {article.category}
+                        </span>
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <h3 class="font-display group-hover:text-yellow mb-2 line-clamp-2 text-lg font-bold text-white transition-colors">
+                        {article.title}
+                      </h3>
+                      <time class="font-body text-xs text-white/40">
+                        {article.date}
+                      </time>
+                    </div>
+                  </a>
+                </div>
+              ))
+          }
+        </div>
+      </Container>
+    </section>
+  </Section>
+
+  <style>
+    /* Hero Image Animation */
+    .hero-img {
+      animation: heroZoom 30s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Article Title Animation */
+    .article-title {
+      animation: titleReveal 1s ease-out;
+    }
+
+    @keyframes titleReveal {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .article-subtitle {
+      animation: subtitleReveal 1s ease-out 0.2s backwards;
+    }
+
+    @keyframes subtitleReveal {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Drop Cap Styling */
+    .drop-cap {
+      line-height: 0.75;
+      margin-top: 0.05em;
+      margin-bottom: -0.1em;
+    }
+
+    /* Pull Quote Animation */
+    .pull-quote {
+      animation: quoteSlide 0.8s ease-out;
+    }
+
+    @keyframes quoteSlide {
+      from {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* Share Button Hover */
+    .share-btn {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .share-btn::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 214, 2, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition:
+        width 0.3s,
+        height 0.3s;
+    }
+
+    .share-btn:hover::before {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Progress Bar Update on Scroll */
+    .progress-bar {
+      transition: width 0.1s linear;
+    }
+
+    /* Article Content Animations */
+    .article-content p {
+      animation: paragraphFade 0.8s ease-out backwards;
+    }
+
+    .article-content p:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .article-content p:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .article-content p:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .article-content p:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes paragraphFade {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Related Article Hover */
+    .related-article {
+      transition: transform 0.3s ease;
+    }
+
+    .related-article:hover {
+      transform: translateX(-5px);
+    }
+  </style>
+
+  <script>
+    // Reading Progress Bar
+    document.addEventListener("DOMContentLoaded", () => {
+      const progressBar = document.querySelector(
+        ".progress-bar",
+      ) as HTMLElement;
+      const progressPercent = document.querySelector(".progress-percent");
+
+      if (progressBar && progressPercent) {
+        window.addEventListener("scroll", () => {
+          const windowHeight = window.innerHeight;
+          const documentHeight =
+            document.documentElement.scrollHeight - windowHeight;
+          const scrolled = window.scrollY;
+          const progress = Math.min((scrolled / documentHeight) * 100, 100);
+
+          progressBar.style.width = `${progress}%`;
+          progressPercent.textContent = Math.round(progress).toString();
+        });
+      }
+    });
+
+    // Copy Link Functionality
+    document.addEventListener("DOMContentLoaded", () => {
+      const copyButton = document.querySelector('[aria-label="Copy link"]');
+
+      copyButton?.addEventListener("click", () => {
+        navigator.clipboard.writeText(window.location.href);
+
+        // Visual feedback
+        const originalHTML = copyButton.innerHTML;
+        copyButton.innerHTML =
+          '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+        copyButton.classList.add("bg-yellow", "text-black");
+
+        setTimeout(() => {
+          copyButton.innerHTML = originalHTML;
+          copyButton.classList.remove("bg-yellow", "text-black");
+        }, 2000);
+      });
+    });
+  </script></BaseLayout
+>

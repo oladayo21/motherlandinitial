@@ -1,0 +1,396 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/ui/Container.astro";
+import Section from "../../components/ui/Section.astro";
+
+// Collection data
+const collection = {
+  title: "Championship Final vs Rangers FC",
+  description: "Historic 4-1 victory that secured our first championship title",
+  date: "March 15, 2024",
+  venue: "National Stadium",
+  attendance: "52,000",
+  photographer: "Club Media Team",
+  images: [
+    {
+      id: 1,
+      title: "Victory Celebration",
+      description: "Players celebrate with the championship trophy in front of ecstatic fans",
+      fullSize: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070",
+      photographer: "Club Media Team",
+      time: "90+3'",
+    },
+    {
+      id: 2,
+      title: "Winning Goal Celebration",
+      description: "Marcus celebrating his decisive fourth goal that sealed the championship",
+      fullSize: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2093",
+      photographer: "Sarah Johnson",
+      time: "87'",
+    },
+    {
+      id: 3,
+      title: "Fan Euphoria",
+      description: "30,000 supporters celebrate in the stands as the final whistle blows",
+      fullSize: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070",
+      photographer: "Maria Santos",
+      time: "Full Time",
+    },
+    {
+      id: 4,
+      title: "Trophy Presentation",
+      description: "Captain lifts the championship trophy as confetti falls from the sky",
+      fullSize: "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?q=80&w=2071",
+      photographer: "Alex Chen",
+      time: "Ceremony",
+    },
+    {
+      id: 5,
+      title: "Team Unity",
+      description: "The entire squad celebrates together in the center circle",
+      fullSize: "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=2070",
+      photographer: "Sarah Johnson",
+      time: "Post-Match",
+    },
+    {
+      id: 6,
+      title: "Manager's Emotion",
+      description: "Head coach overcome with emotion after achieving his lifelong dream",
+      fullSize: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=2049",
+      photographer: "David Kumar",
+      time: "89'",
+    },
+    {
+      id: 7,
+      title: "Golden Moment",
+      description: "The golden trophy gleams under the stadium lights",
+      fullSize: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070",
+      photographer: "Lisa Wang",
+      time: "Ceremony",
+    },
+    {
+      id: 8,
+      title: "Fans' Dreams Realized",
+      description: "Supporters display championship banners in the stands",
+      fullSize: "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2070",
+      photographer: "Maria Santos",
+      time: "85'",
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${collection.title} | Photo Gallery | Motherland Berlin SC`}
+  description={`${collection.description} - Exclusive photos from ${collection.date}`}
+>
+  <!-- Breadcrumb Navigation -->
+  <Section background="black" className="border-b border-white/10 py-4">
+    <Container className="max-w-[1920px]">
+      <nav class="flex items-center space-x-2 text-sm">
+        <a href="/" class="text-white/60 hover:text-yellow transition-colors">Home</a>
+        <span class="text-white/40">/</span>
+        <a href="/gallery" class="text-white/60 hover:text-yellow transition-colors">Gallery</a>
+        <span class="text-white/40">/</span>
+        <span class="text-white">{collection.title}</span>
+      </nav>
+    </Container>
+  </Section>
+
+  <!-- Collection Hero -->
+  <Section background="black" className="relative overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 opacity-20">
+      <img
+        src={collection.images[0].fullSize}
+        alt={collection.title}
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black"></div>
+    </div>
+
+    <Container className="relative z-10 max-w-[1920px]">
+      <div class="py-16 lg:py-24">
+        <!-- Collection Info -->
+        <div class="max-w-4xl">
+          <div class="animate-slide-up">
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase">
+              {collection.title.split(' vs ')[0]} <span class="text-yellow">vs</span> {collection.title.split(' vs ')[1]}
+            </h1>
+            <div class="mt-6 h-1 w-32 bg-yellow"></div>
+          </div>
+          
+          <div class="animate-slide-up animate-stagger-1 mt-8">
+            <p class="text-xl text-white/80 lg:text-2xl">
+              {collection.description}
+            </p>
+          </div>
+
+          <!-- Collection Metadata -->
+          <div class="animate-slide-up animate-stagger-2 mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="border border-white/10 bg-black-900/80 p-4">
+              <div class="text-yellow text-sm font-bold uppercase tracking-wider">Date</div>
+              <div class="mt-1 text-white font-medium">{collection.date}</div>
+            </div>
+            <div class="border border-white/10 bg-black-900/80 p-4">
+              <div class="text-yellow text-sm font-bold uppercase tracking-wider">Venue</div>
+              <div class="mt-1 text-white font-medium">{collection.venue}</div>
+            </div>
+            <div class="border border-white/10 bg-black-900/80 p-4">
+              <div class="text-yellow text-sm font-bold uppercase tracking-wider">Attendance</div>
+              <div class="mt-1 text-white font-medium">{collection.attendance}</div>
+            </div>
+            <div class="border border-white/10 bg-black-900/80 p-4">
+              <div class="text-yellow text-sm font-bold uppercase tracking-wider">Photos</div>
+              <div class="mt-1 text-white font-medium">{collection.images.length} Images</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Photo Gallery -->
+  <Section background="black" className="border-t border-white/10">
+    <Container className="max-w-[1920px]">
+      <div class="py-16">
+        <!-- Featured Image -->
+        <div class="mb-16">
+          <div class="featured-image relative overflow-hidden bg-black-900 border border-white/10">
+            <img
+              src={collection.images[0].fullSize}
+              alt={collection.images[0].title}
+              class="h-auto w-full object-cover lg:h-[600px]"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+            
+            <!-- Featured Badge -->
+            <div class="absolute top-6 left-6">
+              <span class="bg-yellow px-4 py-2 text-sm font-bold text-black uppercase tracking-wider">
+                Featured Photo
+              </span>
+            </div>
+
+            <!-- Content -->
+            <div class="absolute bottom-0 left-0 right-0 p-8">
+              <div class="max-w-2xl space-y-3">
+                <div class="flex items-center gap-3">
+                  <span class="bg-white/20 px-3 py-1 text-xs font-bold text-white uppercase">
+                    {collection.images[0].time}
+                  </span>
+                  <span class="text-white/60 text-sm">by {collection.images[0].photographer}</span>
+                </div>
+                <h2 class="font-display text-2xl lg:text-3xl font-bold text-white">
+                  {collection.images[0].title}
+                </h2>
+                <p class="text-white/80 text-lg">
+                  {collection.images[0].description}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {collection.images.slice(1).map((image, index) => (
+            <div 
+              class="gallery-item scroll-animate cursor-pointer"
+              style={`animation-delay: ${index * 0.1}s`}
+              data-image-id={image.id}
+            >
+              <div class="group relative h-80 overflow-hidden bg-black-900 border border-white/10">
+                <img
+                  src={image.fullSize}
+                  alt={image.title}
+                  class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                <!-- Time Badge -->
+                <div class="absolute top-4 right-4">
+                  <span class="bg-black/80 px-2 py-1 text-xs font-bold text-white">
+                    {image.time}
+                  </span>
+                </div>
+
+                <!-- Content -->
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                  <div class="space-y-2">
+                    <h3 class="font-display text-lg font-bold text-white line-clamp-2">
+                      {image.title}
+                    </h3>
+                    <p class="text-white/70 text-sm line-clamp-2">
+                      {image.description}
+                    </p>
+                    <p class="text-white/50 text-xs">Photo by {image.photographer}</p>
+                  </div>
+                </div>
+
+                <!-- Hover Overlay -->
+                <div class="absolute inset-0 bg-yellow/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+                
+                <!-- Expand Icon -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div class="bg-yellow p-3">
+                    <svg class="h-6 w-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Back to Gallery -->
+        <div class="mt-16 text-center">
+          <a href="/gallery" class="group inline-flex items-center gap-3 border border-white/30 px-8 py-4 font-bold uppercase tracking-wider text-white transition-all hover:border-yellow hover:text-yellow">
+            <svg class="h-5 w-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+            </svg>
+            <span>Back to Gallery</span>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Related Collections -->
+  <Section background="black" className="border-t border-white/10">
+    <Container className="max-w-[1920px]">
+      <div class="py-16">
+        <h2 class="mb-8 font-display text-3xl font-black uppercase text-white">
+          More <span class="text-yellow">Collections</span>
+        </h2>
+        
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Related collection cards would go here -->
+          <a href="/gallery/womens-cup-final" class="group relative block">
+            <div class="relative h-64 overflow-hidden bg-black-900 border border-white/10">
+              <img
+                src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?q=80&w=2034"
+                alt="Women's Cup Final"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <h3 class="font-display text-xl font-bold text-white">Women's Cup Final Victory</h3>
+                <p class="mt-2 text-white/70 text-sm">Historic achievement - 3 photos</p>
+              </div>
+            </div>
+          </a>
+          
+          <a href="/gallery/derby-city-united" class="group relative block">
+            <div class="relative h-64 overflow-hidden bg-black-900 border border-white/10">
+              <img
+                src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070"
+                alt="Derby vs City United"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <h3 class="font-display text-xl font-bold text-white">Derby vs City United</h3>
+                <p class="mt-2 text-white/70 text-sm">Intense rivalry match - 2 photos</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/gallery/friendly-barcelona" class="group relative block">
+            <div class="relative h-64 overflow-hidden bg-black-900 border border-white/10">
+              <img
+                src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2070"
+                alt="Friendly vs Barcelona"
+                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <h3 class="font-display text-xl font-bold text-white">Pre-Season vs Barcelona</h3>
+                <p class="mt-2 text-white/70 text-sm">International friendly - 2 photos</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<script>
+  // Scroll animations
+  function initScrollAnimations() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+      observer.observe(el);
+    });
+  }
+
+  // Gallery item click handlers (for future lightbox implementation)
+  function initGalleryInteractions() {
+    const galleryItems = document.querySelectorAll('[data-image-id]');
+    
+    galleryItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const imageId = item.getAttribute('data-image-id');
+        console.log('Clicked image:', imageId);
+        // Future: Open lightbox with image
+      });
+    });
+  }
+
+  // Initialize all functionality
+  function init() {
+    initScrollAnimations();
+    initGalleryInteractions();
+  }
+
+  // Run when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
+
+<style>
+  /* Line clamping for text */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Initial state for scroll animations */
+  .scroll-animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  /* Featured image responsive behavior */
+  .featured-image img {
+    min-height: 400px;
+  }
+
+  @media (min-width: 1024px) {
+    .featured-image img {
+      height: 600px;
+      object-fit: cover;
+    }
+  }
+</style>

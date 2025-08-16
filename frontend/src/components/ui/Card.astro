@@ -1,0 +1,50 @@
+---
+export interface Props {
+  variant?: "default" | "bordered" | "elevated" | "dark";
+  hover?: boolean;
+  className?: string;
+  animate?: boolean;
+  animateDelay?: number;
+}
+
+const {
+  variant = "default",
+  hover = true,
+  className = "",
+  animate = false,
+  animateDelay = 0,
+} = Astro.props;
+
+const variantClasses = {
+  default: "bg-white",
+  bordered: "border-black-200 border bg-white",
+  elevated: "bg-white shadow-lg",
+  dark: "bg-black-700 text-white",
+};
+
+const hoverClasses = {
+  default: "hover:shadow-lg",
+  bordered: "hover:border-yellow",
+  elevated: "hover:shadow-xl",
+  dark: "hover:bg-black-600",
+};
+
+const variantClass = variantClasses[variant];
+const hoverClass = hover ? hoverClasses[variant] : "";
+const animateClass = animate ? "scroll-animate" : "";
+const animateDelayClass =
+  animate && animateDelay > 0 ? `animate-stagger-${animateDelay}` : "";
+---
+
+<article
+  class:list={[
+    "group transition-all",
+    variantClass,
+    hoverClass,
+    animateClass,
+    animateDelayClass,
+    className,
+  ]}
+>
+  <slot />
+</article>

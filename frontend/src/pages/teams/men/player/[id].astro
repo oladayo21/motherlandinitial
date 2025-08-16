@@ -1,0 +1,569 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import Container from "../../../../components/ui/Container.astro";
+import Button from "../../../../components/ui/Button.astro";
+
+// Define static paths for all players
+export function getStaticPaths() {
+  const players = [
+    { id: "marcus-schmidt" },
+    { id: "david-johnson" },
+    { id: "carlos-silva" },
+    { id: "james-williams" },
+    { id: "mohamed-hassan" },
+    { id: "pierre-dubois" },
+    { id: "oluwaseun-adeyemi" },
+    { id: "antonio-martinez" },
+    { id: "kwame-mensah" },
+    { id: "yuki-tanaka" },
+    { id: "samuel-okonkwo" },
+    { id: "lucas-rodriguez" },
+    { id: "ibrahim-diallo" },
+    { id: "marco-rossi" },
+    { id: "aleksandr-petrov" },
+    { id: "emmanuel-nkrumah" },
+    { id: "joao-santos" },
+    { id: "didier-mbappe" },
+    { id: "park-ji-sung" },
+    { id: "ahmed-el-sharif" },
+  ];
+
+  return players.map((player) => ({
+    params: { id: player.id },
+  }));
+}
+
+// This would normally come from a database or API
+const { id } = Astro.params;
+
+// Example player data (would be fetched based on ID)
+// In a real app, this would be fetched based on the ID parameter
+const player = {
+  firstName: "Lucas",
+  lastName: "RODRIGUEZ",
+  number: "10",
+  position: "Attacking Midfielder",
+  nationality: "Spain",
+  birthDate: "March 15, 1995",
+  age: "29",
+  height: "180 cm",
+  weight: "75 kg",
+  foot: "Right",
+  joined: "2022",
+  contractUntil: "2027",
+  marketValue: "€45M",
+  image:
+    "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=800&h=1200&fit=crop",
+  stats: {
+    appearances: "42",
+    goals: "18",
+    assists: "15",
+    yellowCards: "3",
+    redCards: "0",
+    minutesPlayed: "3,420",
+  },
+  seasonStats: [
+    { competition: "Bundesliga", apps: "28", goals: "12", assists: "10" },
+    { competition: "DFB-Pokal", apps: "6", goals: "3", assists: "2" },
+    { competition: "Europa League", apps: "8", goals: "3", assists: "3" },
+  ],
+  biography:
+    "Lucas Rodriguez joined Motherland SC from Real Madrid in 2022 and has quickly established himself as a key player in the team's midfield. Known for his vision, passing ability, and technical skills, Rodriguez has been instrumental in the team's recent success.",
+  achievements: [
+    "DFB-Pokal Winner 2023",
+    "Bundesliga Team of the Season 2023",
+    "Player of the Month - September 2024",
+  ],
+  social: {
+    instagram: "@lucasrodriguez10",
+    twitter: "@LRodriguez10",
+  },
+};
+
+// Career history
+const careerHistory = [
+  { year: "2022-Present", club: "Motherland SC", apps: "42", goals: "18" },
+  { year: "2019-2022", club: "Real Madrid", apps: "89", goals: "22" },
+  { year: "2017-2019", club: "Valencia CF", apps: "76", goals: "15" },
+  { year: "2015-2017", club: "Sevilla FC", apps: "68", goals: "12" },
+];
+---
+
+<BaseLayout
+  title={`${player.firstName} ${player.lastName} - Motherland SC`}
+  description={`Profile of ${player.firstName} ${player.lastName}, ${player.position} for Motherland SC`}
+>
+  <!-- Hero Section with Player Image -->
+  <section class="relative h-screen overflow-hidden bg-black">
+    <!-- Animated Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div
+        class="absolute inset-0 animate-pulse bg-[linear-gradient(45deg,yellow_1px,transparent_1px),linear-gradient(-45deg,yellow_1px,transparent_1px)] bg-[size:40px_40px]"
+      >
+      </div>
+    </div>
+
+    <!-- Player Image Background -->
+    <div class="absolute inset-0">
+      <div class="relative h-full w-full">
+        <!-- Large Player Image -->
+        <div class="absolute top-0 right-0 h-full w-full md:w-2/3 lg:w-1/2">
+          <img
+            src={player.image}
+            alt={`${player.firstName} ${player.lastName}`}
+            class="h-full w-full object-cover object-top"
+            style="mask-image: linear-gradient(to left, black 50%, transparent 100%);"
+          />
+        </div>
+
+        <!-- Gradient Overlay -->
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"
+        >
+        </div>
+      </div>
+    </div>
+
+    <!-- Player Info Overlay -->
+    <Container>
+      <div class="relative flex h-screen items-center">
+        <div class="max-w-2xl">
+          <!-- Jersey Number -->
+          <div class="animate-slideInLeft mb-6">
+            <span
+              class="text-yellow text-9xl leading-none font-black opacity-50 md:text-[12rem]"
+            >
+              {player.number}
+            </span>
+          </div>
+
+          <!-- Player Name -->
+          <div class="relative -mt-20 mb-8">
+            <h1
+              class="font-display animate-slideInLeft text-4xl font-bold text-white md:text-5xl"
+              style="animation-delay: 0.2s"
+            >
+              {player.firstName}
+            </h1>
+            <h1
+              class="font-display animate-slideInLeft text-6xl font-black text-white uppercase md:text-8xl"
+              style="animation-delay: 0.3s"
+            >
+              {player.lastName}
+            </h1>
+          </div>
+
+          <!-- Position & Nationality -->
+          <div
+            class="animate-fadeInUp mb-8 flex items-center gap-6"
+            style="animation-delay: 0.4s"
+          >
+            <div class="bg-yellow px-4 py-2">
+              <span
+                class="text-sm font-bold tracking-wider text-black uppercase"
+              >
+                {player.position}
+              </span>
+            </div>
+            <div class="border border-white/30 px-4 py-2">
+              <span
+                class="text-sm font-medium tracking-wider text-white uppercase"
+              >
+                {player.nationality}
+              </span>
+            </div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div
+            class="animate-fadeInUp grid grid-cols-3 gap-4"
+            style="animation-delay: 0.5s"
+          >
+            <div
+              class="border border-white/20 bg-black/50 p-4 backdrop-blur-sm"
+            >
+              <div class="text-yellow text-3xl font-black">
+                {player.stats.goals}
+              </div>
+              <div class="mt-1 text-xs text-white/70 uppercase">Goals</div>
+            </div>
+            <div
+              class="border border-white/20 bg-black/50 p-4 backdrop-blur-sm"
+            >
+              <div class="text-yellow text-3xl font-black">
+                {player.stats.assists}
+              </div>
+              <div class="mt-1 text-xs text-white/70 uppercase">Assists</div>
+            </div>
+            <div
+              class="border border-white/20 bg-black/50 p-4 backdrop-blur-sm"
+            >
+              <div class="text-yellow text-3xl font-black">
+                {player.stats.appearances}
+              </div>
+              <div class="mt-1 text-xs text-white/70 uppercase">
+                Appearances
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg
+        class="text-yellow h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="square"
+          stroke-linejoin="miter"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Player Details Grid -->
+  <section class="bg-black py-20">
+    <Container>
+      <div class="grid gap-12 lg:grid-cols-3">
+        <!-- Left Column - Personal Info & Bio -->
+        <div class="space-y-8 lg:col-span-2">
+          <!-- Biography -->
+          <div class="bg-black-900 border border-white/10 p-8">
+            <h2
+              class="font-display mb-4 text-2xl font-bold text-white uppercase"
+            >
+              Biography
+            </h2>
+            <div class="bg-yellow mb-6 h-1 w-16"></div>
+            <p class="leading-relaxed text-white/80">
+              {player.biography}
+            </p>
+          </div>
+
+          <!-- Season Statistics by Competition -->
+          <div class="bg-black-900 border border-white/10 p-8">
+            <h2
+              class="font-display mb-4 text-2xl font-bold text-white uppercase"
+            >
+              Season Statistics
+            </h2>
+            <div class="bg-yellow mb-6 h-1 w-16"></div>
+
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead>
+                  <tr class="border-b border-white/10">
+                    <th
+                      class="pb-4 text-left text-xs font-medium text-white/50 uppercase"
+                      >Competition</th
+                    >
+                    <th
+                      class="pb-4 text-center text-xs font-medium text-white/50 uppercase"
+                      >Apps</th
+                    >
+                    <th
+                      class="pb-4 text-center text-xs font-medium text-white/50 uppercase"
+                      >Goals</th
+                    >
+                    <th
+                      class="pb-4 text-center text-xs font-medium text-white/50 uppercase"
+                      >Assists</th
+                    >
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    player.seasonStats.map((stat) => (
+                      <tr class="border-b border-white/5 transition-colors hover:bg-white/5">
+                        <td class="py-4 font-medium text-white">
+                          {stat.competition}
+                        </td>
+                        <td class="py-4 text-center text-white">{stat.apps}</td>
+                        <td class="text-yellow py-4 text-center font-bold">
+                          {stat.goals}
+                        </td>
+                        <td class="py-4 text-center text-white">
+                          {stat.assists}
+                        </td>
+                      </tr>
+                    ))
+                  }
+                  <tr class="bg-yellow/10">
+                    <td class="py-4 font-bold text-white uppercase">Total</td>
+                    <td class="py-4 text-center font-bold text-white"
+                      >{player.stats.appearances}</td
+                    >
+                    <td class="text-yellow py-4 text-center font-bold"
+                      >{player.stats.goals}</td
+                    >
+                    <td class="py-4 text-center font-bold text-white"
+                      >{player.stats.assists}</td
+                    >
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Career History -->
+          <div class="bg-black-900 border border-white/10 p-8">
+            <h2
+              class="font-display mb-4 text-2xl font-bold text-white uppercase"
+            >
+              Career History
+            </h2>
+            <div class="bg-yellow mb-6 h-1 w-16"></div>
+
+            <div class="space-y-4">
+              {
+                careerHistory.map((career, index) => (
+                  <div
+                    class={`flex items-center justify-between p-4 ${index === 0 ? "bg-yellow/10 border-yellow/30 border" : "bg-black-800"}`}
+                  >
+                    <div class="flex items-center gap-4">
+                      <span class="text-sm text-white/50">{career.year}</span>
+                      <span
+                        class={`font-bold ${index === 0 ? "text-yellow" : "text-white"}`}
+                      >
+                        {career.club}
+                      </span>
+                    </div>
+                    <div class="flex items-center gap-6">
+                      <div class="text-right">
+                        <span class="text-xs text-white/50 uppercase">
+                          Apps
+                        </span>
+                        <div class="font-bold text-white">{career.apps}</div>
+                      </div>
+                      <div class="text-right">
+                        <span class="text-xs text-white/50 uppercase">
+                          Goals
+                        </span>
+                        <div class="text-yellow font-bold">{career.goals}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Stats & Info Cards -->
+        <div class="space-y-6">
+          <!-- Personal Information Card -->
+          <div class="bg-black-900 border border-white/10 p-6">
+            <h3
+              class="font-display mb-4 text-lg font-bold text-white uppercase"
+            >
+              Personal Info
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Age</span>
+                <span class="font-medium text-white">{player.age}</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Birth Date</span>
+                <span class="font-medium text-white">{player.birthDate}</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Height</span>
+                <span class="font-medium text-white">{player.height}</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Weight</span>
+                <span class="font-medium text-white">{player.weight}</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Preferred Foot</span>
+                <span class="font-medium text-white">{player.foot}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contract Information -->
+          <div class="bg-black-900 border border-white/10 p-6">
+            <h3
+              class="font-display mb-4 text-lg font-bold text-white uppercase"
+            >
+              Contract Details
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Joined</span>
+                <span class="font-medium text-white">{player.joined}</span>
+              </div>
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Contract Until</span>
+                <span class="font-medium text-white"
+                  >{player.contractUntil}</span
+                >
+              </div>
+              <div class="flex justify-between border-b border-white/10 py-2">
+                <span class="text-sm text-white/50">Market Value</span>
+                <span class="text-yellow font-bold">{player.marketValue}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Season Stats Card -->
+          <div
+            class="from-yellow/20 to-yellow/5 border-yellow/30 border bg-gradient-to-br p-6"
+          >
+            <h3
+              class="font-display mb-4 text-lg font-bold text-white uppercase"
+            >
+              This Season
+            </h3>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center">
+                <div class="text-yellow text-3xl font-black">
+                  {player.stats.goals}
+                </div>
+                <div class="mt-1 text-xs text-white/70 uppercase">Goals</div>
+              </div>
+              <div class="text-center">
+                <div class="text-yellow text-3xl font-black">
+                  {player.stats.assists}
+                </div>
+                <div class="mt-1 text-xs text-white/70 uppercase">Assists</div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-black text-white">
+                  {player.stats.yellowCards}
+                </div>
+                <div class="mt-1 text-xs text-white/70 uppercase">
+                  Yellow Cards
+                </div>
+              </div>
+              <div class="text-center">
+                <div class="text-3xl font-black text-white">
+                  {player.stats.minutesPlayed}
+                </div>
+                <div class="mt-1 text-xs text-white/70 uppercase">Minutes</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="bg-black-900 border border-white/10 p-6">
+            <h3
+              class="font-display mb-4 text-lg font-bold text-white uppercase"
+            >
+              Achievements
+            </h3>
+            <ul class="space-y-2">
+              {
+                player.achievements.map((achievement) => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-yellow mt-1">▪</span>
+                    <span class="text-sm text-white/80">{achievement}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Social Media -->
+          <div class="bg-black-900 border border-white/10 p-6">
+            <h3
+              class="font-display mb-4 text-lg font-bold text-white uppercase"
+            >
+              Follow
+            </h3>
+            <div class="space-y-3">
+              <a
+                href="#"
+                class="hover:text-yellow flex items-center gap-3 text-white/70 transition-colors"
+              >
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.405a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"
+                  ></path>
+                </svg>
+                <span>{player.social.instagram}</span>
+              </a>
+              <a
+                href="#"
+                class="hover:text-yellow flex items-center gap-3 text-white/70 transition-colors"
+              >
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                  ></path>
+                </svg>
+                <span>{player.social.twitter}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Back to Squad Link -->
+  <section class="bg-yellow py-12">
+    <Container>
+      <div class="text-center">
+        <a
+          href="/teams/men/players-staff"
+          class="font-display inline-flex items-center gap-3 bg-black px-8 py-4 font-bold tracking-wider text-white uppercase transition-all hover:shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+              stroke-width="2"
+              d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+          </svg>
+          <span>Back to Squad</span>
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.8s ease-out forwards;
+  }
+
+  .animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+</style>

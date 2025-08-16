@@ -1,0 +1,63 @@
+---
+export interface Props {
+  name: string;
+  price: string;
+  image: string;
+  imageAlt?: string;
+  href?: string;
+  badge?: string;
+  animate?: boolean;
+  animateDelay?: number;
+}
+
+const {
+  name,
+  price,
+  image,
+  imageAlt = "",
+  href = "#",
+  badge,
+  animate = false,
+  animateDelay = 0,
+} = Astro.props;
+
+const animateClass = animate ? "scroll-animate" : "";
+const animateDelayClass =
+  animate && animateDelay > 0 ? `animate-stagger-${animateDelay}` : "";
+---
+
+<div
+  class:list={[
+    "group hover:border-yellow border-yellow/10 bg-black-700 border transition-all hover:shadow-[0_10px_30px_rgba(255,214,2,0.2)]",
+    animateClass,
+    animateDelayClass,
+  ]}
+>
+  <a href={href} class="block">
+    <div class="relative aspect-square overflow-hidden bg-black">
+      {
+        badge && (
+          <span class="bg-yellow absolute top-2 left-2 z-10 px-2 py-1 text-xs font-bold text-black uppercase">
+            {badge}
+          </span>
+        )
+      }
+      <img
+        src={image}
+        alt={imageAlt || name}
+        class="h-full w-full object-cover transition-transform group-hover:scale-110"
+        loading="lazy"
+      />
+    </div>
+    <div class="p-4">
+      <h3
+        class="font-display group-hover:text-yellow text-lg font-bold text-white transition-colors"
+      >
+        {name}
+      </h3>
+      <p class="font-body text-yellow mt-1 font-bold">
+        {price}
+      </p>
+    </div>
+  </a>
+</div>

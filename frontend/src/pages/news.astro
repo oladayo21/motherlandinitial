@@ -1,0 +1,1695 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+import NewsCard from "../components/cards/NewsCard.astro";
+
+// Mock news data with categories
+const allNews = [
+  // Featured story
+  {
+    id: 1,
+    title: "Historic Victory: Motherland SC Wins National Championship",
+    description:
+      "An unforgettable night as the team secures the title with a commanding 4-1 victory in the final match of the season.",
+    image:
+      "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070",
+    category: "Club News",
+    date: "2 hours ago",
+    href: "/article",
+    featured: true,
+  },
+  // Regular news items
+  {
+    id: 2,
+    title: "New Signing: Star Midfielder Joins Squad",
+    description:
+      "International midfielder signs 4-year contract with the club, strengthening our midfield options.",
+    image:
+      "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?q=80&w=2071",
+    category: "Transfers",
+    date: "5 hours ago",
+    href: "/article",
+  },
+  {
+    id: 3,
+    title: "Match Report: Dominant Display Against City United",
+    description:
+      "The team delivered a masterclass performance with a 3-0 victory at home.",
+    image:
+      "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2093",
+    category: "Match Reports",
+    date: "Yesterday",
+    href: "/article",
+  },
+  {
+    id: 4,
+    title: "Academy Prospect Signs First Professional Contract",
+    description:
+      "18-year-old sensation from our youth academy commits future to the club.",
+    image:
+      "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=2049",
+    category: "Academy",
+    date: "2 days ago",
+    href: "/article",
+  },
+  {
+    id: 5,
+    title: "Manager's Press Conference: Derby Preview",
+    description:
+      "Head coach discusses tactics and team selection ahead of the crucial derby match.",
+    image:
+      "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?q=80&w=2070",
+    category: "Interviews",
+    date: "2 days ago",
+    href: "/article",
+  },
+  {
+    id: 6,
+    title: "Women's Team Advances to Cup Semi-Finals",
+    description:
+      "A brilliant performance sees the women's team through to the last four of the national cup.",
+    image:
+      "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=2049",
+    category: "Women's Team",
+    date: "3 days ago",
+    href: "/article",
+  },
+  {
+    id: 7,
+    title: "Stadium Expansion Plans Revealed",
+    description:
+      "Club announces ambitious plans to increase stadium capacity to 45,000 seats.",
+    image:
+      "https://images.unsplash.com/photo-1516475429286-465d815a0df7?q=80&w=2080",
+    category: "Club News",
+    date: "4 days ago",
+    href: "/article",
+  },
+  {
+    id: 8,
+    title: "Injury Update: Key Players Return to Training",
+    description:
+      "Good news as three first-team players complete their recovery and rejoin squad training.",
+    image:
+      "https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070",
+    category: "Team News",
+    date: "5 days ago",
+    href: "/article",
+  },
+  {
+    id: 9,
+    title: "Youth Cup: U18s Reach Quarter-Finals",
+    description:
+      "Academy team continues impressive cup run with 2-1 victory over strong opposition.",
+    image:
+      "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?q=80&w=2034",
+    category: "Academy",
+    date: "1 week ago",
+    href: "/article",
+  },
+  {
+    id: 10,
+    title: "Community Initiative: Football for All Program Launch",
+    description:
+      "Club launches new community program to provide free football training for local youth.",
+    image:
+      "https://images.unsplash.com/photo-1529900748604-07564a03e7a6?q=80&w=2070",
+    category: "Community",
+    date: "1 week ago",
+    href: "/article",
+  },
+  {
+    id: 11,
+    title: "Transfer Window: Three Targets Identified",
+    description:
+      "Club scouts have identified key positions to strengthen in the upcoming transfer window.",
+    image:
+      "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070",
+    category: "Transfers",
+    date: "1 week ago",
+    href: "/article",
+  },
+  {
+    id: 12,
+    title: "Behind the Scenes: Training Ground Tour",
+    description:
+      "Exclusive look at the state-of-the-art facilities where our champions are made.",
+    image:
+      "https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?q=80&w=2070",
+    category: "Features",
+    date: "2 weeks ago",
+    href: "/article",
+  },
+];
+
+// Categories for filtering
+const categories = [
+  "All News",
+  "Club News",
+  "Match Reports",
+  "Transfers",
+  "Team News",
+  "Academy",
+  "Women's Team",
+  "Interviews",
+  "Features",
+  "Community",
+];
+
+// Get category from URL params (for future JS implementation)
+const selectedCategory = "All News";
+
+// Filter news based on category
+const filteredNews =
+  selectedCategory === "All News"
+    ? allNews
+    : allNews.filter((item) => item.category === selectedCategory);
+
+// Separate featured story from regular news
+const featuredStory = allNews.find((item) => item.featured);
+const regularNews = filteredNews.filter((item) => !item.featured);
+
+// Pagination setup
+const itemsPerPage = 9;
+const currentPage = 1;
+const totalPages = Math.ceil(regularNews.length / itemsPerPage);
+const paginatedNews = regularNews.slice(
+  (currentPage - 1) * itemsPerPage,
+  currentPage * itemsPerPage,
+);
+---
+
+<BaseLayout
+  title="Latest News - Motherland Berlin SC"
+  description="Get the latest news, match reports, transfer updates, and exclusive content from Motherland Berlin SC."
+>
+  {/* Hero Section - Split Screen Magazine Style */}
+  <section class="hero-section relative overflow-hidden bg-black pt-24 pb-0">
+    {/* Grid pattern background */}
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="grid-bg absolute inset-0"></div>
+
+      {/* Floating geometric shapes */}
+      <div class="shapes-container absolute inset-0">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+        <div class="shape shape-5"></div>
+      </div>
+
+      {/* Noise texture overlay */}
+      <div class="noise-overlay absolute inset-0"></div>
+    </div>
+
+    <Container className="relative z-10">
+      {/* Split Layout Header */}
+      <div class="split-header mb-12 grid items-center gap-8 lg:grid-cols-2">
+        {/* Left Side - Title */}
+        <div class="title-section">
+          <div class="category-ticker mb-4 overflow-hidden">
+            <div
+              class="category-scroll flex items-center gap-4 whitespace-nowrap"
+            >
+              <span
+                class="font-body text-yellow text-xs font-bold tracking-[0.2em] uppercase"
+                >Match Reports</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-xs font-bold tracking-[0.2em] text-white/60 uppercase"
+                >Player Interviews</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-xs font-bold tracking-[0.2em] text-white/60 uppercase"
+                >Transfer News</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-xs font-bold tracking-[0.2em] text-white/60 uppercase"
+                >Club Updates</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-yellow text-xs font-bold tracking-[0.2em] uppercase"
+                >Academy News</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-xs font-bold tracking-[0.2em] text-white/60 uppercase"
+                >Women's Team</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-xs font-bold tracking-[0.2em] text-white/60 uppercase"
+                >Community</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-yellow text-xs font-bold tracking-[0.2em] uppercase"
+                >Match Reports</span
+              >
+              <span class="text-yellow/40">•</span>
+              <span
+                class="font-body text-xs font-bold tracking-[0.2em] text-white/60 uppercase"
+                >Player Interviews</span
+              >
+            </div>
+          </div>
+
+          <h1 class="hero-title relative">
+            <span class="title-line block overflow-hidden">
+              <span
+                class="title-text font-display block text-7xl font-black text-white uppercase lg:text-8xl xl:text-9xl"
+              >
+                Latest
+              </span>
+            </span>
+            <span class="title-line block overflow-hidden">
+              <span
+                class="title-text font-display text-yellow block text-7xl font-black uppercase lg:text-8xl xl:text-9xl"
+              >
+                News
+              </span>
+            </span>
+          </h1>
+
+          <p
+            class="hero-description font-body mt-6 max-w-lg text-lg text-white/60"
+          >
+            Breaking stories, exclusive interviews, and real-time match updates
+            from Motherland Berlin SC
+          </p>
+        </div>
+
+        {/* Right Side - Date & Time */}
+        <div class="date-section hidden text-right lg:block">
+          <div class="date-display relative border-l border-white/10 p-8">
+            {/* Background pattern */}
+            <div
+              class="from-yellow/10 via-yellow/5 absolute inset-0 bg-gradient-to-br to-transparent"
+            >
+            </div>
+
+            {/* Date content with better contrast */}
+            <div class="relative z-10">
+              <div
+                class="current-date font-display text-5xl leading-none font-black text-white/50 uppercase"
+              >
+                {new Date().toLocaleDateString("en-US", { weekday: "long" })}
+              </div>
+              <div
+                class="current-time font-display text-yellow/30 my-2 text-9xl leading-none font-black"
+              >
+                {
+                  new Date()
+                    .toLocaleDateString("en-US", { day: "numeric" })
+                    .padStart(2, "0")
+                }
+              </div>
+              <div
+                class="month-year font-body text-base font-bold tracking-[0.4em] text-white uppercase"
+              >
+                {
+                  new Date().toLocaleDateString("en-US", {
+                    month: "long",
+                    year: "numeric",
+                  })
+                }
+              </div>
+
+              {/* Decorative elements */}
+              <div class="mt-6 flex justify-end gap-2">
+                <div class="bg-yellow/50 h-px w-12"></div>
+                <div class="bg-yellow/30 h-px w-6"></div>
+                <div class="bg-yellow/20 h-px w-3"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Featured Story - Magazine Layout */}
+      {
+        featuredStory && (
+          <div class="magazine-feature relative">
+            <div class="feature-grid border-yellow grid gap-0 border-t-4 bg-black lg:grid-cols-12">
+              {/* Article Sidebar - Quick Info */}
+              <div class="article-sidebar bg-black-900 border-r border-white/10 p-8 lg:col-span-2">
+                {/* Priority Indicator */}
+                <div class="priority-badge mb-6">
+                  <div class="mb-2 flex items-center gap-2">
+                    <div class="bg-yellow h-2 w-2 animate-pulse rounded-full" />
+                    <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
+                      Featured Story
+                    </span>
+                  </div>
+                  <div class="from-yellow to-yellow/20 h-1 w-full bg-gradient-to-r" />
+                </div>
+
+                {/* Article Stats */}
+                <div class="article-stats space-y-4">
+                  <div class="stat-row">
+                    <span class="font-body mb-1 block text-xs text-white/40 uppercase">
+                      Category
+                    </span>
+                    <span class="font-body text-yellow text-sm font-bold">
+                      {featuredStory.category}
+                    </span>
+                  </div>
+
+                  <div class="stat-row">
+                    <span class="font-body mb-1 block text-xs text-white/40 uppercase">
+                      Published
+                    </span>
+                    <span class="font-body text-sm font-medium text-white">
+                      {featuredStory.date}
+                    </span>
+                  </div>
+
+                  <div class="stat-row">
+                    <span class="font-body mb-1 block text-xs text-white/40 uppercase">
+                      Reading Time
+                    </span>
+                    <span class="font-body text-sm font-medium text-white">
+                      5 min read
+                    </span>
+                  </div>
+
+                  <div class="stat-row">
+                    <span class="font-body mb-1 block text-xs text-white/40 uppercase">
+                      Engagement
+                    </span>
+                    <div class="flex items-center gap-3">
+                      <span class="font-body text-sm font-medium text-white">
+                        2.5k views
+                      </span>
+                      <span class="text-white/20">•</span>
+                      <span class="font-body text-sm font-medium text-white">
+                        89 shares
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div class="quick-actions mt-6 border-t border-white/10 pt-6">
+                  <div class="flex flex-col gap-2">
+                    <button class="action-btn hover:text-yellow flex items-center gap-2 text-white/60 transition-colors">
+                      <svg
+                        class="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                        />
+                      </svg>
+                      <span class="font-body text-xs uppercase">
+                        Save for later
+                      </span>
+                    </button>
+                    <button class="action-btn hover:text-yellow flex items-center gap-2 text-white/60 transition-colors">
+                      <svg
+                        class="h-4 w-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a3 3 0 10-4.732-2.684m4.732 2.684a3 3 0 00-4.732-2.684M6.316 10.658a3 3 0 10-4.732 2.684"
+                        />
+                      </svg>
+                      <span class="font-body text-xs uppercase">
+                        Share article
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Main Content */}
+              <div class="article-content relative lg:col-span-6">
+                <div class="content-wrapper p-8 lg:p-12">
+                  {/* Main Headline */}
+                  <h2 class="article-headline font-display mb-6 text-4xl leading-tight font-black text-white lg:text-5xl xl:text-6xl">
+                    <span class="headline-highlight relative">
+                      {featuredStory.title.split(":")[0]}:
+                      <span class="highlight-bg" />
+                    </span>
+                    <span class="headline-secondary mt-2 block text-3xl text-white/80 lg:text-4xl">
+                      {featuredStory.title.split(":")[1]}
+                    </span>
+                  </h2>
+
+                  {/* Article Lead */}
+                  <p class="article-lead font-body mb-8 text-lg leading-relaxed text-white/70 lg:text-xl">
+                    {featuredStory.description}
+                  </p>
+
+                  {/* Article Author */}
+                  <div class="article-meta mb-8 flex items-center gap-6">
+                    <div class="meta-item flex items-center gap-2">
+                      <div class="meta-icon bg-yellow/10 flex h-10 w-10 items-center justify-center">
+                        <svg
+                          class="text-yellow h-5 w-5"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <span class="font-body block text-xs text-white/40 uppercase">
+                          Written by
+                        </span>
+                        <span class="font-body block text-sm font-medium text-white">
+                          Sports Desk
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <div class="article-actions flex items-center gap-4">
+                    <a
+                      href={featuredStory.href}
+                      class="read-btn group bg-yellow font-body relative overflow-hidden px-8 py-4 font-black tracking-wider text-black uppercase transition-all hover:bg-yellow-400"
+                    >
+                      <span class="relative z-10 flex items-center gap-2">
+                        Read Article
+                        <svg
+                          class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="3"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      </span>
+                    </a>
+
+                    <button class="save-btn group hover:border-yellow hover:text-yellow flex items-center gap-2 border border-white/20 px-6 py-4 text-white/60 transition-all">
+                      <svg
+                        class="h-5 w-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                        />
+                      </svg>
+                      <span class="font-body text-sm font-bold tracking-wider uppercase">
+                        Save
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Feature Image */}
+              <div class="article-image relative h-[400px] overflow-hidden lg:col-span-4 lg:h-auto">
+                <div class="image-wrapper relative h-full">
+                  <img
+                    src={featuredStory.image}
+                    alt={featuredStory.title}
+                    class="article-img h-full w-full object-cover"
+                    loading="eager"
+                  />
+                  <div class="image-overlay absolute inset-0 bg-gradient-to-l from-transparent to-black/50" />
+
+                  {/* Image Caption */}
+                  <div class="image-caption absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-6">
+                    <p class="font-body text-xs tracking-wider text-white/60 uppercase">
+                      Motherland SC / Official Photo
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Bar */}
+            <div class="feature-bottom bg-black-900 border-t border-white/10 px-8 py-4">
+              <div class="flex items-center justify-between">
+                <div class="trending-topics flex items-center gap-4">
+                  <span class="font-body text-xs font-bold tracking-wider text-white/40 uppercase">
+                    Related:
+                  </span>
+                  <a
+                    href="#"
+                    class="font-body text-yellow text-xs tracking-wider uppercase transition-colors hover:text-yellow-400"
+                  >
+                    Transfers
+                  </a>
+                  <span class="text-white/20">•</span>
+                  <a
+                    href="#"
+                    class="font-body hover:text-yellow text-xs tracking-wider text-white/60 uppercase transition-colors"
+                  >
+                    Squad News
+                  </a>
+                  <span class="text-white/20">•</span>
+                  <a
+                    href="#"
+                    class="font-body hover:text-yellow text-xs tracking-wider text-white/60 uppercase transition-colors"
+                  >
+                    Manager Interview
+                  </a>
+                </div>
+
+                <div class="social-share flex items-center gap-3">
+                  <button class="social-btn hover:bg-yellow flex h-8 w-8 items-center justify-center bg-white/5 text-white/60 transition-all hover:text-black">
+                    <svg
+                      class="h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                    </svg>
+                  </button>
+                  <button class="social-btn hover:bg-yellow flex h-8 w-8 items-center justify-center bg-white/5 text-white/60 transition-all hover:text-black">
+                    <svg
+                      class="h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
+                    </svg>
+                  </button>
+                  <button class="social-btn hover:bg-yellow flex h-8 w-8 items-center justify-center bg-white/5 text-white/60 transition-all hover:text-black">
+                    <svg
+                      class="h-4 w-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8.29 20.25a1.22.25c7.47 0 11.56-6.19 11.56-11.56 0-.18 0-.35-.01-.53A8.28 8.28 0 0022 5.92a8.14 8.14 0 01-2.36.65 4.11 4.11 0 001.8-2.27 8.22 8.22 0 01-2.61 1 4.1 4.1 0 00-7 3.74A11.65 11.65 0 013.39 4.62a4.1 4.1 0 001.27 5.48A4.07 4.07 0 012.8 9.59v.05a4.1 4.1 0 003.29 4.02 4.09 4.09 0 01-1.85.07 4.1 4.1 0 003.83 2.85A8.23 8.23 0 012 18.34a8.27 8.27 0 01-.98-.06 11.62 11.62 0 006.29 1.84" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </Container>
+
+    {/* Bottom transition */}
+    <div class="h-24 bg-gradient-to-b from-transparent to-black"></div>
+  </section>
+
+  {/* Transition Section - Editor's Picks */}
+  <section class="editor-picks to-black-900 bg-gradient-to-b from-black py-16">
+    <Container>
+      <div
+        class="section-header mb-8 flex items-center justify-between border-b border-white/10 pb-4"
+      >
+        <div>
+          <h2 class="font-display text-3xl font-black text-white uppercase">
+            Editor's Picks
+          </h2>
+          <p class="font-body mt-1 text-sm text-white/60">
+            Hand-selected stories by our editorial team
+          </p>
+        </div>
+        <button
+          class="font-body text-yellow text-xs font-bold tracking-wider uppercase transition-colors hover:text-yellow-400"
+        >
+          View All →
+        </button>
+      </div>
+
+      {/* Horizontal scroll of featured items */}
+      <div class="editor-picks-scroll scrollbar-hide overflow-x-auto">
+        <div class="flex gap-6 pb-4">
+          {
+            regularNews.slice(0, 4).map((item, index) => (
+              <div class="editor-pick-card group min-w-[300px]">
+                <a href={item.href} class="block">
+                  <div class="bg-black-900 relative h-48 overflow-hidden">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  </div>
+                  <div class="bg-black-800 p-4">
+                    <span class="font-body text-yellow text-xs tracking-wider uppercase">
+                      {item.category}
+                    </span>
+                    <h3 class="font-display group-hover:text-yellow mt-2 line-clamp-2 text-lg font-bold text-white transition-colors">
+                      {item.title}
+                    </h3>
+                    <time class="font-body mt-2 block text-xs text-white/40">
+                      {item.date}
+                    </time>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  {/* Main News Section with Sidebar Layout */}
+  <Section background="black" className="pt-8 pb-20" id="news-grid">
+    <Container>
+      <div class="grid gap-8 lg:grid-cols-12">
+        {/* Sidebar Categories */}
+        <div class="lg:col-span-3">
+          <div class="category-sidebar sticky top-24">
+            <h3
+              class="font-display mb-6 text-xl font-black text-white uppercase"
+            >
+              Categories
+            </h3>
+            <div class="category-list space-y-2">
+              {
+                categories.map((category) => (
+                  <button
+                    class={`category-btn font-body w-full px-4 py-3 text-left text-sm font-medium transition-all ${
+                      category === selectedCategory
+                        ? "bg-yellow text-black"
+                        : "bg-black-900 hover:bg-black-800 hover:border-yellow border-l-2 border-transparent text-white/80 hover:text-white"
+                    }`}
+                    data-category={category}
+                  >
+                    <span class="flex items-center justify-between">
+                      {category}
+                      {category === selectedCategory && (
+                        <svg
+                          class="h-4 w-4"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                            clip-rule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </span>
+                  </button>
+                ))
+              }
+            </div>
+
+            {/* Newsletter Signup */}
+            <div
+              class="newsletter-box bg-black-900 border-yellow/20 mt-8 border p-6"
+            >
+              <h4 class="font-display text-yellow mb-2 text-lg font-bold">
+                Stay Updated
+              </h4>
+              <p class="font-body mb-4 text-sm text-white/60">
+                Get the latest news delivered to your inbox
+              </p>
+              <input
+                type="email"
+                placeholder="Your email"
+                class="font-body focus:border-yellow mb-3 w-full border border-white/20 bg-black px-4 py-2 text-sm text-white focus:outline-none"
+              />
+              <button
+                class="bg-yellow font-body w-full py-2 text-sm font-bold tracking-wider text-black uppercase transition-colors hover:bg-yellow-400"
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content Area */}
+        <div class="lg:col-span-9">
+          {/* Results Header */}
+          <div
+            class="results-header mb-8 flex items-center justify-between border-b border-white/10 pb-4"
+          >
+            <div>
+              <p class="font-body text-sm text-white/60">
+                Showing <span class="font-medium text-white"
+                  >{paginatedNews.length}</span
+                > of <span class="font-medium text-white"
+                  >{regularNews.length}</span
+                > articles
+              </p>
+            </div>
+            <div class="flex items-center gap-4">
+              <select
+                class="font-body focus:border-yellow border border-white/20 bg-black px-4 py-2 text-sm text-white focus:outline-none"
+              >
+                <option>Latest First</option>
+                <option>Oldest First</option>
+                <option>Most Popular</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Magazine-style Grid */}
+          <div class="news-magazine-grid">
+            {
+              paginatedNews.map((item, index) => {
+                // First item gets special treatment
+                if (index === 0) {
+                  return (
+                    <div class="featured-article mb-8">
+                      <a
+                        href={item.href}
+                        class="group bg-black-900 block overflow-hidden"
+                      >
+                        <div class="grid gap-0 md:grid-cols-2">
+                          <div class="relative h-64 overflow-hidden md:h-full">
+                            <img
+                              src={item.image}
+                              alt={item.title}
+                              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent" />
+                          </div>
+                          <div class="flex flex-col justify-center p-8">
+                            <div class="mb-4">
+                              <span class="font-body text-yellow block text-xs font-bold tracking-wider uppercase">
+                                {item.category}
+                              </span>
+                              <time class="font-body text-xs text-white/40">
+                                {item.date}
+                              </time>
+                            </div>
+                            <h3 class="font-display group-hover:text-yellow mb-3 text-2xl font-black text-white transition-colors">
+                              {item.title}
+                            </h3>
+                            <p class="font-body mb-4 line-clamp-2 text-white/60">
+                              {item.description}
+                            </p>
+                            <span class="font-body text-yellow text-sm font-bold transition-colors group-hover:text-yellow-400">
+                              Read More →
+                            </span>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  );
+                }
+
+                // Regular grid items
+                return (
+                  <div
+                    class={`article-card group ${index % 5 === 1 ? "md:col-span-2" : ""}`}
+                  >
+                    <a
+                      href={item.href}
+                      class="bg-black-900 block h-full overflow-hidden"
+                    >
+                      <div class="relative h-48 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                        <div class="absolute right-4 bottom-4 left-4">
+                          <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
+                            {item.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="p-6">
+                        <h3 class="font-display group-hover:text-yellow mb-2 line-clamp-2 text-lg font-bold text-white transition-colors">
+                          {item.title}
+                        </h3>
+                        <p class="font-body mb-3 line-clamp-2 text-sm text-white/60">
+                          {item.description}
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <time class="font-body text-xs text-white/40">
+                            {item.date}
+                          </time>
+                          <span class="font-body text-yellow text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100">
+                            Read →
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                );
+              })
+            }
+
+            {/* Grid container for regular items */}
+            <div class="grid gap-6 md:grid-cols-2">
+              {
+                paginatedNews.slice(1).map((item, index) => (
+                  <div class="article-card group">
+                    <a
+                      href={item.href}
+                      class="bg-black-900 block h-full overflow-hidden"
+                    >
+                      <div class="relative h-48 overflow-hidden">
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+                        <div class="absolute right-4 bottom-4 left-4">
+                          <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
+                            {item.category}
+                          </span>
+                        </div>
+                      </div>
+                      <div class="p-6">
+                        <h3 class="font-display group-hover:text-yellow mb-2 line-clamp-2 text-lg font-bold text-white transition-colors">
+                          {item.title}
+                        </h3>
+                        <p class="font-body mb-3 line-clamp-2 text-sm text-white/60">
+                          {item.description}
+                        </p>
+                        <div class="flex items-center justify-between">
+                          <time class="font-body text-xs text-white/40">
+                            {item.date}
+                          </time>
+                          <span class="font-body text-yellow text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100">
+                            Read →
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          {/* Magazine-style Pagination */}
+          {
+            totalPages > 1 && (
+              <div class="pagination-container mt-12 border-t border-white/10 pt-8">
+                <div class="flex items-center justify-between">
+                  {/* Page Info */}
+                  <div class="page-info">
+                    <span class="font-body text-sm text-white/60">Page</span>
+                    <span class="font-display text-yellow mx-2 text-2xl font-black">
+                      {currentPage}
+                    </span>
+                    <span class="font-body text-sm text-white/60">
+                      of {totalPages}
+                    </span>
+                  </div>
+
+                  {/* Navigation */}
+                  <div class="flex items-center gap-4">
+                    <button
+                      class="pagination-prev group hover:border-yellow hover:text-yellow flex items-center gap-2 border border-white/20 px-6 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-30"
+                      disabled={currentPage === 1}
+                    >
+                      <svg
+                        class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                      <span class="font-body text-sm font-bold tracking-wider uppercase">
+                        Previous
+                      </span>
+                    </button>
+
+                    {/* Page Numbers */}
+                    <div class="hidden items-center gap-2 md:flex">
+                      {Array.from(
+                        { length: Math.min(5, totalPages) },
+                        (_, i) => {
+                          const page = i + 1;
+                          return (
+                            <button
+                              class={`page-btn font-display h-10 w-10 text-lg font-bold transition-all ${
+                                page === currentPage
+                                  ? "bg-yellow text-black"
+                                  : "hover:text-yellow text-white/40"
+                              }`}
+                              data-page={page}
+                            >
+                              {page}
+                            </button>
+                          );
+                        },
+                      )}
+                      {totalPages > 5 && (
+                        <>
+                          <span class="text-white/20">...</span>
+                          <button
+                            class="page-btn font-display hover:text-yellow h-10 w-10 text-lg font-bold text-white/40 transition-all"
+                            data-page={totalPages}
+                          >
+                            {totalPages}
+                          </button>
+                        </>
+                      )}
+                    </div>
+
+                    <button
+                      class="pagination-next group hover:border-yellow hover:text-yellow flex items-center gap-2 border border-white/20 px-6 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-30"
+                      disabled={currentPage === totalPages}
+                    >
+                      <span class="font-body text-sm font-bold tracking-wider uppercase">
+                        Next
+                      </span>
+                      <svg
+                        class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Progress Bar */}
+                <div class="progress-bar mt-6">
+                  <div class="h-1 overflow-hidden bg-white/10">
+                    <div
+                      class="from-yellow h-full bg-gradient-to-r to-yellow-400 transition-all duration-500"
+                      style={`width: ${(currentPage / totalPages) * 100}%`}
+                    />
+                  </div>
+                </div>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  /* Hide scrollbar for category filter */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Editor's Picks Section */
+  .editor-picks {
+    animation: sectionFadeIn 0.8s ease-out;
+  }
+
+  @keyframes sectionFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .editor-pick-card {
+    animation: cardSlideIn 0.6s ease-out backwards;
+  }
+
+  .editor-pick-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .editor-pick-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .editor-pick-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .editor-pick-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes cardSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Category Sidebar */
+  .category-sidebar {
+    animation: sidebarFadeIn 0.8s ease-out 0.5s backwards;
+  }
+
+  @keyframes sidebarFadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .category-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .category-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 214, 2, 0.5),
+      transparent
+    );
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .category-btn:hover::before {
+    transform: translateY(100%);
+  }
+
+  /* Newsletter Box */
+  .newsletter-box {
+    animation: newsletterSlide 0.8s ease-out 1s backwards;
+  }
+
+  @keyframes newsletterSlide {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Article Cards */
+  .article-card {
+    animation: articleFadeUp 0.6s ease-out backwards;
+  }
+
+  .article-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .article-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .article-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .article-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .article-card:nth-child(5) {
+    animation-delay: 0.5s;
+  }
+  .article-card:nth-child(6) {
+    animation-delay: 0.6s;
+  }
+
+  @keyframes articleFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Pagination */
+  .pagination-container {
+    animation: paginationFade 0.6s ease-out 0.8s backwards;
+  }
+
+  @keyframes paginationFade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .page-btn {
+    position: relative;
+  }
+
+  .page-btn::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: rgba(255, 214, 2, 1);
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+  }
+
+  .page-btn:hover::after {
+    width: 100%;
+  }
+
+  /* Magazine Style Hero Design */
+
+  /* Grid background pattern */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 214, 2, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 214, 2, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+  }
+
+  @keyframes gridMove {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(50px, 50px);
+    }
+  }
+
+  /* Floating geometric shapes */
+  .shape {
+    position: absolute;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 214, 2, 0.1),
+      rgba(255, 214, 2, 0.05)
+    );
+  }
+
+  .shape-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: -150px;
+    transform: rotate(45deg);
+    animation: floatShape1 20s ease-in-out infinite;
+  }
+
+  .shape-2 {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    right: -100px;
+    transform: rotate(30deg);
+    animation: floatShape2 25s ease-in-out infinite;
+  }
+
+  .shape-3 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 20%;
+    transform: rotate(60deg);
+    animation: floatShape3 30s ease-in-out infinite;
+  }
+
+  .shape-4 {
+    width: 100px;
+    height: 100px;
+    top: 40%;
+    right: 30%;
+    transform: rotate(15deg);
+    animation: floatShape1 22s ease-in-out infinite;
+  }
+
+  .shape-5 {
+    width: 250px;
+    height: 250px;
+    bottom: -125px;
+    right: 10%;
+    transform: rotate(75deg);
+    animation: floatShape2 28s ease-in-out infinite;
+  }
+
+  @keyframes floatShape1 {
+    0%,
+    100% {
+      transform: rotate(45deg) translateY(0) scale(1);
+    }
+    50% {
+      transform: rotate(45deg) translateY(-30px) scale(1.1);
+    }
+  }
+
+  @keyframes floatShape2 {
+    0%,
+    100% {
+      transform: rotate(30deg) translateX(0) scale(1);
+    }
+    50% {
+      transform: rotate(30deg) translateX(30px) scale(0.9);
+    }
+  }
+
+  @keyframes floatShape3 {
+    0%,
+    100% {
+      transform: rotate(60deg) translate(0, 0) scale(1);
+    }
+    33% {
+      transform: rotate(60deg) translate(20px, -20px) scale(1.05);
+    }
+    66% {
+      transform: rotate(60deg) translate(-20px, 20px) scale(0.95);
+    }
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* Category ticker animation */
+  .category-scroll {
+    animation: categoryScroll 20s linear infinite;
+  }
+
+  @keyframes categoryScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Title animations */
+  .title-text {
+    animation: titleSlideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform: translateY(100%);
+  }
+
+  .title-line:nth-child(2) .title-text {
+    animation-delay: 0.1s;
+  }
+
+  @keyframes titleSlideUp {
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  /* Stats animations */
+  .stat-item {
+    animation: statFadeIn 0.6s ease-out backwards;
+  }
+
+  .stat-item:nth-child(1) {
+    animation-delay: 0.8s;
+  }
+  .stat-item:nth-child(3) {
+    animation-delay: 0.9s;
+  }
+  .stat-item:nth-child(5) {
+    animation-delay: 1s;
+  }
+
+  @keyframes statFadeIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .stat-number {
+    display: block;
+    animation: numberPop 0.6s ease-out backwards;
+    animation-delay: inherit;
+  }
+
+  @keyframes numberPop {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Date display animation */
+  .date-display {
+    animation: dateFadeIn 1s ease-out 1.2s backwards;
+  }
+
+  @keyframes dateFadeIn {
+    from {
+      transform: translateX(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Magazine feature animations */
+  .magazine-feature {
+    animation: magazineSlideUp 1s ease-out 0.5s backwards;
+  }
+
+  @keyframes magazineSlideUp {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  /* Priority badge animation */
+  .priority-badge {
+    animation: badgeFadeIn 0.8s ease-out 1s backwards;
+  }
+
+  @keyframes badgeFadeIn {
+    from {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Article stats animation */
+  .article-stats .stat-row {
+    animation: statRowSlide 0.6s ease-out backwards;
+  }
+
+  .article-stats .stat-row:nth-child(1) {
+    animation-delay: 1.1s;
+  }
+  .article-stats .stat-row:nth-child(2) {
+    animation-delay: 1.2s;
+  }
+  .article-stats .stat-row:nth-child(3) {
+    animation-delay: 1.3s;
+  }
+  .article-stats .stat-row:nth-child(4) {
+    animation-delay: 1.4s;
+  }
+
+  @keyframes statRowSlide {
+    from {
+      transform: translateX(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  /* Headline highlight effect */
+  .highlight-bg {
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    top: 50%;
+    height: 40%;
+    background: rgba(255, 214, 2, 0.1);
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: left;
+    animation: highlightExpand 0.8s ease-out 1.5s forwards;
+    z-index: -1;
+  }
+
+  @keyframes highlightExpand {
+    to {
+      transform: translateY(-50%) scaleX(1);
+    }
+  }
+
+  /* Tag badges animation */
+  .tag-badge {
+    animation: tagBounce 0.5s ease-out backwards;
+  }
+
+  .tag-badge:nth-child(1) {
+    animation-delay: 1.2s;
+  }
+  .tag-badge:nth-child(2) {
+    animation-delay: 1.3s;
+  }
+  .tag-badge:nth-child(3) {
+    animation-delay: 1.4s;
+  }
+
+  @keyframes tagBounce {
+    from {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Article image hover effect */
+  .article-img {
+    transition: transform 0.6s ease-out;
+  }
+
+  .magazine-feature:hover .article-img {
+    transform: scale(1.05);
+  }
+
+  /* Read button shine effect */
+  .read-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent
+    );
+    transition: left 0.6s;
+  }
+
+  .read-btn:hover::after {
+    left: 100%;
+  }
+
+  /* Social button hover animation */
+  .social-btn {
+    transition: all 0.3s ease;
+  }
+
+  .social-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Engagement stats animation */
+  .engagement-stats {
+    animation: statsFadeIn 0.8s ease-out 1.8s backwards;
+  }
+
+  @keyframes statsFadeIn {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    .shapes-container {
+      opacity: 0.3;
+    }
+    .grid-bg {
+      background-size: 30px 30px;
+    }
+    .category-scroll {
+      animation: none;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .article-sidebar {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 1rem 2rem;
+    }
+    .article-number {
+      font-size: 3rem;
+    }
+  }
+</style>
+
+<script>
+  // Scroll to news grid section
+  function scrollToNewsGrid() {
+    const newsGrid = document.getElementById("news-grid");
+    if (newsGrid) {
+      // Calculate the position accounting for the sticky navbar
+      const navbarHeight = 72; // Height of navbar
+      const elementPosition = newsGrid.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }
+
+  // Category filtering (client-side)
+  document.addEventListener("DOMContentLoaded", () => {
+    // Handle sticky category filter translucency
+    const categoryFilter = document.querySelector(".category-filter");
+
+    if (categoryFilter) {
+      // Store the initial offset position
+      const initialOffset = categoryFilter.offsetTop;
+
+      // Check if filter is stuck and add translucent effect
+      const handleScroll = () => {
+        const scrollY = window.scrollY;
+        const threshold = initialOffset - 72 - 10;
+
+        // When scrolled past the initial position, the filter becomes sticky
+        if (scrollY > threshold) {
+          categoryFilter.classList.add("is-scrolled");
+        } else {
+          categoryFilter.classList.remove("is-scrolled");
+        }
+      };
+
+      // Add scroll listener with passive option for better performance
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      // Check initial state
+      handleScroll();
+    }
+    const categoryButtons = document.querySelectorAll("[data-category]");
+
+    categoryButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const category = button.dataset.category;
+        // In a real implementation, this would filter the news items
+        // or navigate to a URL with the category parameter
+        console.log("Selected category:", category);
+
+        // Update active state
+        categoryButtons.forEach((btn) => {
+          btn.classList.remove("bg-yellow", "text-black");
+          btn.classList.add("bg-black-900", "text-white");
+        });
+        button.classList.remove("bg-black-900", "text-white");
+        button.classList.add("bg-yellow", "text-black");
+
+        // Scroll to top of news section
+        scrollToNewsGrid();
+      });
+    });
+  });
+
+  // Pagination (would typically be handled server-side or with a framework)
+  document.addEventListener("DOMContentLoaded", () => {
+    const pageButtons = document.querySelectorAll("[data-page]");
+    const prevButton = document.querySelector(".pagination-prev");
+    const nextButton = document.querySelector(".pagination-next");
+
+    // Handle page number clicks
+    pageButtons?.forEach((button) => {
+      button.addEventListener("click", () => {
+        const page = button.dataset.page;
+        // Navigate to page or update content
+        console.log("Navigate to page:", page);
+        scrollToNewsGrid();
+      });
+    });
+
+    // Handle prev/next buttons
+    prevButton?.addEventListener("click", () => {
+      if (!prevButton.disabled) {
+        scrollToNewsGrid();
+      }
+    });
+
+    nextButton?.addEventListener("click", () => {
+      if (!nextButton.disabled) {
+        scrollToNewsGrid();
+      }
+    });
+  });
+</script>
