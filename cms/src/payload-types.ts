@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    pages: Page;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +78,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -84,8 +86,20 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    navigation: Navigation;
+    footer: Footer;
+    'club-info': ClubInfo;
+    sponsors: Sponsor;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    navigation: NavigationSelect<false> | NavigationSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    'club-info': ClubInfoSelect<false> | ClubInfoSelect<true>;
+    sponsors: SponsorsSelect<false> | SponsorsSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -158,6 +172,36 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  title: string;
+  /**
+   * URL-friendly version of the title
+   */
+  slug: string;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  status: 'draft' | 'published';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -170,6 +214,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: string | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -255,6 +303,18 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  content?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -284,6 +344,584 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * General site configuration and metadata
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: string;
+  /**
+   * The name of your website
+   */
+  siteName: string;
+  /**
+   * Site tagline or slogan
+   */
+  tagline?: string | null;
+  /**
+   * Main logo displayed in header
+   */
+  logo: string | Media;
+  /**
+   * Browser tab icon (32x32 or 16x16)
+   */
+  favicon?: (string | null) | Media;
+  /**
+   * Default title for search engines
+   */
+  seoTitle?: string | null;
+  /**
+   * Default description for search engines (150-160 characters)
+   */
+  seoDescription?: string | null;
+  /**
+   * Default image for social media sharing (1200x630)
+   */
+  seoImage?: (string | null) | Media;
+  /**
+   * GA tracking ID (e.g., G-XXXXXXXXXX)
+   */
+  googleAnalyticsId?: string | null;
+  /**
+   * When enabled, the site will show a maintenance message
+   */
+  maintenanceMode?: boolean | null;
+  /**
+   * Message to display during maintenance
+   */
+  maintenanceMessage?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Main navigation menu structure
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation".
+ */
+export interface Navigation {
+  id: string;
+  /**
+   * Main navigation items
+   */
+  mainMenu: {
+    label: string;
+    type: 'internal' | 'external' | 'dropdown';
+    /**
+     * External URL (e.g., https://example.com)
+     */
+    url?: string | null;
+    /**
+     * Select an internal page
+     */
+    page?: (string | null) | Page;
+    /**
+     * Dropdown menu items
+     */
+    submenu?:
+      | {
+          label: string;
+          type: 'internal' | 'external';
+          /**
+           * External URL
+           */
+          url?: string | null;
+          /**
+           * Select an internal page
+           */
+          page?: (string | null) | Page;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  /**
+   * Header quick links (e.g., Login, Contact)
+   */
+  quickLinks?:
+    | {
+        label: string;
+        url: string;
+        /**
+         * Optional icon class (e.g., fa-user)
+         */
+        icon?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Footer content and structure
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  /**
+   * Footer column sections
+   */
+  sections: {
+    title: string;
+    links: {
+      label: string;
+      type: 'internal' | 'external';
+      url?: string | null;
+      page?: (string | null) | Page;
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  /**
+   * Social media profiles
+   */
+  socialLinks: {
+    platform: 'facebook' | 'twitter' | 'instagram' | 'youtube' | 'tiktok' | 'linkedin';
+    url: string;
+    /**
+     * Optional custom icon class
+     */
+    icon?: string | null;
+    id?: string | null;
+  }[];
+  newsletterEnabled?: boolean | null;
+  newsletterTitle?: string | null;
+  newsletterDescription?: string | null;
+  appLinks?: {
+    /**
+     * Link to iOS app
+     */
+    iosUrl?: string | null;
+    /**
+     * Link to Android app
+     */
+    androidUrl?: string | null;
+  };
+  /**
+   * Use {year} for current year
+   */
+  copyrightText: string;
+  /**
+   * Privacy, Terms, etc.
+   */
+  legalLinks?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Club information, history, and stadium details
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "club-info".
+ */
+export interface ClubInfo {
+  id: string;
+  clubName: string;
+  /**
+   * Year the club was established
+   */
+  founded: number;
+  /**
+   * e.g., "The Lions", "The Eagles"
+   */
+  nickname?: string | null;
+  /**
+   * Club slogan or motto
+   */
+  motto?: string | null;
+  colors?: {
+    /**
+     * Hex code (e.g., #FF0000)
+     */
+    primary?: string | null;
+    /**
+     * Hex code (e.g., #FFFFFF)
+     */
+    secondary?: string | null;
+  };
+  /**
+   * About the club content
+   */
+  aboutUs: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  /**
+   * Detailed club history
+   */
+  history?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Club vision for the future
+   */
+  vision?: string | null;
+  /**
+   * Club mission and purpose
+   */
+  mission?: string | null;
+  /**
+   * Club core values
+   */
+  values?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Trophies and major achievements
+   */
+  achievements?:
+    | {
+        year: number;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  stadium: {
+    name: string;
+    /**
+     * Total seating capacity
+     */
+    capacity: number;
+    address: string;
+    /**
+     * For map display
+     *
+     * @minItems 2
+     * @maxItems 2
+     */
+    coordinates?: [number, number] | null;
+    image?: (string | null) | Media;
+    /**
+     * History and features of the stadium
+     */
+    description?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+  };
+  contact: {
+    email: string;
+    phone: string;
+    address: string;
+    /**
+     * e.g., Mon-Fri 9AM-5PM
+     */
+    businessHours?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Manage club sponsors and partners
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors".
+ */
+export interface Sponsor {
+  id: string;
+  /**
+   * Primary/Title sponsor
+   */
+  mainSponsor: {
+    name: string;
+    /**
+     * Sponsor logo image
+     */
+    logo: string | Media;
+    /**
+     * Sponsor website URL
+     */
+    website?: string | null;
+    /**
+     * Year partnership started
+     */
+    since?: number | null;
+  };
+  /**
+   * Kit/Jersey sponsor
+   */
+  kitSponsor: {
+    name: string;
+    logo: string | Media;
+    website?: string | null;
+    since?: number | null;
+  };
+  /**
+   * Other official partners and sponsors
+   */
+  officialPartners?:
+    | {
+        name: string;
+        logo: string | Media;
+        website?: string | null;
+        category?: ('official' | 'technical' | 'media' | 'regional' | 'community' | 'other') | null;
+        /**
+         * Order of display (lower numbers appear first)
+         */
+        order?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  siteName?: T;
+  tagline?: T;
+  logo?: T;
+  favicon?: T;
+  seoTitle?: T;
+  seoDescription?: T;
+  seoImage?: T;
+  googleAnalyticsId?: T;
+  maintenanceMode?: T;
+  maintenanceMessage?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "navigation_select".
+ */
+export interface NavigationSelect<T extends boolean = true> {
+  mainMenu?:
+    | T
+    | {
+        label?: T;
+        type?: T;
+        url?: T;
+        page?: T;
+        submenu?:
+          | T
+          | {
+              label?: T;
+              type?: T;
+              url?: T;
+              page?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  quickLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  sections?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              type?: T;
+              url?: T;
+              page?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        icon?: T;
+        id?: T;
+      };
+  newsletterEnabled?: T;
+  newsletterTitle?: T;
+  newsletterDescription?: T;
+  appLinks?:
+    | T
+    | {
+        iosUrl?: T;
+        androidUrl?: T;
+      };
+  copyrightText?: T;
+  legalLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "club-info_select".
+ */
+export interface ClubInfoSelect<T extends boolean = true> {
+  clubName?: T;
+  founded?: T;
+  nickname?: T;
+  motto?: T;
+  colors?:
+    | T
+    | {
+        primary?: T;
+        secondary?: T;
+      };
+  aboutUs?: T;
+  history?: T;
+  vision?: T;
+  mission?: T;
+  values?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  achievements?:
+    | T
+    | {
+        year?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  stadium?:
+    | T
+    | {
+        name?: T;
+        capacity?: T;
+        address?: T;
+        coordinates?: T;
+        image?: T;
+        description?: T;
+      };
+  contact?:
+    | T
+    | {
+        email?: T;
+        phone?: T;
+        address?: T;
+        businessHours?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sponsors_select".
+ */
+export interface SponsorsSelect<T extends boolean = true> {
+  mainSponsor?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        website?: T;
+        since?: T;
+      };
+  kitSponsor?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        website?: T;
+        since?: T;
+      };
+  officialPartners?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        website?: T;
+        category?: T;
+        order?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

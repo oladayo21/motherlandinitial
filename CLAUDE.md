@@ -11,7 +11,9 @@ This is the official website monorepo for Motherland SC, a football club. The pr
 - ✅ Monorepo structure set up with pnpm workspaces
 - ✅ Payload CMS configured with MongoDB
 - ✅ Astro frontend integrated from previous project
-- ⏳ Need to create Payload collections for football club content
+- ✅ All 5 Globals implemented (Site Settings, Navigation, Footer, Club Info, Sponsors)
+- ✅ Basic Pages collection created
+- ⏳ Need to create remaining Payload collections (Teams, Players, Matches, News, etc.)
 - ⏳ Need to connect frontend to CMS API
 
 ## 🏗️ Architecture
@@ -151,11 +153,13 @@ make clean        # Remove Docker volumes (⚠️ deletes data)
 
 ## 🚀 Immediate Priorities
 
-1. **Create Payload Collections**:
-   - Teams collection
-   - Players collection with relationships to teams
-   - Matches collection with home/away teams
-   - News/Articles collection
+1. **Create Remaining Payload Collections** (5 globals done, 11 collections to go):
+   - Teams collection (foundation for relationships)
+   - Players collection with stats and profiles
+   - Staff collection for coaching team
+   - Matches collection with events and statistics
+   - Competitions and Venues collections
+   - News/Articles with categories
    - Gallery collection for media
 
 2. **Connect Frontend to CMS**:

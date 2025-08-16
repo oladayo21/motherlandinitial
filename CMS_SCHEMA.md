@@ -19,9 +19,6 @@ This document defines all collections and globals (singletons) for the Motherlan
 | seoTitle | text | No | Default SEO title |
 | seoDescription | textarea | No | Default meta description |
 | seoImage | upload (Media) | No | Default OG image |
-| googleAnalyticsId | text | No | GA tracking ID |
-| maintenanceMode | checkbox | No | Enable maintenance mode |
-| maintenanceMessage | richText | No | Maintenance mode message |
 
 ### 2. Navigation Global
 **Purpose**: Main navigation menu structure
