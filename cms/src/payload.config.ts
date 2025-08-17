@@ -1,6 +1,7 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
+import { seoPlugin } from '@payloadcms/plugin-seo'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -47,6 +48,17 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
+    seoPlugin({
+      collections: ['pages'],
+      generateTitle: ({ doc }) => `${doc?.title?.value ?? ''} | Motherland SC`,
+      generateDescription: ({ doc }) => doc?.excerpt?.value || doc?.description?.value || 'Welcome to Motherland SC Berlin',
+      generateImage: ({ doc }) => doc?.featuredImage?.value || doc?.ogImage?.value,
+      generateURL: ({ doc }) => `${process.env.NEXT_PUBLIC_SITE_URL || 'https://motherlandsc.com'}/${doc?.slug?.value ?? ''}`,
+      uploadsCollection: 'media',
+      fields: [
+        // Additional custom SEO fields can be added here
+      ],
+    }),
     // storage-adapter-placeholder
   ],
 })

@@ -23,9 +23,6 @@ export const Footer: GlobalConfig = {
               maxRows: 6,
               admin: {
                 description: 'Footer column sections',
-                components: {
-                  RowLabel: ({ data }) => data?.title || 'Footer Section',
-                },
               },
               fields: [
                 {
@@ -42,9 +39,6 @@ export const Footer: GlobalConfig = {
                   minRows: 1,
                   maxRows: 10,
                   admin: {
-                    components: {
-                      RowLabel: ({ data }) => data?.label || 'Link',
-                    },
                   },
                   fields: [
                     {
@@ -103,9 +97,6 @@ export const Footer: GlobalConfig = {
               required: true,
               admin: {
                 description: 'Social media profiles',
-                components: {
-                  RowLabel: ({ data }) => data?.platform || 'Social Link',
-                },
               },
               fields: [
                 {
@@ -224,9 +215,6 @@ export const Footer: GlobalConfig = {
               maxRows: 10,
               admin: {
                 description: 'Privacy, Terms, etc.',
-                components: {
-                  RowLabel: ({ data }) => data?.label || 'Legal Link',
-                },
               },
               fields: [
                 {

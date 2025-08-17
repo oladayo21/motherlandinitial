@@ -23,13 +23,15 @@ export const ClubInfo: GlobalConfig = {
             },
             {
               name: 'founded',
-              label: 'Year Founded',
-              type: 'number',
+              label: 'Date Founded',
+              type: 'date',
               required: true,
-              min: 1800,
-              max: new Date().getFullYear(),
               admin: {
-                description: 'Year the club was established',
+                description: 'Date the club was established',
+                date: {
+                  pickerAppearance: 'dayOnly',
+                  displayFormat: 'dd/MM/yyyy',
+                },
               },
             },
             {
@@ -79,18 +81,20 @@ export const ClubInfo: GlobalConfig = {
             {
               name: 'aboutUs',
               label: 'About Us',
-              type: 'richText',
+              type: 'textarea',
               required: true,
               admin: {
                 description: 'About the club content',
+                rows: 6,
               },
             },
             {
               name: 'history',
               label: 'Club History',
-              type: 'richText',
+              type: 'textarea',
               admin: {
                 description: 'Detailed club history',
+                rows: 8,
               },
             },
             {
@@ -121,9 +125,6 @@ export const ClubInfo: GlobalConfig = {
               maxRows: 10,
               admin: {
                 description: 'Club core values',
-                components: {
-                  RowLabel: ({ data }) => data?.title || 'Value',
-                },
               },
               fields: [
                 {
@@ -146,9 +147,6 @@ export const ClubInfo: GlobalConfig = {
               type: 'array',
               admin: {
                 description: 'Trophies and major achievements',
-                components: {
-                  RowLabel: ({ data }) => data?.title || 'Achievement',
-                },
               },
               fields: [
                 {
@@ -221,9 +219,10 @@ export const ClubInfo: GlobalConfig = {
                 {
                   name: 'description',
                   label: 'Stadium Description',
-                  type: 'richText',
+                  type: 'textarea',
                   admin: {
                     description: 'History and features of the stadium',
+                    rows: 5,
                   },
                 },
               ],

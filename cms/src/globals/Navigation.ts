@@ -17,9 +17,6 @@ export const Navigation: GlobalConfig = {
       maxRows: 10,
       admin: {
         description: 'Main navigation items',
-        components: {
-          RowLabel: ({ data }) => data?.label || 'Menu Item',
-        },
       },
       fields: [
         {
@@ -75,9 +72,6 @@ export const Navigation: GlobalConfig = {
           admin: {
             condition: (_, siblingData) => siblingData?.type === 'dropdown',
             description: 'Dropdown menu items',
-            components: {
-              RowLabel: ({ data }) => data?.label || 'Submenu Item',
-            },
           },
           fields: [
             {
@@ -133,9 +127,6 @@ export const Navigation: GlobalConfig = {
       maxRows: 5,
       admin: {
         description: 'Header quick links (e.g., Login, Contact)',
-        components: {
-          RowLabel: ({ data }) => data?.label || 'Quick Link',
-        },
       },
       fields: [
         {

@@ -171,6 +171,8 @@ export interface Media {
   focalY?: number | null;
 }
 /**
+ * Create and manage pages with flexible content blocks
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -178,27 +180,124 @@ export interface Page {
   id: string;
   title: string;
   /**
-   * URL-friendly version of the title
+   * URL path for this page (e.g., "about-us")
    */
   slug: string;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
+  /**
+   * Build your page by adding different types of content blocks
+   */
+  layout?:
+    | (
+        | {
+            title: string;
+            subtitle?: string | null;
+            description?: string | null;
+            backgroundImage: string | Media;
+            /**
+             * Dark overlay opacity (0-100)
+             */
+            overlayOpacity?: number | null;
+            height?: ('small' | 'medium' | 'large' | 'full') | null;
+            alignment?: ('left' | 'center' | 'right') | null;
+            primaryButton?: {
+              text?: string | null;
+              link?: string | null;
+            };
+            secondaryButton?: {
+              text?: string | null;
+              link?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            heading?: string | null;
+            content: string;
+            backgroundStyle?: ('white' | 'light' | 'dark' | 'primary') | null;
+            alignment?: ('left' | 'center' | 'right') | null;
+            maxWidth?: ('narrow' | 'medium' | 'wide' | 'full') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'content';
+          }
+        | {
+            heading?: string | null;
+            leftColumn: string;
+            rightColumn: string;
+            columnRatio?: ('50-50' | '60-40' | '40-60' | '70-30' | '30-70') | null;
+            reverseOnMobile?: boolean | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'two-column';
+          }
+        | {
+            heading?: string | null;
+            stats?:
+              | {
+                  /**
+                   * e.g., "500+", "15", "2023"
+                   */
+                  value: string;
+                  /**
+                   * e.g., "Players", "Teams", "Founded"
+                   */
+                  label: string;
+                  icon?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            backgroundStyle?: ('white' | 'light' | 'dark' | 'primary' | 'gradient') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            heading?: string | null;
+            images?:
+              | {
+                  image: string | Media;
+                  caption?: string | null;
+                  altText: string;
+                  id?: string | null;
+                }[]
+              | null;
+            layout?: ('grid' | 'masonry' | 'slider' | 'lightbox') | null;
+            columns?: number | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'gallery';
+          }
+        | {
+            heading: string;
+            description?: string | null;
+            primaryButton: {
+              text: string;
+              link: string;
+            };
+            secondaryButton?: {
+              text?: string | null;
+              link?: string | null;
+            };
+            backgroundImage?: (string | null) | Media;
+            style?: ('centered' | 'left' | 'split') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cta';
+          }
+      )[]
+    | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
   };
-  status: 'draft' | 'published';
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -308,10 +407,122 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
-  content?: T;
-  status?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              description?: T;
+              backgroundImage?: T;
+              overlayOpacity?: T;
+              height?: T;
+              alignment?: T;
+              primaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        content?:
+          | T
+          | {
+              heading?: T;
+              content?: T;
+              backgroundStyle?: T;
+              alignment?: T;
+              maxWidth?: T;
+              id?: T;
+              blockName?: T;
+            };
+        'two-column'?:
+          | T
+          | {
+              heading?: T;
+              leftColumn?: T;
+              rightColumn?: T;
+              columnRatio?: T;
+              reverseOnMobile?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              heading?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              backgroundStyle?: T;
+              id?: T;
+              blockName?: T;
+            };
+        gallery?:
+          | T
+          | {
+              heading?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    caption?: T;
+                    altText?: T;
+                    id?: T;
+                  };
+              layout?: T;
+              columns?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cta?:
+          | T
+          | {
+              heading?: T;
+              description?: T;
+              primaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    text?: T;
+                    link?: T;
+                  };
+              backgroundImage?: T;
+              style?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -392,21 +603,7 @@ export interface SiteSetting {
   /**
    * Message to display during maintenance
    */
-  maintenanceMessage?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  maintenanceMessage?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -543,9 +740,9 @@ export interface ClubInfo {
   id: string;
   clubName: string;
   /**
-   * Year the club was established
+   * Date the club was established
    */
-  founded: number;
+  founded: string;
   /**
    * e.g., "The Lions", "The Eagles"
    */
@@ -567,39 +764,11 @@ export interface ClubInfo {
   /**
    * About the club content
    */
-  aboutUs: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  aboutUs: string;
   /**
    * Detailed club history
    */
-  history?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  history?: string | null;
   /**
    * Club vision for the future
    */
@@ -647,21 +816,7 @@ export interface ClubInfo {
     /**
      * History and features of the stadium
      */
-    description?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
+    description?: string | null;
   };
   contact: {
     email: string;

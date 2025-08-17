@@ -106,10 +106,11 @@ export const SiteSettings: GlobalConfig = {
             {
               name: 'maintenanceMessage',
               label: 'Maintenance Message',
-              type: 'richText',
+              type: 'textarea',
               admin: {
                 condition: (data) => data?.maintenanceMode === true,
                 description: 'Message to display during maintenance',
+                rows: 4,
               },
             },
           ],

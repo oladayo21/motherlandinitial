@@ -93,9 +93,6 @@ export const Sponsors: GlobalConfig = {
       type: 'array',
       admin: {
         description: 'Other official partners and sponsors',
-        components: {
-          RowLabel: ({ data }) => data?.name || 'Partner',
-        },
       },
       fields: [
         {
