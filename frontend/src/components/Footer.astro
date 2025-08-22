@@ -3,20 +3,20 @@ const currentYear = new Date().getFullYear();
 
 const footerLinks = {
   club: [
-    { label: "About Us", href: "/about" },
-    { label: "History & Heritage", href: "/history" },
-    { label: "Stadium Tour", href: "/stadium-tour" },
-    { label: "Board & Leadership", href: "/leadership" },
-    { label: "Partners & Sponsors", href: "/partners" },
-    { label: "Careers", href: "/careers" },
+    { label: "About Us", href: "/club" },
+    { label: "Our Mission", href: "/club#mission" },
+    { label: "Stadium", href: "/club#stadium" },
+    { label: "History", href: "/club#history" },
+    { label: "Tony Ujah Foundation", href: "/partners" },
+    { label: "Contact", href: "/contact" },
   ],
   teams: [
     { label: "Men's First Team", href: "/teams/mens" },
-    { label: "Women's Team", href: "/teams/womens" },
-    { label: "Academy", href: "/teams/academy" },
-    { label: "Legends", href: "/teams/legends" },
-    { label: "Player Profiles", href: "/players" },
-    { label: "Coaching Staff", href: "/staff" },
+    { label: "Youth Programs", href: "/youth" },
+    { label: "Motherland Youth Playday", href: "/youth#programs" },
+    { label: "Football & Tech", href: "/youth#programs" },
+    { label: "Player Profiles", href: "/teams/mens/players-staff" },
+    { label: "Coaching Staff", href: "/teams/mens/players-staff" },
   ],
   fans: [
     { label: "Membership", href: "/membership" },
@@ -28,28 +28,24 @@ const footerLinks = {
   ],
   connect: [
     { label: "Latest News", href: "/news" },
-    { label: "Newsletter Signup", href: "/newsletter" },
-    { label: "Contact Us", href: "/contact" },
-    { label: "FAQs", href: "/faqs" },
-    { label: "Media Center", href: "/media" },
-    { label: "Press Releases", href: "/press" },
+    { label: "Match Center", href: "/match-center" },
+    { label: "Shop", href: "mailto:shop@motherlandscberlin.com" },
+    { label: "Contact Us", href: "mailto:info@motherlandscberlin.com" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Live Stream", href: "/live" },
   ],
 };
 
 const socialLinks = [
-  { name: "Twitter", icon: "twitter", href: "#" },
+  { name: "Instagram", icon: "instagram", href: "https://www.instagram.com/motherlandberlinsc/" },
   { name: "Facebook", icon: "facebook", href: "#" },
-  { name: "Instagram", icon: "instagram", href: "#" },
+  { name: "Twitter", icon: "twitter", href: "#" },
   { name: "YouTube", icon: "youtube", href: "#" },
-  { name: "TikTok", icon: "tiktok", href: "#" },
 ];
 
 const sponsors = [
-  "Main Sponsor",
-  "Kit Partner",
-  "Official Partner 1",
-  "Official Partner 2",
-  "Official Partner 3",
+  "Tony Ujah Foundation",
+  "Official Sponsor",
 ];
 
 const legalLinks = [
@@ -61,7 +57,7 @@ const legalLinks = [
 ];
 ---
 
-<footer class="bg-black-800 text-white">
+<footer class="bg-zinc-900 text-white">
   <!-- Main Footer Content -->
   <div class="container mx-auto px-4 py-12 lg:py-16">
     <!-- Top Section - Main Links -->
@@ -155,7 +151,7 @@ const legalLinks = [
             <input
               type="email"
               placeholder="Enter your email"
-              class="bg-black-900 border-black-700 placeholder-black-400 focus:border-yellow flex-1 border px-4 py-2 text-white transition-colors duration-200 focus:outline-none"
+              class="bg-black border-zinc-700 placeholder-zinc-400 focus:border-yellow flex-1 border px-4 py-2 text-white transition-colors duration-200 focus:outline-none"
             />
             <button
               type="submit"
@@ -174,7 +170,7 @@ const legalLinks = [
                 <a
                   href={social.href}
                   aria-label={social.name}
-                  class="bg-black-900 hover:bg-yellow flex h-10 w-10 items-center justify-center transition-all duration-200 hover:text-black"
+                  class="bg-black hover:bg-yellow flex h-10 w-10 items-center justify-center transition-all duration-200 hover:text-black"
                 >
                   <span class="text-sm font-bold">
                     {social.icon[0].toUpperCase()}
@@ -186,13 +182,13 @@ const legalLinks = [
           <div class="flex gap-3">
             <a
               href="#"
-              class="bg-black-900 font-body hover:bg-black-700 px-4 py-2 text-sm transition-colors duration-200"
+              class="bg-black font-body hover:bg-zinc-800 px-4 py-2 text-sm transition-colors duration-200"
             >
               Download iOS App
             </a>
             <a
               href="#"
-              class="bg-black-900 font-body hover:bg-black-700 px-4 py-2 text-sm transition-colors duration-200"
+              class="bg-black font-body hover:bg-zinc-800 px-4 py-2 text-sm transition-colors duration-200"
             >
               Download Android App
             </a>
@@ -209,7 +205,7 @@ const legalLinks = [
       <div class="flex flex-wrap items-center gap-8">
         {
           sponsors.map((sponsor) => (
-            <div class="bg-black-900 px-6 py-3">
+            <div class="bg-black px-6 py-3">
               <span class="font-body text-black-300">{sponsor}</span>
             </div>
           ))
@@ -228,7 +224,7 @@ const legalLinks = [
             class="h-8 w-8 object-contain"
           />
           <p class="font-body text-black-300">
-            © {currentYear} Motherland SC. All rights reserved.
+            © {currentYear} Motherland SC Berlin. Est. 2019 | Cornelius-Fredericks-Str. 31, Wedding
           </p>
         </div>
 

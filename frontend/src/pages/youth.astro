@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/ui/Container.astro";
+import Section from "../components/ui/Section.astro";
+import Button from "../components/ui/Button.astro";
+---
+
+<BaseLayout
+  title="Youth Programs - Motherland Berlin SC"
+  description="Discover Motherland SC's youth programs - providing football opportunities for African youth aged 3-18 in Berlin."
+>
+  <!-- Hero Section -->
+  <section class="relative h-[70vh] min-h-[600px] w-full overflow-hidden bg-black">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1551958219-acbc608c6377?q=80&w=2070"
+        alt="Youth Football Training"
+        class="h-full w-full object-cover opacity-50"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 flex h-full items-center">
+      <Container>
+        <div class="max-w-4xl">
+          <p class="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-yellow">
+            Youth Development
+          </p>
+          <h1 class="font-display mb-6 text-5xl font-black uppercase text-white lg:text-7xl">
+            Building Tomorrow's
+            <span class="block text-yellow">Champions</span>
+          </h1>
+          <p class="mb-8 max-w-2xl text-xl text-white/90">
+            Empowering African youth in Berlin through football and technology, 
+            creating opportunities for personal growth and community integration.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <Button href="#programs" variant="primary" size="large">
+              Explore Programs
+            </Button>
+            <Button href="#register" variant="outline" size="large">
+              Join Today
+            </Button>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
+
+  <!-- Programs Overview -->
+  <Section background="black" id="programs">
+    <Container>
+      <div class="mb-12 text-center">
+        <h2 class="font-display text-4xl font-black uppercase text-white lg:text-5xl">
+          Our <span class="text-yellow">Programs</span>
+        </h2>
+        <div class="mx-auto mt-4 h-1 w-20 bg-yellow"></div>
+      </div>
+
+      <!-- Program Cards -->
+      <div class="grid gap-8 lg:grid-cols-2">
+        <!-- Motherland Youth Playday -->
+        <div class="group relative overflow-hidden bg-gradient-to-br from-zinc-900 to-neutral-900 border border-white/5 p-6 sm:p-8 transition-all hover:shadow-2xl hover:shadow-black/50">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-yellow/10 rounded-full blur-3xl group-hover:bg-yellow/20 transition-all"></div>
+          
+          <div class="relative z-10">
+            <!-- Age Badge -->
+            <div class="mb-6 inline-block">
+              <span class="bg-yellow px-4 py-2 text-sm font-black text-black uppercase">
+                Ages 3+
+              </span>
+            </div>
+
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-4">
+              Motherland Youth Playday
+            </h3>
+
+            <p class="text-white/80 mb-6 text-base sm:text-lg">
+              A special football event designed for children from 3 years old within the African community. 
+              We create a fun, inclusive, and engaging environment where kids can develop their love for 
+              football while learning basic skills.
+            </p>
+
+            <div class="space-y-3 mb-8">
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-yellow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-white/70">Free participation - just bring your energy!</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-yellow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-white/70">Fun and supportive atmosphere</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-yellow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-white/70">Discover future football talents</span>
+              </div>
+            </div>
+
+            <Button href="#register" variant="primary">
+              Register Your Child
+            </Button>
+          </div>
+        </div>
+
+        <!-- Football & Tech Program -->
+        <div class="group relative overflow-hidden bg-gradient-to-br from-zinc-900 to-neutral-900 border border-white/5 p-6 sm:p-8 transition-all hover:shadow-2xl hover:shadow-black/50">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-yellow/10 rounded-full blur-3xl group-hover:bg-yellow/20 transition-all"></div>
+          
+          <div class="relative z-10">
+            <!-- Age Badge -->
+            <div class="mb-6 inline-block">
+              <span class="bg-yellow px-4 py-2 text-sm font-black text-black uppercase">
+                Ages 12-18
+              </span>
+            </div>
+
+            <h3 class="font-display text-2xl sm:text-3xl font-bold text-white mb-4">
+              Football & Tech Program
+            </h3>
+
+            <p class="text-white/80 mb-6 text-base sm:text-lg">
+              Empowering African youths living in Germany by providing opportunities to engage in 
+              football and gain valuable technological skills. This comprehensive program helps 
+              participants integrate into German society while developing both athletic and digital competencies.
+            </p>
+
+            <div class="space-y-3 mb-8">
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-yellow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-white/70">Football training & tech skills development</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-yellow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-white/70">Foster personal growth & self-confidence</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-yellow flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-white/70">Support social integration</span>
+              </div>
+            </div>
+
+            <Button href="#register" variant="primary">
+              Apply Now
+            </Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Mission & Values -->
+  <Section background="custom" className="bg-gradient-to-br from-gold-900 via-gold-800 to-black">
+    <Container>
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-display text-4xl font-black uppercase text-white mb-6 lg:text-5xl">
+            Our Youth <span class="text-yellow">Mission</span>
+          </h2>
+          
+          <p class="text-white/90 text-lg mb-6">
+            At Motherland SC, we believe in the power of football to transform lives. Our youth 
+            programs are designed to provide a safe and inclusive space for African youth in Berlin 
+            to participate in sports and learn valuable life skills.
+          </p>
+
+          <p class="text-white/90 text-lg mb-8">
+            Through our partnership with the Tony Ujah Foundation, we're committed to discovering 
+            and nurturing young talents, providing them with opportunities to pursue their dreams 
+            in football and potentially secure scholarships or professional contracts.
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-black/30 backdrop-blur-sm border border-yellow/30 p-6 text-center">
+              <div class="text-4xl font-black text-yellow mb-2">3+</div>
+              <div class="text-white/70 text-sm uppercase">Starting Age</div>
+            </div>
+            <div class="bg-black/30 backdrop-blur-sm border border-yellow/30 p-6 text-center">
+              <div class="text-4xl font-black text-yellow mb-2">Free</div>
+              <div class="text-white/70 text-sm uppercase">Participation</div>
+            </div>
+            <div class="bg-black/30 backdrop-blur-sm border border-yellow/30 p-6 text-center">
+              <div class="text-4xl font-black text-yellow mb-2">2</div>
+              <div class="text-white/70 text-sm uppercase">Programs</div>
+            </div>
+            <div class="bg-black/30 backdrop-blur-sm border border-yellow/30 p-6 text-center">
+              <div class="text-4xl font-black text-yellow mb-2">100%</div>
+              <div class="text-white/70 text-sm uppercase">Inclusive</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?q=80&w=2071"
+            alt="Youth Training"
+            class="w-full rounded-lg shadow-2xl"
+          />
+          <div class="absolute -bottom-6 -left-6 bg-yellow p-6 max-w-xs">
+            <p class="text-black font-bold text-lg">
+              "Celebrating African heritage while building bridges in Berlin"
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+
+  <!-- Registration CTA -->
+  <Section background="black" id="register">
+    <Container>
+      <div class="bg-gradient-to-r from-yellow via-gold to-yellow p-1">
+        <div class="bg-black p-12 text-center">
+          <h2 class="font-display text-4xl font-black uppercase text-white mb-6 lg:text-5xl">
+            Join Our <span class="text-yellow">Youth Programs</span>
+          </h2>
+          
+          <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">
+            Give your child the opportunity to develop their football skills, make new friends, 
+            and be part of the Motherland SC family. Registration is open for all skill levels.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Button href="mailto:info@motherlandscberlin.com" variant="primary" size="large">
+              Contact Us to Register
+            </Button>
+            <div class="text-white/60">
+              or call us at <span class="text-yellow font-bold">+49 XXX XXXX XXXX</span>
+            </div>
+          </div>
+
+          <div class="mt-12 pt-8 border-t border-white/10">
+            <p class="text-white/60 text-sm">
+              Training Location: <span class="text-yellow">Cornelius-Fredericks-Str. 31, Wedding, Berlin</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>

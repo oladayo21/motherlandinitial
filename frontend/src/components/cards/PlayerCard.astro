@@ -20,8 +20,8 @@ const {
 
 <div
   class={`
-    group relative bg-black-700 border border-black-600 overflow-hidden transition-all duration-300
-    hover:border-yellow hover:scale-105 hover:shadow-xl hover:shadow-yellow/10
+    group relative bg-gradient-to-b from-zinc-900 to-black border border-white/5 overflow-hidden transition-all duration-300
+    hover:scale-105 hover:shadow-2xl hover:shadow-black/50
     ${animate ? "opacity-0 animate-fadeInUp" : ""}
   `}
 >
@@ -72,6 +72,9 @@ const {
     class="bg-yellow/0 group-hover:bg-yellow/5 pointer-events-none absolute inset-0 transition-colors"
   >
   </div>
+  
+  <!-- Subtle yellow accent on hover -->
+  <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow/20 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
 </div>
 
 <style>

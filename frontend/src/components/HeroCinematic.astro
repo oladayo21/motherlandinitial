@@ -13,44 +13,44 @@ const {
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1631495634750-0f14320bc0a7?q=80&w=2071",
-    title: "Rise Together",
-    subtitle: "United We Stand",
-    description: "From Berlin's streets to Europe's elite. This is more than football—this is a revolution.",
+    title: "Promoted",
+    subtitle: "To Landesliga FZ",
+    description: "Historic achievement in our first year. From foundation to promotion – the Motherland SC journey continues.",
     featuredNews: {
-      category: "BREAKING",
-      title: "Historic Victory Secures Championship Title",
-      excerpt: "An unforgettable night at Olympiastadion as Motherland SC clinches their first major trophy with a commanding 4-1 victory.",
+      category: "HISTORIC",
+      title: "Promotion Secured to Landesliga FZ",
+      excerpt: "Motherland SC achieves promotion to Landesliga FZ in June 2024, a remarkable milestone in our inaugural season.",
       image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070",
-      time: "2 hours ago",
-      author: "Michael Schmidt",
+      time: "June 9, 2024",
+      author: "Club News",
     },
   },
   {
     image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070",
-    title: "Champions",
-    subtitle: "In The Making",
-    description: "Building a legacy that will echo through generations. Join us as we write history.",
+    title: "African Heritage",
+    subtitle: "Berlin Pride",
+    description: "Celebrating African culture, values and heritage through the beautiful game in the heart of Berlin.",
     featuredNews: {
-      category: "TRANSFER NEWS",
-      title: "World-Class Striker Signs for Record Fee",
-      excerpt: "Motherland SC breaks club transfer record to secure the signature of international star Marcus Weber from Barcelona.",
+      category: "COMMUNITY",
+      title: "Youth Programs Transform Lives",
+      excerpt: "Motherland Youth Playday and Football & Tech initiatives provide opportunities for African youth aged 3-18 in Berlin.",
       image: "https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?q=80&w=2071",
-      time: "5 hours ago",
-      author: "Sarah Johnson",
+      time: "This Week",
+      author: "Youth Department",
     },
   },
   {
     image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=2093",
-    title: "The Future",
-    subtitle: "Is Yellow & Black",
-    description: "Where passion meets purpose. Experience the power of supporting Berlin's most ambitious club.",
+    title: "Community",
+    subtitle: "United",
+    description: "A supportive atmosphere for all ages and skill levels. Together, we're building more than a club.",
     featuredNews: {
-      category: "EXCLUSIVE",
-      title: "Inside the Academy: Berlin's Future Stars",
-      excerpt: "Exclusive access to Motherland SC's state-of-the-art youth academy, where tomorrow's champions are being forged today.",
+      category: "PARTNERSHIP",
+      title: "Tony Ujah Foundation Partnership",
+      excerpt: "Official sponsorship from Tony Ujah Foundation strengthens our mission to nurture African football talents in Germany.",
       image: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?q=80&w=2049",
-      time: "Yesterday",
-      author: "Emma Williams",
+      time: "Recent",
+      author: "Partnership Team",
     },
   },
 ];
@@ -77,22 +77,19 @@ const slides = [
     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
   </div>
 
-  <!-- Cinematic Bars (Top and Bottom) -->
-  <div class="absolute top-0 left-0 right-0 h-20 bg-black z-20"></div>
-  <div class="absolute bottom-0 left-0 right-0 h-20 bg-black z-20"></div>
 
   <!-- Main Content -->
   <div class="relative z-10 h-full flex items-center">
     <div class="w-full">
       <!-- Split Screen Layout -->
-      <div class="grid lg:grid-cols-2 gap-12 mx-auto max-w-[1920px] px-8 lg:px-16">
+      <div class="grid lg:grid-cols-2 gap-8 md:gap-12 mx-auto max-w-[1920px] px-4 sm:px-6 md:px-8 lg:px-16">
         
         <!-- Left: Typography -->
         <div class="flex flex-col justify-center">
           <!-- Number/Year -->
-          <div class="mb-6 overflow-hidden">
-            <div class="text-yellow/20 text-[200px] font-black leading-none -mb-20 animate-slide-in-left">
-              2019
+          <div class="mb-4 md:mb-6 overflow-hidden">
+            <div class="text-yellow/20 text-[80px] sm:text-[120px] md:text-[160px] lg:text-[200px] font-black leading-none -mb-8 sm:-mb-12 md:-mb-16 lg:-mb-20 animate-slide-in-left">
+              2024
             </div>
           </div>
           
@@ -100,38 +97,35 @@ const slides = [
           {slides.map((slide, index) => (
             <div class={`slide-content ${index === 0 ? 'block' : 'hidden'}`} data-content={index}>
               <!-- Main Title -->
-              <div class="space-y-2 mb-8">
-                <h1 class="font-display text-7xl lg:text-8xl font-black text-white uppercase leading-none animate-slide-in-left animation-delay-200">
+              <div class="space-y-2 mb-4 md:mb-8">
+                <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase leading-none animate-slide-in-left animation-delay-200">
                   {slide.title}
                 </h1>
-                <h2 class="font-display text-5xl lg:text-6xl font-bold text-yellow uppercase animate-slide-in-left animation-delay-400">
+                <h2 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-yellow uppercase animate-slide-in-left animation-delay-400">
                   {slide.subtitle}
                 </h2>
               </div>
               
               <!-- Description -->
-              <p class="text-xl text-white/70 max-w-lg mb-8 animate-fade-in animation-delay-600">
+              <p class="text-base sm:text-lg md:text-xl text-white/70 max-w-lg mb-6 md:mb-8 animate-fade-in animation-delay-600">
                 {slide.description}
               </p>
             </div>
           ))}
           
           <!-- Action Buttons -->
-          <div class="flex gap-4 animate-fade-in animation-delay-800">
-            <a href="/tickets" class="relative group">
-              <div class="absolute -inset-1 bg-yellow blur-lg opacity-60 group-hover:opacity-100 transition-opacity"></div>
-              <div class="relative bg-yellow px-8 py-4 font-bold text-black uppercase">
-                Get Tickets
-              </div>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in animation-delay-800">
+            <a href="/tickets" class="bg-yellow px-6 sm:px-8 py-3 sm:py-4 font-bold text-sm sm:text-base text-black uppercase text-center hover:bg-yellow-400 transition-colors inline-block">
+              Get Tickets
             </a>
-            <a href="/news" class="border border-white/30 px-8 py-4 font-bold text-white uppercase hover:bg-white/10 transition-colors">
+            <a href="/news" class="border border-white/30 px-6 sm:px-8 py-3 sm:py-4 font-bold text-sm sm:text-base text-white uppercase hover:bg-white/10 transition-colors text-center">
               Latest News
             </a>
           </div>
         </div>
         
         <!-- Right: Featured News -->
-        <div class="flex flex-col justify-center items-end">
+        <div class="hidden lg:flex flex-col justify-center items-end">
           {slides.map((slide, index) => (
             <div class={`featured-news w-full max-w-md ${index === 0 ? 'block' : 'hidden'}`} data-news={index}>
               <!-- News Card with Glass Effect -->
@@ -217,7 +211,7 @@ const slides = [
   </div>
   
   <!-- Navigation Dots -->
-  <div class="absolute bottom-32 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+  <div class="absolute bottom-24 sm:bottom-28 md:bottom-32 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
     {slides.map((_, index) => (
       <button 
         class={`slide-dot w-12 h-1 transition-colors ${index === 0 ? 'bg-yellow' : 'bg-white/20 hover:bg-white/40'}`}
@@ -228,7 +222,7 @@ const slides = [
   </div>
   
   <!-- Slide Progress Bar -->
-  <div class="absolute bottom-28 left-0 right-0 h-[1px] bg-white/10 z-20">
+  <div class="absolute bottom-20 sm:bottom-24 md:bottom-28 left-0 right-0 h-[1px] bg-white/10 z-20">
     <div class="slide-progress h-full bg-yellow transition-all duration-[5000ms] ease-linear" style="width: 0%"></div>
   </div>
 </section>
