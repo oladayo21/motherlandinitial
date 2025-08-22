@@ -7,6 +7,8 @@ import Container from "../components/ui/Container.astro";
 import Grid from "../components/ui/Grid.astro";
 import SectionHeader from "../components/ui/SectionHeader.astro";
 import Button from "../components/ui/Button.astro";
+import LinkButton from "../components/ui/LinkButton.astro";
+import ArticleCard from "../components/ui/ArticleCard.astro";
 import NewsCard from "../components/cards/NewsCard.astro";
 import MatchCard from "../components/cards/MatchCard.astro";
 import ProductCard from "../components/cards/ProductCard.astro";
@@ -156,12 +158,9 @@ const products = [
           </h2>
           <div class="h-1 w-20 bg-yellow mt-4"></div>
         </div>
-        <a href="/news" class="btn-text group hidden md:inline-flex items-center gap-2 text-yellow font-bold text-sm uppercase tracking-wider transition-all hover:text-yellow-400">
-          <span>All Stories</span>
-          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
+        <LinkButton href="/news" variant="with-arrow" className="hidden md:inline-flex">
+          All Stories
+        </LinkButton>
       </div>
 
       <!-- News Ticker - Magazine Style -->
@@ -241,40 +240,19 @@ const products = [
         <!-- Side Stories - 4 columns -->
         <div class="lg:col-span-4 flex flex-col gap-6">
           {newsItems.slice(1, 3).map((item, index) => (
-            <article class="group relative flex-1 overflow-hidden bg-zinc-900 border border-white/5 transition-all hover:shadow-xl">
-              <div class="h-full">
-                <!-- Image -->
-                <div class="relative h-48 overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-
-                  <!-- Number Badge -->
-                  <div class="absolute top-4 right-4 w-10 h-10 bg-yellow flex items-center justify-center">
-                    <span class="font-display text-xl font-black text-black">{index + 2}</span>
-                  </div>
-                </div>
-
-                <!-- Content -->
-                <div class="p-6">
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="text-yellow text-xs font-bold uppercase tracking-wider">
-                      {item.category}
-                    </span>
-                    <span class="text-white/40 text-xs">{item.date}</span>
-                  </div>
-                  <h3 class="font-display text-lg md:text-xl font-bold text-white mb-2 group-hover:text-yellow transition-colors">
-                    {item.title}
-                  </h3>
-                  <p class="text-white/60 text-sm line-clamp-2">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            </article>
+            <div class="flex-1">
+              <ArticleCard
+                title={item.title}
+                description={item.description}
+                image={item.image}
+                category={item.category}
+                date={item.date}
+                href={item.href}
+                variant="overlay"
+                numberBadge={index + 2}
+                className="h-full"
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -305,9 +283,9 @@ const products = [
 
       <!-- Mobile View All Button -->
       <div class="mt-8 text-center md:hidden">
-        <a href="/news" class="btn-primary inline-flex items-center gap-2 bg-yellow px-6 py-3 font-bold text-sm text-black uppercase tracking-wider transition-all hover:bg-yellow-400 hover:shadow-lg">
+        <Button href="/news" variant="primary">
           View All News
-        </a>
+        </Button>
       </div>
     </Container>
   </Section>
@@ -328,12 +306,9 @@ const products = [
           </h2>
           <div class="h-1 w-20 bg-yellow mt-4"></div>
         </div>
-        <a href="/matches" class="btn-text group hidden md:inline-flex items-center gap-2 text-yellow font-bold text-sm uppercase tracking-wider transition-all hover:text-yellow-400">
-          <span>Full Schedule</span>
-          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
+        <LinkButton href="/matches" variant="with-arrow" className="hidden md:inline-flex">
+          Full Schedule
+        </LinkButton>
       </div>
 
       <!-- Matches Grid -->
@@ -673,12 +648,9 @@ const products = [
 
       <!-- View Full Gallery CTA -->
       <div class="mt-12 text-center">
-        <a href="/gallery" class="btn-text group inline-flex items-center gap-2 text-yellow font-bold text-sm uppercase tracking-wider transition-all hover:text-yellow-400">
-          <span>Explore Full Gallery</span>
-          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
+        <LinkButton href="/gallery" variant="with-arrow">
+          Explore Full Gallery
+        </LinkButton>
       </div>
     </Container>
   </Section>
@@ -694,12 +666,9 @@ const products = [
           </h2>
           <div class="h-1 w-20 bg-yellow mt-4"></div>
         </div>
-        <a href="/shop" class="btn-text group hidden md:inline-flex items-center gap-2 text-yellow font-bold text-sm uppercase tracking-wider transition-all hover:text-yellow-400">
-          <span>Visit Shop</span>
-          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
+        <LinkButton href="/shop" variant="with-arrow" className="hidden md:inline-flex">
+          Visit Shop
+        </LinkButton>
       </div>
 
       <!-- Products Grid -->

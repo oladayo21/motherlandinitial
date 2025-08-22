@@ -3,6 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/ui/Container.astro";
 import Section from "../components/ui/Section.astro";
 import NewsCard from "../components/cards/NewsCard.astro";
+import Button from "../components/ui/Button.astro";
+import LinkButton from "../components/ui/LinkButton.astro";
+import ArticleCard from "../components/ui/ArticleCard.astro";
+import IconButton from "../components/ui/IconButton.astro";
+import Badge from "../components/ui/Badge.astro";
+import ImageContainer from "../components/ui/ImageContainer.astro";
 
 // Mock news data with categories
 const allNews = [
@@ -185,18 +191,28 @@ const paginatedNews = regularNews.slice(
   description="Get the latest news, match reports, transfer updates, and exclusive content from Motherland Berlin SC."
 >
   {/* Hero Section - Split Screen Magazine Style */}
-  <section class="hero-section relative overflow-hidden bg-black pt-24 pb-0">
-    {/* Grid pattern background */}
+  <section class="hero-section relative overflow-hidden bg-black pt-20 md:pt-24 pb-0">
+    {/* Mobile background image */}
+    <div class="absolute inset-0 lg:hidden">
+      <img
+        src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070"
+        alt=""
+        class="w-full h-full object-cover opacity-30"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black"></div>
+    </div>
+    
+    {/* Desktop Grid pattern background */}
     <div class="absolute inset-0 overflow-hidden">
-      <div class="grid-bg absolute inset-0"></div>
+      <div class="grid-bg absolute inset-0 opacity-0 lg:opacity-30"></div>
 
-      {/* Floating geometric shapes */}
-      <div class="shapes-container absolute inset-0">
+      {/* Floating geometric shapes - desktop only */}
+      <div class="shapes-container absolute inset-0 opacity-0 lg:opacity-20">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-        <div class="shape shape-4"></div>
-        <div class="shape shape-5"></div>
+        <div class="shape shape-3 hidden md:block"></div>
+        <div class="shape shape-4 hidden lg:block"></div>
+        <div class="shape shape-5 hidden md:block"></div>
       </div>
 
       {/* Noise texture overlay */}
@@ -204,16 +220,20 @@ const paginatedNews = regularNews.slice(
     </div>
 
     <Container className="relative z-10">
-      {/* Split Layout Header */}
-      <div class="split-header mb-12 grid items-center gap-8 lg:grid-cols-2">
+      {/* Split Layout Header - Stack on mobile */}
+      <div class="split-header mb-6 md:mb-8 lg:mb-12 grid items-center gap-4 md:gap-6 lg:gap-8 lg:grid-cols-2">
         {/* Left Side - Title */}
         <div class="title-section">
           <div class="category-ticker mb-4 overflow-hidden">
+            {/* Simple badge on mobile, ticker on desktop */}
+            <div class="block md:hidden">
+              <Badge variant="primary" size="small">Latest Updates</Badge>
+            </div>
             <div
-              class="category-scroll flex items-center gap-4 whitespace-nowrap"
+              class="category-scroll hidden md:flex items-center gap-3 md:gap-4 whitespace-nowrap text-xs md:text-sm"
             >
               <span
-                class="font-body text-yellow text-xs font-bold tracking-[0.2em] uppercase"
+                class="font-body text-yellow font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase"
                 >Match Reports</span
               >
               <span class="text-yellow/40">•</span>
@@ -262,14 +282,14 @@ const paginatedNews = regularNews.slice(
           <h1 class="hero-title relative">
             <span class="title-line block overflow-hidden">
               <span
-                class="title-text font-display block text-7xl font-black text-white uppercase lg:text-8xl xl:text-9xl"
+                class="title-text font-display block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black text-white uppercase"
               >
                 Latest
               </span>
             </span>
             <span class="title-line block overflow-hidden">
               <span
-                class="title-text font-display text-yellow block text-7xl font-black uppercase lg:text-8xl xl:text-9xl"
+                class="title-text font-display text-yellow block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-black uppercase"
               >
                 News
               </span>
@@ -277,15 +297,15 @@ const paginatedNews = regularNews.slice(
           </h1>
 
           <p
-            class="hero-description font-body mt-6 max-w-lg text-lg text-white/60"
+            class="hero-description font-body mt-4 md:mt-6 max-w-lg text-sm sm:text-base md:text-lg text-white/60 lg:text-white/60"
           >
             Breaking stories, exclusive interviews, and real-time match updates
             from Motherland Berlin SC
           </p>
         </div>
 
-        {/* Right Side - Date & Time */}
-        <div class="date-section hidden text-right lg:block">
+        {/* Right Side - Date & Time - Desktop only */}
+        <div class="date-section hidden lg:block text-right">
           <div class="date-display relative border-l border-white/10 p-8">
             {/* Background pattern */}
             <div
@@ -335,11 +355,79 @@ const paginatedNews = regularNews.slice(
       {
         featuredStory && (
           <div class="magazine-feature relative">
-            <div class="feature-grid border-yellow grid gap-0 border-t-4 bg-black lg:grid-cols-12">
-              {/* Article Sidebar - Quick Info */}
-              <div class="article-sidebar bg-black-900 border-r border-white/10 p-8 lg:col-span-2">
+            {/* Mobile-first layout */}
+            <div class="block lg:hidden">
+              {/* Mobile Featured Card */}
+              <div class="bg-black border-t-2 border-yellow">
+                {/* Image */}
+                <div class="relative h-[250px] sm:h-[350px] overflow-hidden">
+                  <img
+                    src={featuredStory.image}
+                    alt={featuredStory.title}
+                    class="h-full w-full object-cover"
+                    loading="eager"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                  
+                  {/* Content overlay */}
+                  <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+                    {/* Category and Featured badge */}
+                    <div class="flex items-center gap-3 mb-3">
+                      <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
+                        Featured Story
+                      </span>
+                      <span class="text-yellow/40">•</span>
+                      <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
+                        {featuredStory.category}
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h2 class="font-display text-2xl sm:text-3xl font-black text-white mb-2 leading-tight">
+                      {featuredStory.title}
+                    </h2>
+                    
+                    {/* Description */}
+                    <p class="font-body text-sm sm:text-base text-white/80 mb-3 line-clamp-2">
+                      {featuredStory.description}
+                    </p>
+                    
+                    {/* Meta info */}
+                    <div class="flex items-center gap-4 text-xs text-white/60">
+                      <span>{featuredStory.date}</span>
+                      <span>•</span>
+                      <span>5 min read</span>
+                      <span>•</span>
+                      <span>2.5k views</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Action buttons */}
+                <div class="bg-black-900 border-t border-white/10 p-4 flex gap-3">
+                  <Button href={featuredStory.href} variant="primary" size="medium" fullWidth>
+                    Read Article
+                  </Button>
+                  <IconButton variant="outline" size="medium" ariaLabel="Save for later">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                    </svg>
+                  </IconButton>
+                  <IconButton variant="outline" size="medium" ariaLabel="Share">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a3 3 0 10-4.732-2.684m4.732 2.684a3 3 0 00-4.732-2.684M6.316 10.658a3 3 0 10-4.732 2.684" />
+                    </svg>
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+            
+            {/* Desktop layout */}
+            <div class="hidden lg:grid feature-grid border-yellow gap-0 border-t-4 bg-black lg:grid-cols-12">
+              {/* Article Sidebar - Quick Info - Only on desktop */}
+              <div class="article-sidebar bg-black-900 border-r border-white/10 p-6 lg:p-8 lg:col-span-2">
                 {/* Priority Indicator */}
-                <div class="priority-badge mb-6">
+                <div class="priority-badge mb-4 lg:mb-6">
                   <div class="mb-2 flex items-center gap-2">
                     <div class="bg-yellow h-2 w-2 animate-pulse rounded-full" />
                     <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
@@ -438,26 +526,26 @@ const paginatedNews = regularNews.slice(
               </div>
 
               {/* Main Content */}
-              <div class="article-content relative lg:col-span-6">
-                <div class="content-wrapper p-8 lg:p-12">
+              <div class="article-content relative col-span-12 lg:col-span-6">
+                <div class="content-wrapper p-4 sm:p-6 md:p-8 lg:p-12">
                   {/* Main Headline */}
-                  <h2 class="article-headline font-display mb-6 text-4xl leading-tight font-black text-white lg:text-5xl xl:text-6xl">
+                  <h2 class="article-headline font-display mb-4 md:mb-6 text-2xl sm:text-3xl md:text-4xl leading-tight font-black text-white lg:text-5xl xl:text-6xl">
                     <span class="headline-highlight relative">
                       {featuredStory.title.split(":")[0]}:
                       <span class="highlight-bg" />
                     </span>
-                    <span class="headline-secondary mt-2 block text-3xl text-white/80 lg:text-4xl">
+                    <span class="headline-secondary mt-2 block text-xl sm:text-2xl md:text-3xl text-white/80 lg:text-4xl">
                       {featuredStory.title.split(":")[1]}
                     </span>
                   </h2>
 
                   {/* Article Lead */}
-                  <p class="article-lead font-body mb-8 text-lg leading-relaxed text-white/70 lg:text-xl">
+                  <p class="article-lead font-body mb-6 md:mb-8 text-base sm:text-lg leading-relaxed text-white/70 lg:text-xl">
                     {featuredStory.description}
                   </p>
 
                   {/* Article Author */}
-                  <div class="article-meta mb-8 flex items-center gap-6">
+                  <div class="article-meta mb-6 md:mb-8 flex items-center gap-4 sm:gap-6">
                     <div class="meta-item flex items-center gap-2">
                       <div class="meta-icon bg-yellow/10 flex h-10 w-10 items-center justify-center">
                         <svg
@@ -480,12 +568,9 @@ const paginatedNews = regularNews.slice(
                   </div>
 
                   {/* CTA Buttons */}
-                  <div class="article-actions flex items-center gap-4">
-                    <a
-                      href={featuredStory.href}
-                      class="read-btn group bg-yellow font-body relative overflow-hidden px-8 py-4 font-black tracking-wider text-black uppercase transition-all hover:bg-yellow-400"
-                    >
-                      <span class="relative z-10 flex items-center gap-2">
+                  <div class="article-actions flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                    <Button href={featuredStory.href} variant="primary" size="large">
+                      <span class="flex items-center gap-2">
                         Read Article
                         <svg
                           class="h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -501,32 +586,32 @@ const paginatedNews = regularNews.slice(
                           />
                         </svg>
                       </span>
-                    </a>
+                    </Button>
 
-                    <button class="save-btn group hover:border-yellow hover:text-yellow flex items-center gap-2 border border-white/20 px-6 py-4 text-white/60 transition-all">
-                      <svg
-                        class="h-5 w-5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                        />
-                      </svg>
-                      <span class="font-body text-sm font-bold tracking-wider uppercase">
+                    <Button variant="outline" size="large">
+                      <span class="flex items-center gap-2">
+                        <svg
+                          class="h-5 w-5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                          />
+                        </svg>
                         Save
                       </span>
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>
 
               {/* Feature Image */}
-              <div class="article-image relative h-[400px] overflow-hidden lg:col-span-4 lg:h-auto">
+              <div class="article-image relative h-[250px] sm:h-[350px] md:h-[400px] overflow-hidden col-span-12 lg:col-span-4 lg:h-auto">
                 <div class="image-wrapper relative h-full">
                   <img
                     src={featuredStory.image}
@@ -534,49 +619,48 @@ const paginatedNews = regularNews.slice(
                     class="article-img h-full w-full object-cover"
                     loading="eager"
                   />
-                  <div class="image-overlay absolute inset-0 bg-gradient-to-l from-transparent to-black/50" />
+                  <div class="image-overlay absolute inset-0 bg-gradient-to-l from-transparent to-black/30 lg:to-black/50" />
 
                   {/* Image Caption */}
-                  <div class="image-caption absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-6">
-                    <p class="font-body text-xs tracking-wider text-white/60 uppercase">
+                  <div class="image-caption absolute right-0 bottom-0 left-0 bg-gradient-to-t from-black to-transparent p-3 sm:p-4 md:p-6">
+                    <p class="font-body text-[10px] sm:text-xs tracking-wider text-white/60 uppercase">
                       Motherland SC / Official Photo
                     </p>
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Bottom Bar */}
-            <div class="feature-bottom bg-black-900 border-t border-white/10 px-8 py-4">
-              <div class="flex items-center justify-between">
-                <div class="trending-topics flex items-center gap-4">
-                  <span class="font-body text-xs font-bold tracking-wider text-white/40 uppercase">
+              
+              {/* Desktop Bottom Bar */}
+              <div class="feature-bottom bg-black-900 border-t border-white/10 px-4 sm:px-6 md:px-8 py-3 md:py-4 col-span-12">
+              <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+                <div class="trending-topics flex flex-wrap items-center gap-2 sm:gap-4">
+                  <span class="font-body text-[10px] sm:text-xs font-bold tracking-wider text-white/40 uppercase">
                     Related:
                   </span>
                   <a
                     href="#"
-                    class="font-body text-yellow text-xs tracking-wider uppercase transition-colors hover:text-yellow-400"
+                    class="font-body text-yellow text-[10px] sm:text-xs tracking-wider uppercase transition-colors hover:text-yellow-400"
                   >
                     Transfers
                   </a>
-                  <span class="text-white/20">•</span>
+                  <span class="text-white/20 hidden sm:inline">•</span>
                   <a
                     href="#"
-                    class="font-body hover:text-yellow text-xs tracking-wider text-white/60 uppercase transition-colors"
+                    class="font-body hover:text-yellow text-[10px] sm:text-xs tracking-wider text-white/60 uppercase transition-colors"
                   >
                     Squad News
                   </a>
-                  <span class="text-white/20">•</span>
+                  <span class="text-white/20 hidden sm:inline">•</span>
                   <a
                     href="#"
-                    class="font-body hover:text-yellow text-xs tracking-wider text-white/60 uppercase transition-colors"
+                    class="font-body hover:text-yellow text-[10px] sm:text-xs tracking-wider text-white/60 uppercase transition-colors"
                   >
                     Manager Interview
                   </a>
                 </div>
 
                 <div class="social-share flex items-center gap-3">
-                  <button class="social-btn hover:bg-yellow flex h-8 w-8 items-center justify-center bg-white/5 text-white/60 transition-all hover:text-black">
+                  <IconButton variant="ghost" size="small" ariaLabel="Share on Twitter">
                     <svg
                       class="h-4 w-4"
                       fill="currentColor"
@@ -584,8 +668,8 @@ const paginatedNews = regularNews.slice(
                     >
                       <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
                     </svg>
-                  </button>
-                  <button class="social-btn hover:bg-yellow flex h-8 w-8 items-center justify-center bg-white/5 text-white/60 transition-all hover:text-black">
+                  </IconButton>
+                  <IconButton variant="ghost" size="small" ariaLabel="Share on Facebook">
                     <svg
                       class="h-4 w-4"
                       fill="currentColor"
@@ -593,18 +677,19 @@ const paginatedNews = regularNews.slice(
                     >
                       <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
                     </svg>
-                  </button>
-                  <button class="social-btn hover:bg-yellow flex h-8 w-8 items-center justify-center bg-white/5 text-white/60 transition-all hover:text-black">
+                  </IconButton>
+                  <IconButton variant="ghost" size="small" ariaLabel="Share on X">
                     <svg
                       class="h-4 w-4"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path d="M8.29 20.25a1.22.25c7.47 0 11.56-6.19 11.56-11.56 0-.18 0-.35-.01-.53A8.28 8.28 0 0022 5.92a8.14 8.14 0 01-2.36.65 4.11 4.11 0 001.8-2.27 8.22 8.22 0 01-2.61 1 4.1 4.1 0 00-7 3.74A11.65 11.65 0 013.39 4.62a4.1 4.1 0 001.27 5.48A4.07 4.07 0 012.8 9.59v.05a4.1 4.1 0 003.29 4.02 4.09 4.09 0 01-1.85.07 4.1 4.1 0 003.83 2.85A8.23 8.23 0 012 18.34a8.27 8.27 0 01-.98-.06 11.62 11.62 0 006.29 1.84" />
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>
-                  </button>
+                  </IconButton>
                 </div>
               </div>
+            </div>
             </div>
           </div>
         )
@@ -612,14 +697,14 @@ const paginatedNews = regularNews.slice(
     </Container>
 
     {/* Bottom transition */}
-    <div class="h-24 bg-gradient-to-b from-transparent to-black"></div>
+    <div class="h-12 md:h-24 bg-gradient-to-b from-transparent to-black"></div>
   </section>
 
   {/* Transition Section - Editor's Picks */}
-  <section class="editor-picks to-black-900 bg-gradient-to-b from-black py-16">
+  <section class="editor-picks to-black-900 bg-gradient-to-b from-black py-8 sm:py-12 md:py-16">
     <Container>
       <div
-        class="section-header mb-8 flex items-center justify-between border-b border-white/10 pb-4"
+        class="section-header mb-6 md:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-4"
       >
         <div>
           <h2 class="font-display text-3xl font-black text-white uppercase">
@@ -629,61 +714,62 @@ const paginatedNews = regularNews.slice(
             Hand-selected stories by our editorial team
           </p>
         </div>
-        <button
-          class="font-body text-yellow text-xs font-bold tracking-wider uppercase transition-colors hover:text-yellow-400"
-        >
-          View All →
-        </button>
+        <LinkButton href="/news" variant="with-arrow" size="small">
+          View All
+        </LinkButton>
       </div>
 
-      {/* Horizontal scroll of featured items */}
-      <div class="editor-picks-scroll scrollbar-hide overflow-x-auto">
-        <div class="flex gap-6 pb-4">
-          {
-            regularNews.slice(0, 4).map((item, index) => (
-              <div class="editor-pick-card group min-w-[300px]">
-                <a href={item.href} class="block">
-                  <div class="bg-black-900 relative h-48 overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                  </div>
-                  <div class="bg-black-800 p-4">
-                    <span class="font-body text-yellow text-xs tracking-wider uppercase">
-                      {item.category}
-                    </span>
-                    <h3 class="font-display group-hover:text-yellow mt-2 line-clamp-2 text-lg font-bold text-white transition-colors">
-                      {item.title}
-                    </h3>
-                    <time class="font-body mt-2 block text-xs text-white/40">
-                      {item.date}
-                    </time>
-                  </div>
-                </a>
-              </div>
-            ))
-          }
-        </div>
+      {/* Editor's Picks Grid - 3 cards */}
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {
+          regularNews.slice(0, 3).map((item, index) => (
+            <ArticleCard
+              title={item.title}
+              description={item.description}
+              image={item.image}
+              category={item.category}
+              date={item.date}
+              href={item.href}
+              variant="overlay"
+            />
+          ))
+        }
       </div>
     </Container>
   </section>
 
   {/* Main News Section with Sidebar Layout */}
-  <Section background="black" className="pt-8 pb-20" id="news-grid">
+  <Section background="black" className="pt-8 pb-12 md:pb-16 lg:pb-20" id="news-grid">
     <Container>
-      <div class="grid gap-8 lg:grid-cols-12">
-        {/* Sidebar Categories */}
+      <div class="grid gap-6 md:gap-8 lg:grid-cols-12">
+        {/* Sidebar Categories - Horizontal scroll on mobile */}
         <div class="lg:col-span-3">
-          <div class="category-sidebar sticky top-24">
+          <div class="category-sidebar lg:sticky lg:top-24">
             <h3
-              class="font-display mb-6 text-xl font-black text-white uppercase"
+              class="font-display mb-4 lg:mb-6 text-lg lg:text-xl font-black text-white uppercase"
             >
               Categories
             </h3>
-            <div class="category-list space-y-2">
+            {/* Mobile select dropdown */}
+            <div class="category-list-mobile lg:hidden mb-6">
+              <select
+                class="font-body w-full border border-white/20 bg-black px-4 py-2.5 text-sm text-white focus:border-yellow focus:outline-none"
+                data-category-select
+              >
+                {
+                  categories.map((category) => (
+                    <option 
+                      value={category}
+                      selected={category === selectedCategory}
+                    >
+                      {category}
+                    </option>
+                  ))
+                }
+              </select>
+            </div>
+            {/* Desktop vertical list */}
+            <div class="category-list hidden lg:block space-y-2">
               {
                 categories.map((category) => (
                   <button
@@ -715,26 +801,24 @@ const paginatedNews = regularNews.slice(
               }
             </div>
 
-            {/* Newsletter Signup */}
+            {/* Newsletter Signup - Hidden on mobile, shown on tablet up */}
             <div
-              class="newsletter-box bg-black-900 border-yellow/20 mt-8 border p-6"
+              class="newsletter-box bg-black-900 border-yellow/20 mt-6 lg:mt-8 border p-4 lg:p-6 hidden md:block"
             >
-              <h4 class="font-display text-yellow mb-2 text-lg font-bold">
+              <h4 class="font-display text-yellow mb-2 text-base lg:text-lg font-bold">
                 Stay Updated
               </h4>
-              <p class="font-body mb-4 text-sm text-white/60">
+              <p class="font-body mb-3 lg:mb-4 text-xs lg:text-sm text-white/60">
                 Get the latest news delivered to your inbox
               </p>
               <input
                 type="email"
                 placeholder="Your email"
-                class="font-body focus:border-yellow mb-3 w-full border border-white/20 bg-black px-4 py-2 text-sm text-white focus:outline-none"
+                class="font-body focus:border-yellow mb-3 w-full border border-white/20 bg-black px-3 lg:px-4 py-2 text-xs lg:text-sm text-white focus:outline-none"
               />
-              <button
-                class="bg-yellow font-body w-full py-2 text-sm font-bold tracking-wider text-black uppercase transition-colors hover:bg-yellow-400"
-              >
+              <Button variant="primary" size="small" fullWidth>
                 Subscribe
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -743,10 +827,10 @@ const paginatedNews = regularNews.slice(
         <div class="lg:col-span-9">
           {/* Results Header */}
           <div
-            class="results-header mb-8 flex items-center justify-between border-b border-white/10 pb-4"
+            class="results-header mb-6 md:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-white/10 pb-4 gap-3"
           >
             <div>
-              <p class="font-body text-sm text-white/60">
+              <p class="font-body text-xs md:text-sm text-white/60">
                 Showing <span class="font-medium text-white"
                   >{paginatedNews.length}</span
                 > of <span class="font-medium text-white"
@@ -754,9 +838,9 @@ const paginatedNews = regularNews.slice(
                 > articles
               </p>
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 md:gap-4">
               <select
-                class="font-body focus:border-yellow border border-white/20 bg-black px-4 py-2 text-sm text-white focus:outline-none"
+                class="font-body focus:border-yellow border border-white/20 bg-black px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-sm text-white focus:outline-none"
               >
                 <option>Latest First</option>
                 <option>Oldest First</option>
@@ -773,85 +857,22 @@ const paginatedNews = regularNews.slice(
                 if (index === 0) {
                   return (
                     <div class="featured-article mb-8">
-                      <a
+                      <ArticleCard
+                        title={item.title}
+                        description={item.description}
+                        image={item.image}
+                        category={item.category}
+                        date={item.date}
                         href={item.href}
-                        class="group bg-black-900 block overflow-hidden"
-                      >
-                        <div class="grid gap-0 md:grid-cols-2">
-                          <div class="relative h-64 overflow-hidden md:h-full">
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
-                            <div class="absolute inset-0 bg-gradient-to-r from-black via-transparent to-transparent" />
-                          </div>
-                          <div class="flex flex-col justify-center p-8">
-                            <div class="mb-4">
-                              <span class="font-body text-yellow block text-xs font-bold tracking-wider uppercase">
-                                {item.category}
-                              </span>
-                              <time class="font-body text-xs text-white/40">
-                                {item.date}
-                              </time>
-                            </div>
-                            <h3 class="font-display group-hover:text-yellow mb-3 text-2xl font-black text-white transition-colors">
-                              {item.title}
-                            </h3>
-                            <p class="font-body mb-4 line-clamp-2 text-white/60">
-                              {item.description}
-                            </p>
-                            <span class="font-body text-yellow text-sm font-bold transition-colors group-hover:text-yellow-400">
-                              Read More →
-                            </span>
-                          </div>
-                        </div>
-                      </a>
+                        variant="horizontal"
+                        featured
+                      />
                     </div>
                   );
                 }
 
-                // Regular grid items
-                return (
-                  <div
-                    class={`article-card group ${index % 5 === 1 ? "md:col-span-2" : ""}`}
-                  >
-                    <a
-                      href={item.href}
-                      class="bg-black-900 block h-full overflow-hidden"
-                    >
-                      <div class="relative h-48 overflow-hidden">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                        <div class="absolute right-4 bottom-4 left-4">
-                          <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
-                            {item.category}
-                          </span>
-                        </div>
-                      </div>
-                      <div class="p-6">
-                        <h3 class="font-display group-hover:text-yellow mb-2 line-clamp-2 text-lg font-bold text-white transition-colors">
-                          {item.title}
-                        </h3>
-                        <p class="font-body mb-3 line-clamp-2 text-sm text-white/60">
-                          {item.description}
-                        </p>
-                        <div class="flex items-center justify-between">
-                          <time class="font-body text-xs text-white/40">
-                            {item.date}
-                          </time>
-                          <span class="font-body text-yellow text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100">
-                            Read →
-                          </span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                );
+                // Regular grid items - return null, handled below
+                return null;
               })
             }
 
@@ -859,42 +880,15 @@ const paginatedNews = regularNews.slice(
             <div class="grid gap-6 md:grid-cols-2">
               {
                 paginatedNews.slice(1).map((item, index) => (
-                  <div class="article-card group">
-                    <a
-                      href={item.href}
-                      class="bg-black-900 block h-full overflow-hidden"
-                    >
-                      <div class="relative h-48 overflow-hidden">
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
-                        <div class="absolute right-4 bottom-4 left-4">
-                          <span class="font-body text-yellow text-xs font-bold tracking-wider uppercase">
-                            {item.category}
-                          </span>
-                        </div>
-                      </div>
-                      <div class="p-6">
-                        <h3 class="font-display group-hover:text-yellow mb-2 line-clamp-2 text-lg font-bold text-white transition-colors">
-                          {item.title}
-                        </h3>
-                        <p class="font-body mb-3 line-clamp-2 text-sm text-white/60">
-                          {item.description}
-                        </p>
-                        <div class="flex items-center justify-between">
-                          <time class="font-body text-xs text-white/40">
-                            {item.date}
-                          </time>
-                          <span class="font-body text-yellow text-xs font-bold opacity-0 transition-opacity group-hover:opacity-100">
-                            Read →
-                          </span>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
+                  <ArticleCard
+                    title={item.title}
+                    description={item.description}
+                    image={item.image}
+                    category={item.category}
+                    date={item.date}
+                    href={item.href}
+                    variant="overlay"
+                  />
                 ))
               }
             </div>
@@ -903,27 +897,27 @@ const paginatedNews = regularNews.slice(
           {/* Magazine-style Pagination */}
           {
             totalPages > 1 && (
-              <div class="pagination-container mt-12 border-t border-white/10 pt-8">
-                <div class="flex items-center justify-between">
+              <div class="pagination-container mt-8 md:mt-12 border-t border-white/10 pt-6 md:pt-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                   {/* Page Info */}
-                  <div class="page-info">
-                    <span class="font-body text-sm text-white/60">Page</span>
-                    <span class="font-display text-yellow mx-2 text-2xl font-black">
+                  <div class="page-info order-2 md:order-1">
+                    <span class="font-body text-xs md:text-sm text-white/60">Page</span>
+                    <span class="font-display text-yellow mx-1 md:mx-2 text-xl md:text-2xl font-black">
                       {currentPage}
                     </span>
-                    <span class="font-body text-sm text-white/60">
+                    <span class="font-body text-xs md:text-sm text-white/60">
                       of {totalPages}
                     </span>
                   </div>
 
                   {/* Navigation */}
-                  <div class="flex items-center gap-4">
+                  <div class="flex items-center gap-2 md:gap-4 order-1 md:order-2">
                     <button
-                      class="pagination-prev group hover:border-yellow hover:text-yellow flex items-center gap-2 border border-white/20 px-6 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-30"
+                      class="pagination-prev group hover:border-yellow hover:text-yellow flex items-center gap-1 md:gap-2 border border-white/20 px-3 md:px-6 py-2 md:py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-30"
                       disabled={currentPage === 1}
                     >
                       <svg
-                        class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+                        class="h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:-translate-x-1"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -935,8 +929,11 @@ const paginatedNews = regularNews.slice(
                           d="M15 19l-7-7 7-7"
                         />
                       </svg>
-                      <span class="font-body text-sm font-bold tracking-wider uppercase">
+                      <span class="font-body text-xs md:text-sm font-bold tracking-wider uppercase hidden sm:inline">
                         Previous
+                      </span>
+                      <span class="font-body text-xs font-bold uppercase sm:hidden">
+                        Prev
                       </span>
                     </button>
 
@@ -974,14 +971,14 @@ const paginatedNews = regularNews.slice(
                     </div>
 
                     <button
-                      class="pagination-next group hover:border-yellow hover:text-yellow flex items-center gap-2 border border-white/20 px-6 py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-30"
+                      class="pagination-next group hover:border-yellow hover:text-yellow flex items-center gap-1 md:gap-2 border border-white/20 px-3 md:px-6 py-2 md:py-3 text-white transition-all disabled:cursor-not-allowed disabled:opacity-30"
                       disabled={currentPage === totalPages}
                     >
-                      <span class="font-body text-sm font-bold tracking-wider uppercase">
+                      <span class="font-body text-xs md:text-sm font-bold tracking-wider uppercase">
                         Next
                       </span>
                       <svg
-                        class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                        class="h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:translate-x-1"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -1016,15 +1013,6 @@ const paginatedNews = regularNews.slice(
 </BaseLayout>
 
 <style>
-  /* Hide scrollbar for category filter */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
   /* Editor's Picks Section */
   .editor-picks {
     animation: sectionFadeIn 0.8s ease-out;
@@ -1038,34 +1026,6 @@ const paginatedNews = regularNews.slice(
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  .editor-pick-card {
-    animation: cardSlideIn 0.6s ease-out backwards;
-  }
-
-  .editor-pick-card:nth-child(1) {
-    animation-delay: 0.1s;
-  }
-  .editor-pick-card:nth-child(2) {
-    animation-delay: 0.2s;
-  }
-  .editor-pick-card:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-  .editor-pick-card:nth-child(4) {
-    animation-delay: 0.4s;
-  }
-
-  @keyframes cardSlideIn {
-    from {
-      opacity: 0;
-      transform: translateX(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
     }
   }
 
@@ -1570,13 +1530,33 @@ const paginatedNews = regularNews.slice(
   /* Mobile optimizations */
   @media (max-width: 768px) {
     .shapes-container {
-      opacity: 0.3;
+      opacity: 0;
     }
     .grid-bg {
       background-size: 30px 30px;
+      opacity: 0.1;
     }
     .category-scroll {
       animation: none;
+    }
+    /* Reduce animation intensity on mobile */
+    .title-text {
+      animation-duration: 0.5s;
+    }
+    .magazine-feature {
+      animation-duration: 0.5s;
+      animation-delay: 0.2s;
+    }
+    /* Simplify complex animations on mobile */
+    @keyframes titleSlideUp {
+      from {
+        transform: translateY(50%);
+        opacity: 0.5;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   }
 
@@ -1614,34 +1594,34 @@ const paginatedNews = regularNews.slice(
 
   // Category filtering (client-side)
   document.addEventListener("DOMContentLoaded", () => {
-    // Handle sticky category filter translucency
-    const categoryFilter = document.querySelector(".category-filter");
-
-    if (categoryFilter) {
-      // Store the initial offset position
-      const initialOffset = categoryFilter.offsetTop;
-
-      // Check if filter is stuck and add translucent effect
-      const handleScroll = () => {
-        const scrollY = window.scrollY;
-        const threshold = initialOffset - 72 - 10;
-
-        // When scrolled past the initial position, the filter becomes sticky
-        if (scrollY > threshold) {
-          categoryFilter.classList.add("is-scrolled");
-        } else {
-          categoryFilter.classList.remove("is-scrolled");
-        }
-      };
-
-      // Add scroll listener with passive option for better performance
-      window.addEventListener("scroll", handleScroll, { passive: true });
-
-      // Check initial state
-      handleScroll();
-    }
     const categoryButtons = document.querySelectorAll("[data-category]");
+    const categorySelect = document.querySelector("[data-category-select]");
 
+    // Handle category select dropdown (mobile)
+    if (categorySelect) {
+      categorySelect.addEventListener("change", (e) => {
+        const category = e.target.value;
+        // In a real implementation, this would filter the news items
+        // or navigate to a URL with the category parameter
+        console.log("Selected category:", category);
+        
+        // Update desktop buttons to match
+        categoryButtons.forEach((btn) => {
+          if (btn.dataset.category === category) {
+            btn.classList.add("bg-yellow", "text-black");
+            btn.classList.remove("bg-black-900", "text-white");
+          } else {
+            btn.classList.remove("bg-yellow", "text-black");
+            btn.classList.add("bg-black-900", "text-white");
+          }
+        });
+
+        // Scroll to top of news section
+        scrollToNewsGrid();
+      });
+    }
+
+    // Handle category buttons (desktop)
     categoryButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const category = button.dataset.category;
@@ -1656,6 +1636,11 @@ const paginatedNews = regularNews.slice(
         });
         button.classList.remove("bg-black-900", "text-white");
         button.classList.add("bg-yellow", "text-black");
+
+        // Update mobile select to match
+        if (categorySelect) {
+          categorySelect.value = category;
+        }
 
         // Scroll to top of news section
         scrollToNewsGrid();

@@ -1,0 +1,63 @@
+---
+export interface Props {
+  variant?: "primary" | "secondary" | "outline" | "success" | "warning";
+  size?: "small" | "medium" | "large";
+  animated?: boolean;
+  className?: string;
+}
+
+const {
+  variant = "primary",
+  size = "medium",
+  animated = false,
+  className = "",
+} = Astro.props;
+
+const variantClasses = {
+  primary: "bg-yellow text-black",
+  secondary: "bg-white/10 text-white/60",
+  outline: "border border-yellow text-yellow bg-transparent",
+  success: "bg-green-500 text-white",
+  warning: "bg-orange-500 text-white",
+};
+
+const sizeClasses = {
+  small: "px-2 py-0.5 text-xs",
+  medium: "px-3 py-1 text-sm",
+  large: "px-4 py-1.5 text-base",
+};
+
+const baseClasses = "font-body font-bold uppercase tracking-wider inline-block";
+
+const animatedClasses = animated ? "relative overflow-hidden" : "";
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  animatedClasses,
+  className,
+].join(" ");
+---
+
+<span class={classes}>
+  <slot />
+  {animated && variant === "primary" && (
+    <span class="absolute inset-0 -z-1 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+  )}
+</span>
+
+<style>
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+</style>

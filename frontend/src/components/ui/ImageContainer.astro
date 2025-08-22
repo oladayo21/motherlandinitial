@@ -1,0 +1,64 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  scaleOnHover?: 105 | 110 | false;
+  overlay?: "none" | "gradient" | "dark" | "light";
+  duration?: 300 | 500 | 700;
+  loading?: "eager" | "lazy";
+  className?: string;
+  containerClassName?: string;
+}
+
+const {
+  src,
+  alt,
+  scaleOnHover = 105,
+  overlay = "none",
+  duration = 700,
+  loading = "lazy",
+  className = "",
+  containerClassName = "",
+} = Astro.props;
+
+const scaleClasses = {
+  105: "group-hover:scale-105",
+  110: "group-hover:scale-110",
+  false: "",
+};
+
+const durationClasses = {
+  300: "duration-300",
+  500: "duration-500",
+  700: "duration-700",
+};
+
+const overlayClasses = {
+  none: "",
+  gradient: "after:absolute after:inset-0 after:bg-gradient-to-t after:from-black after:via-black/30 after:to-transparent",
+  dark: "after:absolute after:inset-0 after:bg-black/40",
+  light: "after:absolute after:inset-0 after:bg-white/20",
+};
+
+const imageClasses = [
+  "w-full h-full object-cover",
+  scaleOnHover !== false ? `transition-transform ${durationClasses[duration]} ${scaleClasses[scaleOnHover]}` : "",
+  className,
+].join(" ");
+
+const containerClasses = [
+  "relative overflow-hidden",
+  overlayClasses[overlay],
+  containerClassName,
+].join(" ");
+---
+
+<div class={containerClasses}>
+  <img
+    src={src}
+    alt={alt}
+    class={imageClasses}
+    loading={loading}
+  />
+  <slot />
+</div>

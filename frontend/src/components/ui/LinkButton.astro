@@ -1,0 +1,61 @@
+---
+export interface Props {
+  href: string;
+  variant?: "default" | "with-arrow" | "underline";
+  size?: "small" | "medium" | "large";
+  className?: string;
+  external?: boolean;
+}
+
+const {
+  href,
+  variant = "default",
+  size = "medium",
+  className = "",
+  external = false,
+} = Astro.props;
+
+const variantClasses = {
+  default: "text-yellow hover:text-yellow-400",
+  "with-arrow": "text-yellow hover:text-yellow-400 group inline-flex items-center gap-2",
+  underline: "text-yellow hover:text-yellow-400 underline-offset-4 hover:underline",
+};
+
+const sizeClasses = {
+  small: "text-xs",
+  medium: "text-sm",
+  large: "text-base",
+};
+
+const baseClasses = "font-body font-bold uppercase tracking-wider transition-all duration-300";
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  className,
+].join(" ");
+
+const linkProps = external 
+  ? { href, class: classes, target: "_blank", rel: "noopener noreferrer" }
+  : { href, class: classes };
+---
+
+<a {...linkProps}>
+  <slot />
+  {variant === "with-arrow" && (
+    <svg 
+      class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
+      fill="none" 
+      stroke="currentColor" 
+      viewBox="0 0 24 24"
+    >
+      <path 
+        stroke-linecap="square" 
+        stroke-linejoin="miter" 
+        stroke-width="2" 
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+  )}
+</a>

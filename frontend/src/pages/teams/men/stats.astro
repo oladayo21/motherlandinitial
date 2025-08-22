@@ -173,17 +173,17 @@ const competitions = [
   <!-- Form Guide Bar -->
   <section class="bg-yellow">
     <Container>
-      <div class="py-6">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-4">
-            <span class="text-sm font-bold text-black uppercase"
+      <div class="py-4 sm:py-6">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div class="flex items-center gap-2 sm:gap-4">
+            <span class="text-xs sm:text-sm font-bold text-black uppercase"
               >Last 5 Matches</span
             >
-            <div class="flex gap-2">
+            <div class="flex gap-1 sm:gap-2">
               {
                 formGuide.map((result) => (
                   <div
-                    class={`flex h-8 w-8 items-center justify-center text-xs font-bold ${
+                    class={`flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center text-[10px] sm:text-xs font-bold ${
                       result === "W"
                         ? "bg-green-500 text-white"
                         : result === "D"
@@ -197,9 +197,9 @@ const competitions = [
               }
             </div>
           </div>
-          <div class="hidden md:block">
-            <span class="font-medium text-black">Current Form: </span>
-            <span class="font-black text-black">Excellent</span>
+          <div class="hidden sm:block">
+            <span class="font-medium text-black text-sm">Current Form: </span>
+            <span class="font-black text-black text-sm">Excellent</span>
           </div>
         </div>
       </div>
@@ -207,60 +207,60 @@ const competitions = [
   </section>
 
   <!-- Main Stats Content -->
-  <section class="bg-black py-20">
+  <section class="bg-black py-12 sm:py-16 lg:py-20">
     <Container>
-      <div class="grid gap-12 lg:grid-cols-3">
+      <div class="grid gap-8 sm:gap-12 lg:grid-cols-3">
         <!-- Left Column - League Table -->
-        <div class="space-y-8 lg:col-span-2">
+        <div class="space-y-6 sm:space-y-8 lg:col-span-2">
           <!-- League Standings -->
-          <div class="bg-black-900 border border-white/10 p-8">
+          <div class="bg-black-900 border border-white/10 p-4 sm:p-6 lg:p-8">
             <h2
-              class="font-display mb-6 text-2xl font-bold text-white uppercase"
+              class="font-display mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white uppercase"
             >
               Bundesliga Standings
             </h2>
-            <div class="overflow-x-auto">
-              <table class="w-full">
+            <div class="overflow-x-auto -mx-4 sm:mx-0">
+              <table class="w-full min-w-[600px]">
                 <thead>
                   <tr class="border-b border-white/20">
                     <th
-                      class="py-3 text-left text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 pl-4 sm:pl-0 text-left text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >Pos</th
                     >
                     <th
-                      class="py-3 text-left text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-left text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >Team</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >P</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >W</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >D</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >L</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >GF</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >GA</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >GD</th
                     >
                     <th
-                      class="py-3 text-center text-xs font-medium text-white/50 uppercase"
+                      class="py-2 sm:py-3 pr-4 sm:pr-0 text-center text-[10px] sm:text-xs font-medium text-white/50 uppercase"
                       >Pts</th
                     >
                   </tr>
@@ -275,35 +275,35 @@ const competitions = [
                             : "hover:bg-white/5"
                         }`}
                       >
-                        <td class="py-4">
+                        <td class="py-3 sm:py-4 pl-4 sm:pl-0">
                           <span
-                            class={`font-bold ${team.highlight ? "text-yellow" : "text-white"}`}
+                            class={`font-bold text-sm sm:text-base ${team.highlight ? "text-yellow" : "text-white"}`}
                           >
                             {team.position}
                           </span>
                         </td>
-                        <td class="py-4">
+                        <td class="py-3 sm:py-4">
                           <span
-                            class={`font-medium ${team.highlight ? "text-yellow" : "text-white"}`}
+                            class={`font-medium text-xs sm:text-sm ${team.highlight ? "text-yellow" : "text-white"}`}
                           >
                             {team.team}
                           </span>
                         </td>
-                        <td class="py-4 text-center text-white/70">
+                        <td class="py-3 sm:py-4 text-center text-white/70 text-xs sm:text-sm">
                           {team.played}
                         </td>
-                        <td class="py-4 text-center text-green-400">
+                        <td class="py-3 sm:py-4 text-center text-green-400 text-xs sm:text-sm">
                           {team.won}
                         </td>
-                        <td class="py-4 text-center text-gray-400">
+                        <td class="py-3 sm:py-4 text-center text-gray-400 text-xs sm:text-sm">
                           {team.drawn}
                         </td>
-                        <td class="py-4 text-center text-red-400">
+                        <td class="py-3 sm:py-4 text-center text-red-400 text-xs sm:text-sm">
                           {team.lost}
                         </td>
-                        <td class="py-4 text-center text-white">{team.gf}</td>
-                        <td class="py-4 text-center text-white">{team.ga}</td>
-                        <td class="py-4 text-center">
+                        <td class="py-3 sm:py-4 text-center text-white text-xs sm:text-sm">{team.gf}</td>
+                        <td class="py-3 sm:py-4 text-center text-white text-xs sm:text-sm">{team.ga}</td>
+                        <td class="py-3 sm:py-4 text-center text-xs sm:text-sm">
                           <span
                             class={
                               team.gd > 0 ? "text-green-400" : "text-red-400"
@@ -313,9 +313,9 @@ const competitions = [
                             {team.gd}
                           </span>
                         </td>
-                        <td class="py-4 text-center">
+                        <td class="py-3 sm:py-4 pr-4 sm:pr-0 text-center">
                           <span
-                            class={`font-bold ${team.highlight ? "text-yellow" : "text-white"}`}
+                            class={`font-bold text-sm sm:text-base ${team.highlight ? "text-yellow" : "text-white"}`}
                           >
                             {team.points}
                           </span>
@@ -329,9 +329,9 @@ const competitions = [
           </div>
 
           <!-- Top Scorers -->
-          <div class="bg-black-900 border border-white/10 p-8">
+          <div class="bg-black-900 border border-white/10 p-4 sm:p-6 lg:p-8">
             <h2
-              class="font-display mb-6 text-2xl font-bold text-white uppercase"
+              class="font-display mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white uppercase"
             >
               Top Scorers
             </h2>
@@ -339,37 +339,37 @@ const competitions = [
               {
                 topScorers.map((player, index) => (
                   <div
-                    class={`flex items-center justify-between p-4 ${
+                    class={`flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 gap-3 ${
                       index === 0
                         ? "from-yellow/20 border-yellow border-l-4 bg-gradient-to-r to-transparent"
                         : "bg-black-800"
                     }`}
                   >
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-3 sm:gap-4">
                       <div
-                        class={`text-2xl font-black ${index === 0 ? "text-yellow" : "text-white/50"}`}
+                        class={`text-xl sm:text-2xl font-black ${index === 0 ? "text-yellow" : "text-white/50"}`}
                       >
                         {player.rank}
                       </div>
                       <div>
-                        <div class="font-bold text-white">{player.name}</div>
-                        <div class="text-sm text-white/50">
+                        <div class="font-bold text-white text-sm sm:text-base">{player.name}</div>
+                        <div class="text-xs sm:text-sm text-white/50">
                           {player.matches} matches
                         </div>
                       </div>
                     </div>
-                    <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-4 sm:gap-6">
                       <div class="text-center">
-                        <div class="text-yellow text-2xl font-black">
+                        <div class="text-yellow text-xl sm:text-2xl font-black">
                           {player.goals}
                         </div>
-                        <div class="text-xs text-white/50 uppercase">Goals</div>
+                        <div class="text-[10px] sm:text-xs text-white/50 uppercase">Goals</div>
                       </div>
                       <div class="text-center">
-                        <div class="text-xl font-bold text-white">
+                        <div class="text-lg sm:text-xl font-bold text-white">
                           {player.assists}
                         </div>
-                        <div class="text-xs text-white/50 uppercase">
+                        <div class="text-[10px] sm:text-xs text-white/50 uppercase">
                           Assists
                         </div>
                       </div>
@@ -381,9 +381,9 @@ const competitions = [
           </div>
 
           <!-- Team Performance Stats -->
-          <div class="bg-black-900 border border-white/10 p-8">
+          <div class="bg-black-900 border border-white/10 p-4 sm:p-6 lg:p-8">
             <h2
-              class="font-display mb-6 text-2xl font-bold text-white uppercase"
+              class="font-display mb-4 sm:mb-6 text-xl sm:text-2xl font-bold text-white uppercase"
             >
               Performance Metrics
             </h2>
@@ -391,15 +391,15 @@ const competitions = [
               {
                 teamComparison.map((stat) => (
                   <div>
-                    <div class="mb-2 flex justify-between">
-                      <span class="font-medium text-white">{stat.stat}</span>
-                      <div class="flex items-center gap-4">
-                        <span class="text-yellow font-bold">{stat.value}</span>
-                        <span class="text-sm text-white/50">
-                          League Avg: {stat.leagueAvg}
+                    <div class="mb-2 flex flex-col sm:flex-row sm:justify-between gap-2">
+                      <span class="font-medium text-white text-sm sm:text-base">{stat.stat}</span>
+                      <div class="flex items-center gap-2 sm:gap-4">
+                        <span class="text-yellow font-bold text-sm sm:text-base">{stat.value}</span>
+                        <span class="text-xs sm:text-sm text-white/50">
+                          Avg: {stat.leagueAvg}
                         </span>
                         <span
-                          class={`px-2 py-1 text-xs font-bold ${
+                          class={`px-2 py-1 text-[10px] sm:text-xs font-bold ${
                             stat.rank === 1
                               ? "bg-yellow/20 text-yellow"
                               : "bg-white/10 text-white"
@@ -427,29 +427,29 @@ const competitions = [
         </div>
 
         <!-- Right Column - Competition Progress -->
-        <div class="space-y-6">
+        <div class="space-y-4 sm:space-y-6">
           <!-- Competition Status -->
           <div
-            class="from-yellow/20 to-yellow/5 border-yellow/30 border bg-gradient-to-br p-6"
+            class="from-yellow/20 to-yellow/5 border-yellow/30 border bg-gradient-to-br p-4 sm:p-6"
           >
             <h3
-              class="font-display mb-6 text-xl font-bold text-white uppercase"
+              class="font-display mb-4 sm:mb-6 text-lg sm:text-xl font-bold text-white uppercase"
             >
               Competition Progress
             </h3>
             <div class="space-y-4">
               {
                 competitions.map((comp) => (
-                  <div class="bg-black/40 p-4 backdrop-blur-sm">
-                    <div class="flex items-start gap-3">
-                      <span class="text-2xl">{comp.icon}</span>
+                  <div class="bg-black/40 p-3 sm:p-4 backdrop-blur-sm">
+                    <div class="flex items-start gap-2 sm:gap-3">
+                      <span class="text-xl sm:text-2xl">{comp.icon}</span>
                       <div class="flex-1">
-                        <h4 class="font-bold text-white">{comp.name}</h4>
-                        <p class="text-yellow mt-1 text-sm font-medium">
+                        <h4 class="font-bold text-white text-sm sm:text-base">{comp.name}</h4>
+                        <p class="text-yellow mt-1 text-xs sm:text-sm font-medium">
                           {comp.position}
                         </p>
-                        <p class="mt-2 text-xs text-white/50">{comp.stage}</p>
-                        <p class="mt-2 text-sm text-white/70">
+                        <p class="mt-2 text-[10px] sm:text-xs text-white/50">{comp.stage}</p>
+                        <p class="mt-2 text-xs sm:text-sm text-white/70">
                           Next: {comp.nextMatch}
                         </p>
                       </div>
@@ -461,63 +461,63 @@ const competitions = [
           </div>
 
           <!-- Season Overview Card -->
-          <div class="bg-black-900 border border-white/10 p-6">
+          <div class="bg-black-900 border border-white/10 p-4 sm:p-6">
             <h3
-              class="font-display mb-4 text-xl font-bold text-white uppercase"
+              class="font-display mb-3 sm:mb-4 text-lg sm:text-xl font-bold text-white uppercase"
             >
               Season Overview
             </h3>
             <div class="space-y-4">
-              <div class="flex justify-between border-b border-white/10 py-3">
-                <span class="text-white/50">Home Record</span>
-                <span class="font-bold text-white">W7 D1 L0</span>
+              <div class="flex justify-between border-b border-white/10 py-2 sm:py-3">
+                <span class="text-white/50 text-xs sm:text-sm">Home Record</span>
+                <span class="font-bold text-white text-xs sm:text-sm">W7 D1 L0</span>
               </div>
-              <div class="flex justify-between border-b border-white/10 py-3">
-                <span class="text-white/50">Away Record</span>
-                <span class="font-bold text-white">W3 D2 L2</span>
+              <div class="flex justify-between border-b border-white/10 py-2 sm:py-3">
+                <span class="text-white/50 text-xs sm:text-sm">Away Record</span>
+                <span class="font-bold text-white text-xs sm:text-sm">W3 D2 L2</span>
               </div>
-              <div class="flex justify-between border-b border-white/10 py-3">
-                <span class="text-white/50">Biggest Win</span>
-                <span class="font-bold text-white">5-0 vs Frankfurt</span>
+              <div class="flex justify-between border-b border-white/10 py-2 sm:py-3">
+                <span class="text-white/50 text-xs sm:text-sm">Biggest Win</span>
+                <span class="font-bold text-white text-xs sm:text-sm">5-0 vs Frankfurt</span>
               </div>
-              <div class="flex justify-between border-b border-white/10 py-3">
-                <span class="text-white/50">Top Scorer</span>
-                <span class="font-bold text-white">E. Nkrumah (12)</span>
+              <div class="flex justify-between border-b border-white/10 py-2 sm:py-3">
+                <span class="text-white/50 text-xs sm:text-sm">Top Scorer</span>
+                <span class="font-bold text-white text-xs sm:text-sm">E. Nkrumah (12)</span>
               </div>
-              <div class="flex justify-between py-3">
-                <span class="text-white/50">Top Assists</span>
-                <span class="font-bold text-white">L. Rodriguez (8)</span>
+              <div class="flex justify-between py-2 sm:py-3">
+                <span class="text-white/50 text-xs sm:text-sm">Top Assists</span>
+                <span class="font-bold text-white text-xs sm:text-sm">L. Rodriguez (8)</span>
               </div>
             </div>
           </div>
 
           <!-- Records This Season -->
-          <div class="bg-black-900 border border-white/10 p-6">
+          <div class="bg-black-900 border border-white/10 p-4 sm:p-6">
             <h3
-              class="font-display mb-4 text-xl font-bold text-white uppercase"
+              class="font-display mb-3 sm:mb-4 text-lg sm:text-xl font-bold text-white uppercase"
             >
               Club Records 24/25
             </h3>
             <div class="space-y-3">
-              <div class="flex items-center gap-3">
-                <span class="text-yellow text-xl">🎯</span>
-                <span class="text-sm text-white/80"
+              <div class="flex items-center gap-2 sm:gap-3">
+                <span class="text-yellow text-lg sm:text-xl">🎯</span>
+                <span class="text-xs sm:text-sm text-white/80"
                   >Most goals in first 15 games</span
                 >
               </div>
-              <div class="flex items-center gap-3">
-                <span class="text-yellow text-xl">🥅</span>
-                <span class="text-sm text-white/80">Best defensive record</span>
+              <div class="flex items-center gap-2 sm:gap-3">
+                <span class="text-yellow text-lg sm:text-xl">🥅</span>
+                <span class="text-xs sm:text-sm text-white/80">Best defensive record</span>
               </div>
-              <div class="flex items-center gap-3">
-                <span class="text-yellow text-xl">⚡</span>
-                <span class="text-sm text-white/80"
+              <div class="flex items-center gap-2 sm:gap-3">
+                <span class="text-yellow text-lg sm:text-xl">⚡</span>
+                <span class="text-xs sm:text-sm text-white/80"
                   >Longest unbeaten run (9 games)</span
                 >
               </div>
-              <div class="flex items-center gap-3">
-                <span class="text-yellow text-xl">🏟️</span>
-                <span class="text-sm text-white/80">100% home win record</span>
+              <div class="flex items-center gap-2 sm:gap-3">
+                <span class="text-yellow text-lg sm:text-xl">🏟️</span>
+                <span class="text-xs sm:text-sm text-white/80">100% home win record</span>
               </div>
             </div>
           </div>
@@ -527,29 +527,29 @@ const competitions = [
   </section>
 
   <!-- Call to Action -->
-  <section class="from-yellow via-yellow/90 to-gold bg-gradient-to-r py-16">
+  <section class="from-yellow via-yellow/90 to-gold bg-gradient-to-r py-12 sm:py-16">
     <Container>
       <div class="text-center">
         <h2
-          class="font-display mb-4 text-3xl font-black text-black uppercase md:text-4xl"
+          class="font-display mb-4 text-2xl sm:text-3xl font-black text-black uppercase md:text-4xl"
         >
           Follow Every Match
         </h2>
-        <p class="mb-8 text-lg text-black/70">
+        <p class="mb-6 sm:mb-8 text-base sm:text-lg text-black/70">
           Get live updates, detailed statistics, and match analysis
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <a
             href="/teams/men/fixtures-results"
-            class="font-display bg-black px-8 py-4 font-bold tracking-wider text-white uppercase transition-all hover:shadow-[0_0_40px_rgba(0,0,0,0.5)]"
+            class="font-display bg-black px-6 sm:px-8 py-3 sm:py-4 font-bold tracking-wider text-white text-sm sm:text-base uppercase transition-all hover:shadow-[0_0_40px_rgba(0,0,0,0.5)]"
           >
             View Fixtures
           </a>
           <a
-            href="/teams/mens"
-            class="font-display bg-white px-8 py-4 font-bold tracking-wider text-black uppercase transition-all hover:shadow-[0_0_40px_rgba(255,255,255,0.5)]"
+            href="/teams/men/players-staff"
+            class="font-display bg-white px-6 sm:px-8 py-3 sm:py-4 font-bold tracking-wider text-black text-sm sm:text-base uppercase transition-all hover:shadow-[0_0_40px_rgba(255,255,255,0.5)]"
           >
-            Team Overview
+            View Squad
           </a>
         </div>
       </div>

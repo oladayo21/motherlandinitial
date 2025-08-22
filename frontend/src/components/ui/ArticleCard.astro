@@ -1,0 +1,193 @@
+---
+import Badge from "./Badge.astro";
+import ImageContainer from "./ImageContainer.astro";
+
+export interface Props {
+  title: string;
+  description?: string;
+  image: string;
+  imageAlt?: string;
+  category?: string;
+  date?: string;
+  href: string;
+  featured?: boolean;
+  variant?: "default" | "horizontal" | "compact" | "overlay";
+  className?: string;
+  numberBadge?: number;
+}
+
+const {
+  title,
+  description,
+  image,
+  imageAlt = title,
+  category,
+  date,
+  href,
+  featured = false,
+  variant = "default",
+  className = "",
+  numberBadge,
+} = Astro.props;
+
+const baseClasses = variant === "overlay" 
+  ? "group block overflow-hidden bg-zinc-900 border border-white/5 transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-black/60"
+  : "group block bg-black-900 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1";
+
+const variantClasses = {
+  default: "flex flex-col",
+  horizontal: "flex flex-row",
+  compact: "flex flex-col",
+  overlay: "",
+};
+
+const imageHeightClasses = {
+  default: "h-48",
+  horizontal: "h-64 md:h-full md:w-1/2",
+  compact: "h-32",
+  overlay: "h-[300px] md:h-[350px] lg:h-[400px]",
+};
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  featured ? "border-2 border-yellow" : "border border-white/10",
+  className,
+].join(" ");
+---
+
+<article class={classes}>
+  <a href={href} class="block h-full">
+    {variant === "overlay" ? (
+      // Overlay variant - text overlaid on image
+      <div class={`relative block ${imageHeightClasses[variant]} w-full`}>
+        {/* Image takes full space */}
+        <img
+          src={image}
+          alt={imageAlt}
+          class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
+        />
+        
+        {/* Gradient overlay - stronger for better text readability */}
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 via-40% to-black/90 pointer-events-none" />
+        
+        {/* Number badge if provided */}
+        {numberBadge && (
+          <div class="absolute top-4 right-4 w-10 h-10 bg-yellow flex items-center justify-center z-10">
+            <span class="font-display text-xl font-black text-black">{numberBadge}</span>
+          </div>
+        )}
+        
+        {/* Text content positioned absolutely at bottom with dark background */}
+        <div class="absolute inset-x-0 bottom-0 z-10">
+          {/* Extra dark scrim behind text for guaranteed readability */}
+          <div class="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
+          <div class="relative p-4 md:p-6">
+          {/* Category Badge */}
+          {category && (
+            <div class="mb-2">
+              <span class="inline-block font-body bg-yellow text-black px-2 py-1 text-xs font-bold tracking-wider uppercase">
+                {category}
+              </span>
+            </div>
+          )}
+          
+          {/* Title */}
+          <h3 class="font-display group-hover:text-yellow mb-2 text-xl md:text-2xl leading-tight font-bold text-white transition-colors">
+            {title.length > 50 ? title.substring(0, 50) + '...' : title}
+          </h3>
+          
+          {/* Description - only show on larger screens */}
+          {description && (
+            <p class="font-body hidden md:block text-sm text-white/80 line-clamp-2">
+              {description}
+            </p>
+          )}
+          
+          {/* Date and Read More */}
+          <div class="flex items-center justify-between mt-3">
+            {date && <time class="font-body text-xs text-white/60">{date}</time>}
+            <span class="font-body text-yellow text-xs font-bold uppercase tracking-wider">
+              Read →
+            </span>
+          </div>
+          </div>
+        </div>
+      </div>
+    ) : variant === "horizontal" ? (
+      <div class="flex flex-col md:flex-row h-full">
+        <div class={`relative overflow-hidden ${imageHeightClasses[variant]}`}>
+          <ImageContainer
+            src={image}
+            alt={imageAlt}
+            scaleOnHover={featured ? 110 : 105}
+            overlay="gradient"
+          />
+          {category && (
+            <div class="absolute bottom-4 left-4 z-10">
+              <Badge variant="primary" size="small">
+                {category}
+              </Badge>
+            </div>
+          )}
+        </div>
+        <div class="flex flex-1 flex-col justify-center p-6">
+          {date && (
+            <time class="font-body text-xs text-white/40 mb-2">{date}</time>
+          )}
+          <h3 class="font-display text-lg font-bold text-white group-hover:text-yellow transition-colors duration-300 mb-2 line-clamp-2">
+            {title}
+          </h3>
+          {description && (
+            <p class="font-body text-sm text-white/60 line-clamp-2 mb-3">
+              {description}
+            </p>
+          )}
+          <span class="font-body text-yellow text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Read →
+          </span>
+        </div>
+      </div>
+    ) : (
+      <>
+        <div class={`relative overflow-hidden ${imageHeightClasses[variant]}`}>
+          <ImageContainer
+            src={image}
+            alt={imageAlt}
+            scaleOnHover={featured ? 110 : 105}
+            overlay="gradient"
+          />
+          {category && (
+            <div class="absolute bottom-4 left-4 right-4 z-10">
+              <Badge variant="primary" size="small">
+                {category}
+              </Badge>
+            </div>
+          )}
+        </div>
+        <div class={variant === "compact" ? "p-4" : "p-6"}>
+          {date && (
+            <time class="font-body text-xs text-white/40 block mb-2">{date}</time>
+          )}
+          <h3 class={`font-display font-bold text-white group-hover:text-yellow transition-colors duration-300 mb-2 line-clamp-2 ${variant === "compact" ? "text-base" : "text-lg"}`}>
+            {title}
+          </h3>
+          {description && variant !== "compact" && (
+            <p class="font-body text-sm text-white/60 line-clamp-2 mb-3">
+              {description}
+            </p>
+          )}
+          <div class="flex items-center justify-between">
+            {date && variant === "compact" && (
+              <time class="font-body text-xs text-white/40">{date}</time>
+            )}
+            <span class="font-body text-yellow text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 ml-auto">
+              Read →
+            </span>
+          </div>
+        </div>
+      </>
+    )}
+  </a>
+</article>

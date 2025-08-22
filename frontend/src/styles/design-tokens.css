@@ -1,0 +1,103 @@
+/* Design Tokens for Motherland SC */
+
+:root {
+  /* Transition Durations */
+  --transition-fast: 300ms;
+  --transition-medium: 500ms;
+  --transition-slow: 700ms;
+  
+  /* Scale Transforms */
+  --scale-subtle: 1.05;
+  --scale-dramatic: 1.1;
+  
+  /* Translate Transforms */
+  --lift-subtle: -0.25rem;
+  --lift-medium: -0.5rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-yellow: 0 10px 40px -10px rgba(255, 214, 2, 0.3);
+  
+  /* Brand Colors */
+  --color-yellow: #ffd602;
+  --color-yellow-400: #facc15;
+  --color-yellow-500: #eab308;
+  --color-yellow-600: #ca8a04;
+  --color-red: #dc2626;
+  --color-red-400: #f87171;
+  --color-black: #000000;
+  --color-black-600: #1f1f1f;
+  --color-black-700: #171717;
+  --color-black-800: #0f0f0f;
+  --color-black-900: #0a0a0a;
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border Radius */
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  
+  /* Z-Index Scale */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-overlay: 30;
+  --z-modal: 40;
+  --z-tooltip: 50;
+}
+
+/* Consistent Hover States */
+.hover-lift {
+  transition: transform var(--transition-fast);
+}
+
+.hover-lift:hover {
+  transform: translateY(var(--lift-subtle));
+}
+
+.hover-scale-subtle {
+  transition: transform var(--transition-slow);
+}
+
+.hover-scale-subtle:hover {
+  transform: scale(var(--scale-subtle));
+}
+
+.hover-scale-dramatic {
+  transition: transform var(--transition-slow);
+}
+
+.hover-scale-dramatic:hover {
+  transform: scale(var(--scale-dramatic));
+}
+
+/* Consistent Button Transitions */
+.btn-transition {
+  transition: 
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+/* Consistent Text Color Transitions */
+.text-transition {
+  transition: color var(--transition-fast);
+}
+
+/* Consistent Image Transitions */
+.img-transition {
+  transition: transform var(--transition-slow);
+}

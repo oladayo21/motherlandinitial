@@ -3,6 +3,11 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Container from "../../../components/ui/Container.astro";
 import TeamHero from "../../../components/TeamHero.astro";
 
+// Helper function to generate avatar URLs
+const getAvatarUrl = (firstName: string, lastName: string) => {
+  return `https://ui-avatars.com/api/?name=${firstName}+${lastName}&size=400&background=27272a&color=fbbf24&bold=true`;
+};
+
 const positions = {
   goalkeepers: "Goalkeepers",
   defenders: "Defenders",
@@ -24,8 +29,7 @@ const players = {
       joinedYear: "2021",
       caps: 45,
       cleanSheets: 18,
-      image:
-        "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Marcus", "Schmidt"),
     },
     {
       id: "david-johnson",
@@ -39,8 +43,7 @@ const players = {
       joinedYear: "2023",
       caps: 12,
       cleanSheets: 5,
-      image:
-        "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=400&h=600&fit=crop",
+      image: getAvatarUrl("David", "Johnson"),
     },
   ],
   defenders: [
@@ -57,8 +60,7 @@ const players = {
       caps: 67,
       goals: 4,
       assists: 12,
-      image:
-        "https://images.unsplash.com/photo-1599834562135-b6fc90e642ca?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Carlos", "Silva"),
     },
     {
       id: "james-williams",
@@ -73,8 +75,7 @@ const players = {
       caps: 54,
       goals: 2,
       assists: 8,
-      image:
-        "https://images.unsplash.com/photo-1606924842584-ffa79285b531?w=400&h=600&fit=crop",
+      image: getAvatarUrl("James", "Williams"),
     },
     {
       id: "mohamed-hassan",
@@ -88,8 +89,7 @@ const players = {
       joinedYear: "2021",
       caps: 89,
       goals: 6,
-      image:
-        "https://images.unsplash.com/photo-1597075995396-b4054813fdfe?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Mohamed", "Hassan"),
     },
     {
       id: "pierre-dubois",
@@ -104,8 +104,7 @@ const players = {
       caps: 112,
       goals: 8,
       isCaptain: true,
-      image:
-        "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Pierre", "Dubois"),
     },
     {
       id: "oluwaseun-adeyemi",
@@ -119,8 +118,7 @@ const players = {
       joinedYear: "2023",
       caps: 21,
       goals: 1,
-      image:
-        "https://images.unsplash.com/photo-1574096079513-d8259312b785?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Oluwaseun", "Adeyemi"),
     },
     {
       id: "antonio-martinez",
@@ -134,8 +132,7 @@ const players = {
       joinedYear: "2024",
       caps: 8,
       assists: 2,
-      image:
-        "https://images.unsplash.com/photo-1578425669166-7a7e4057e35f?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Antonio", "Martinez"),
     },
   ],
   midfielders: [
@@ -152,8 +149,7 @@ const players = {
       caps: 95,
       goals: 7,
       assists: 15,
-      image:
-        "https://images.unsplash.com/photo-1606924735276-fbb5b325e933?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Kwame", "Mensah"),
     },
     {
       id: "yuki-tanaka",
@@ -201,8 +197,7 @@ const players = {
       goals: 18,
       assists: 15,
       isViceCaptain: true,
-      image:
-        "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Lucas", "RODRIGUEZ"),
     },
     {
       id: "ibrahim-diallo",
@@ -217,8 +212,7 @@ const players = {
       caps: 31,
       goals: 4,
       assists: 7,
-      image:
-        "https://images.unsplash.com/photo-1621592484082-2d05b1290d7a?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Ibrahim", "DIALLO"),
     },
     {
       id: "marco-rossi",
@@ -233,8 +227,7 @@ const players = {
       caps: 15,
       goals: 5,
       assists: 6,
-      image:
-        "https://images.unsplash.com/photo-1589386417686-0d34b5903d23?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Marco", "ROSSI"),
     },
     {
       id: "aleksandr-petrov",
@@ -249,8 +242,7 @@ const players = {
       caps: 58,
       goals: 8,
       assists: 12,
-      image:
-        "https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Aleksandr", "PETROV"),
     },
   ],
   forwards: [
@@ -268,8 +260,7 @@ const players = {
       goals: 42,
       assists: 11,
       isTopScorer: true,
-      image:
-        "https://images.unsplash.com/photo-1613144448271-e3a9a3e43397?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Emmanuel", "NKRUMAH"),
     },
     {
       id: "joao-santos",
@@ -284,8 +275,7 @@ const players = {
       caps: 45,
       goals: 14,
       assists: 19,
-      image:
-        "https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?w=400&h=600&fit=crop",
+      image: getAvatarUrl("João", "SANTOS"),
     },
     {
       id: "didier-mbappe",
@@ -300,8 +290,7 @@ const players = {
       caps: 33,
       goals: 18,
       assists: 7,
-      image:
-        "https://images.unsplash.com/photo-1611262588019-db6cc2032da3?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Didier", "MBAPPÉ"),
     },
     {
       id: "park-ji-sung",
@@ -316,8 +305,7 @@ const players = {
       caps: 92,
       goals: 21,
       assists: 25,
-      image:
-        "https://images.unsplash.com/photo-1618333452884-1f9a731a8bfd?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Park", "JI-SUNG"),
     },
     {
       id: "ahmed-el-sharif",
@@ -332,8 +320,7 @@ const players = {
       caps: 12,
       goals: 6,
       assists: 3,
-      image:
-        "https://images.unsplash.com/photo-1605296867424-35fc25c9212a?w=400&h=600&fit=crop",
+      image: getAvatarUrl("Ahmed", "EL-SHARIF"),
     },
   ],
 };
@@ -344,21 +331,52 @@ const staff = [
     role: "Head Coach",
     nationality: "Italy",
     joinedYear: "2022",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=600&fit=crop",
+    image: getAvatarUrl("Roberto", "MANCINI"),
   },
   {
     name: "Michael O'BRIEN",
     role: "Assistant Coach",
     nationality: "Ireland",
     joinedYear: "2022",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=600&fit=crop",
+    image: getAvatarUrl("Michael", "O'BRIEN"),
   },
   {
     name: "Franz MUELLER",
     role: "Goalkeeping Coach",
     nationality: "Germany",
     joinedYear: "2021",
-    image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=400&h=600&fit=crop",
+    image: getAvatarUrl("Franz", "MUELLER"),
+  },
+];
+
+const officials = [
+  {
+    name: "Alexander SCHMIDT",
+    role: "Club President",
+    nationality: "Germany",
+    joinedYear: "2019",
+    image: getAvatarUrl("Alexander", "SCHMIDT"),
+  },
+  {
+    name: "David WILLIAMS",
+    role: "Technical Director",
+    nationality: "England",
+    joinedYear: "2021",
+    image: getAvatarUrl("David", "WILLIAMS"),
+  },
+  {
+    name: "Sarah JOHNSON",
+    role: "Head of Football Operations",
+    nationality: "United States",
+    joinedYear: "2020",
+    image: getAvatarUrl("Sarah", "JOHNSON"),
+  },
+  {
+    name: "Marcus WEBER",
+    role: "Team Manager",
+    nationality: "Germany",
+    joinedYear: "2022",
+    image: getAvatarUrl("Marcus", "WEBER"),
   },
 ];
 
@@ -385,176 +403,96 @@ const activePosition = "all";
     title="The Squad"
     subtitle="Meet the players and staff who represent Motherland SC on and off the pitch."
     badge="2024/25 Squad"
-    backgroundImage="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=2070"
-    stats={[
-      { value: squadStats.totalPlayers, label: "Players", highlight: true },
-      { value: squadStats.averageAge, label: "Avg Age" },
-      { value: squadStats.nationalities, label: "Nations" },
-      { value: squadStats.totalCaps, label: "Total Caps" },
-      { value: squadStats.totalGoals, label: "Total Goals", highlight: true },
-    ]}
+    backgroundImage="https://images.unsplash.com/photo-1522778119026-d647f0596c20?q=80&w=2070"
   />
 
-  <!-- Position Filter Bar -->
-  <section class="bg-yellow sticky top-20 z-40">
-    <Container>
-      <div class="py-4">
-        <div class="flex items-center justify-between">
-          <div class="flex gap-2">
-            <button class="bg-black text-white px-6 py-2 font-bold uppercase tracking-wider hover:bg-black-800 transition-colors">
-              All Players
-            </button>
-            <button class="bg-transparent text-black px-6 py-2 font-medium uppercase tracking-wider hover:bg-black/10 transition-colors">
-              Goalkeepers
-            </button>
-            <button class="bg-transparent text-black px-6 py-2 font-medium uppercase tracking-wider hover:bg-black/10 transition-colors">
-              Defenders
-            </button>
-            <button class="bg-transparent text-black px-6 py-2 font-medium uppercase tracking-wider hover:bg-black/10 transition-colors">
-              Midfielders
-            </button>
-            <button class="bg-transparent text-black px-6 py-2 font-medium uppercase tracking-wider hover:bg-black/10 transition-colors">
-              Forwards
-            </button>
-          </div>
-          
-          <div class="hidden md:flex items-center gap-4">
-            <button class="flex items-center gap-2 text-black hover:text-black/70 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-              </svg>
-              <span class="font-medium">List View</span>
-            </button>
-            <button class="flex items-center gap-2 text-black/50 hover:text-black/70 transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-              </svg>
-              <span class="font-medium">Grid View</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </Container>
-  </section>
-
   <!-- Players Grid with Enhanced Design -->
-  <section class="bg-black min-h-screen py-20">
+  <section class="bg-black min-h-screen py-12 sm:py-16 lg:py-20">
     <Container>
       {Object.entries(players).map(([position, playerList]) => (
-        <div class="mb-20">
+        <div class="mb-12 sm:mb-16 lg:mb-20">
           <!-- Position Header -->
-          <div class="mb-10 relative">
-            <h2 class="font-display text-6xl md:text-8xl font-black text-white/5 uppercase">
+          <div class="mb-6 sm:mb-8 lg:mb-10 relative">
+            <h2 class="font-display text-3xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white/5 uppercase">
               {positions[position as keyof typeof positions]}
             </h2>
             <div class="absolute top-1/2 -translate-y-1/2 left-0">
-              <h3 class="font-display text-2xl md:text-3xl font-bold text-yellow uppercase">
+              <h3 class="font-display text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-yellow uppercase">
                 {positions[position as keyof typeof positions]}
               </h3>
-              <div class="h-1 w-20 bg-yellow mt-2"></div>
+              <div class="h-1 w-16 sm:w-20 bg-yellow mt-1 sm:mt-2"></div>
             </div>
           </div>
           
           <!-- Players Grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-4 md:gap-6">
             {playerList.map((player, index) => (
               <a
                 href={`/teams/men/player/${player.id}`}
-                class="group relative bg-black-900 border border-white/10 overflow-hidden hover:border-yellow/50 transition-all duration-500 hover:scale-105 hover:shadow-[0_20px_60px_rgba(255,214,2,0.3)] animate-fadeInUp"
+                class="group relative bg-zinc-900 border border-white/20 overflow-hidden hover:border-yellow transition-all duration-500 animate-fadeInUp"
                 style={`animation-delay: ${index * 0.1}s`}
               >
                 <!-- Player Image -->
-                <div class="relative h-96 overflow-hidden bg-gradient-to-b from-black-800 to-black">
+                <div class="relative h-64 sm:h-72 overflow-hidden bg-zinc-800">
                   <img
                     src={player.image}
                     alt={`${player.firstName} ${player.lastName}`}
                     class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  
-                  <!-- Gradient Overlay -->
-                  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60"></div>
-                  
-                  <!-- Jersey Number -->
-                  <div class="absolute top-4 right-4 text-8xl font-black text-white/10 group-hover:text-yellow/20 transition-colors duration-500">
-                    {player.number}
-                  </div>
-                  
-                  <!-- Special Badges -->
-                  {player.isCaptain && (
-                    <div class="absolute top-4 left-4 bg-yellow text-black px-3 py-1 text-xs font-bold uppercase">
-                      Captain
-                    </div>
-                  )}
-                  {player.isViceCaptain && (
-                    <div class="absolute top-4 left-4 bg-white text-black px-3 py-1 text-xs font-bold uppercase">
-                      Vice Captain
-                    </div>
-                  )}
-                  {player.isTopScorer && (
-                    <div class="absolute top-4 left-4 bg-gradient-to-r from-yellow to-gold text-black px-3 py-1 text-xs font-bold uppercase">
-                      Top Scorer
-                    </div>
-                  )}
                 </div>
                 
                 <!-- Player Info -->
-                <div class="relative p-6 bg-gradient-to-t from-black to-black-900">
-                  <!-- Name and Number -->
-                  <div class="mb-4">
-                    <div class="flex items-center justify-between mb-2">
-                      <span class="text-yellow text-2xl font-black">{player.number}</span>
-                      <span class="text-white/50 text-xs uppercase">{player.position}</span>
+                <div class="relative p-4 sm:p-5 bg-zinc-900 border-t border-white/10">
+                  <h3 class="font-display text-lg font-bold text-white uppercase mb-2">
+                    {player.firstName} {player.lastName}
+                  </h3>
+                  <p class="text-yellow text-xs font-medium uppercase mb-3">
+                    {player.position}
+                  </p>
+                  <div class="flex items-center justify-between text-xs">
+                    <div class="flex items-center gap-2">
+                      <img 
+                        src={`https://flagcdn.com/24x18/${
+                          player.nationality === "Germany" ? "de" :
+                          player.nationality === "England" ? "gb-eng" :
+                          player.nationality === "Brazil" ? "br" :
+                          player.nationality === "Wales" ? "gb-wls" :
+                          player.nationality === "Egypt" ? "eg" :
+                          player.nationality === "France" ? "fr" :
+                          player.nationality === "Nigeria" ? "ng" :
+                          player.nationality === "Spain" ? "es" :
+                          player.nationality === "Ghana" ? "gh" :
+                          player.nationality === "Japan" ? "jp" :
+                          player.nationality === "Mali" ? "ml" :
+                          player.nationality === "Italy" ? "it" :
+                          player.nationality === "Russia" ? "ru" :
+                          player.nationality === "Portugal" ? "pt" :
+                          player.nationality === "Cameroon" ? "cm" :
+                          player.nationality === "South Korea" ? "kr" :
+                          player.nationality === "Ireland" ? "ie" :
+                          "un"
+                        }.png`}
+                        alt={player.nationality}
+                        class="w-4 h-3 object-cover"
+                        loading="lazy"
+                      />
+                      <span class="text-white/70">{player.nationality}</span>
                     </div>
-                    <h4 class="font-body text-white/80 text-sm">{player.firstName}</h4>
-                    <h3 class="font-display text-2xl font-black text-white uppercase tracking-tight">
-                      {player.lastName}
-                    </h3>
-                  </div>
-                  
-                  <!-- Player Stats -->
-                  <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10">
-                    <div class="text-center">
-                      <div class="text-white text-sm font-bold">
-                        {player.caps || player.goals || "-"}
-                      </div>
-                      <div class="text-white/50 text-xs uppercase mt-1">
-                        {player.caps ? "Caps" : player.goals ? "Goals" : "Saves"}
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-white text-sm font-bold">
-                        {player.goals || player.assists || player.cleanSheets || "-"}
-                      </div>
-                      <div class="text-white/50 text-xs uppercase mt-1">
-                        {player.goals ? "Goals" : player.assists ? "Assists" : "Clean"}
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <div class="text-white text-sm font-bold">
-                        {player.assists || player.cleanSheets || player.age || "-"}
-                      </div>
-                      <div class="text-white/50 text-xs uppercase mt-1">
-                        {player.assists ? "Assists" : player.cleanSheets ? "Sheets" : "Age"}
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Nationality Flag -->
-                  <div class="absolute bottom-6 right-6 text-white/30 text-xs uppercase">
-                    {player.nationality}
+                    <span class="text-white/50">#{player.number}</span>
                   </div>
                 </div>
                 
-                <!-- Hover Overlay -->
-                <div class="absolute inset-0 bg-yellow/0 group-hover:bg-yellow/10 transition-colors duration-500 pointer-events-none"></div>
-                
-                <!-- View Profile CTA -->
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                  <div class="bg-yellow text-black px-6 py-3 font-bold uppercase tracking-wider transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                    View Profile
+                <!-- Role Badge -->
+                {(player.isCaptain || player.isViceCaptain || player.isTopScorer) && (
+                  <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 border border-yellow/30">
+                    <span class="text-yellow text-[10px] font-bold uppercase tracking-wider">
+                      {player.isCaptain ? "Captain" : 
+                       player.isViceCaptain ? "Vice Captain" : 
+                       "Top Scorer"}
+                    </span>
                   </div>
-                </div>
+                )}
               </a>
             ))}
           </div>
@@ -564,7 +502,7 @@ const activePosition = "all";
   </section>
 
   <!-- Coaching Staff Section -->
-  <section class="bg-gradient-to-b from-black via-black-900 to-black py-20 relative overflow-hidden">
+  <section class="bg-gradient-to-b from-black via-black-900 to-black py-12 sm:py-16 lg:py-20 relative overflow-hidden">
     <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-10">
       <div class="absolute inset-0 bg-[linear-gradient(to_right,yellow_1px,transparent_1px),linear-gradient(to_bottom,yellow_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
@@ -573,47 +511,63 @@ const activePosition = "all";
     <Container>
       <div class="relative">
         <!-- Section Header -->
-        <div class="text-center mb-16">
-          <h2 class="font-display text-5xl md:text-7xl font-black text-white uppercase mb-4">
+        <div class="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 class="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase mb-3 sm:mb-4">
             Coaching Staff
           </h2>
-          <div class="h-1 w-32 bg-yellow mx-auto"></div>
+          <div class="h-1 w-24 sm:w-32 bg-yellow mx-auto"></div>
         </div>
         
         <!-- Staff Grid -->
-        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
           {staff.map((member, index) => (
             <div 
-              class="group relative bg-black border border-white/10 overflow-hidden hover:border-yellow/50 transition-all duration-500 hover:shadow-[0_20px_60px_rgba(255,214,2,0.2)] animate-fadeInUp"
-              style={`animation-delay: ${index * 0.2}s`}
+              class="group relative bg-zinc-900 border border-white/20 overflow-hidden hover:border-yellow transition-all duration-500 animate-fadeInUp"
+              style={`animation-delay: ${index * 0.15}s`}
             >
               <!-- Staff Image -->
-              <div class="relative h-80 overflow-hidden">
+              <div class="relative h-64 sm:h-72 overflow-hidden bg-zinc-800">
                 <img
                   src={member.image}
                   alt={member.name}
                   class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
               </div>
               
               <!-- Staff Info -->
-              <div class="relative p-6 bg-black">
-                <h3 class="font-display text-xl font-bold text-white uppercase mb-2">
+              <div class="relative p-4 sm:p-5 bg-zinc-900 border-t border-white/10">
+                <h3 class="font-display text-lg font-bold text-white uppercase mb-2">
                   {member.name}
                 </h3>
-                <p class="text-yellow text-sm font-medium uppercase mb-4">
+                <p class="text-yellow text-xs font-medium uppercase mb-3">
                   {member.role}
                 </p>
-                <div class="flex justify-between text-sm">
-                  <span class="text-white/50">{member.nationality}</span>
+                <div class="flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <img 
+                      src={`https://flagcdn.com/24x18/${
+                        member.nationality === "Germany" ? "de" :
+                        member.nationality === "Italy" ? "it" :
+                        member.nationality === "Ireland" ? "ie" :
+                        "un"
+                      }.png`}
+                      alt={member.nationality}
+                      class="w-4 h-3 object-cover"
+                      loading="lazy"
+                    />
+                    <span class="text-white/70">{member.nationality}</span>
+                  </div>
                   <span class="text-white/50">Since {member.joinedYear}</span>
                 </div>
               </div>
               
-              <!-- Hover Effect -->
-              <div class="absolute left-0 bottom-0 h-1 w-full bg-yellow transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <!-- Role Badge -->
+              <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 border border-yellow/30">
+                <span class="text-yellow text-[10px] font-bold uppercase tracking-wider">
+                  Coaching
+                </span>
+              </div>
             </div>
           ))}
         </div>
@@ -621,31 +575,98 @@ const activePosition = "all";
     </Container>
   </section>
 
-  <!-- Call to Action -->
-  <section class="bg-yellow relative overflow-hidden py-20">
-    <div class="absolute inset-0 bg-[linear-gradient(45deg,black_25%,transparent_25%,transparent_75%,black_75%,black)] bg-[length:30px_30px] opacity-10"></div>
+  <!-- Club Officials Section -->
+  <section class="bg-black py-12 sm:py-16 lg:py-20 relative overflow-hidden border-t border-white/10">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,yellow_1px,transparent_1px)] bg-[size:30px_30px]"></div>
+    </div>
+    
     <Container>
-      <div class="relative text-center">
-        <h2 class="font-display text-4xl md:text-5xl font-black text-black uppercase mb-4">
-          Meet The Players
-        </h2>
-        <p class="text-black/70 text-lg mb-8 max-w-2xl mx-auto">
-          Get exclusive access to player interviews, behind-the-scenes content, and matchday experiences.
-        </p>
-        <div class="flex flex-wrap gap-4 justify-center">
-          <a href="/membership" class="bg-black text-white px-8 py-4 font-display font-bold uppercase tracking-wider hover:shadow-[0_0_40px_rgba(0,0,0,0.5)] transition-all">
-            Become a Member
-          </a>
-          <a href="/teams/mens" class="bg-white text-black px-8 py-4 font-display font-bold uppercase tracking-wider hover:shadow-[0_0_40px_rgba(255,255,255,0.5)] transition-all">
-            Team Overview
-          </a>
+      <div class="relative">
+        <!-- Section Header -->
+        <div class="text-center mb-8 sm:mb-12 lg:mb-16">
+          <h2 class="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white uppercase mb-3 sm:mb-4">
+            Club Officials
+          </h2>
+          <div class="h-1 w-24 sm:w-32 bg-yellow mx-auto"></div>
+        </div>
+        
+        <!-- Officials Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto">
+          {officials.map((official, index) => (
+            <div 
+              class="group relative bg-zinc-900 border border-white/20 overflow-hidden hover:border-yellow transition-all duration-500 animate-fadeInUp"
+              style={`animation-delay: ${index * 0.15}s`}
+            >
+              <!-- Official Image -->
+              <div class="relative h-64 sm:h-72 overflow-hidden bg-zinc-800">
+                <img
+                  src={official.image}
+                  alt={official.name}
+                  class="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+              </div>
+              
+              <!-- Official Info -->
+              <div class="relative p-4 sm:p-5 bg-zinc-900 border-t border-white/10">
+                <h3 class="font-display text-lg font-bold text-white uppercase mb-2">
+                  {official.name}
+                </h3>
+                <p class="text-yellow text-xs font-medium uppercase mb-3">
+                  {official.role}
+                </p>
+                <div class="flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-2">
+                    <img 
+                      src={`https://flagcdn.com/24x18/${
+                        official.nationality === "Germany" ? "de" :
+                        official.nationality === "England" ? "gb-eng" :
+                        official.nationality === "United States" ? "us" :
+                        official.nationality === "Italy" ? "it" :
+                        official.nationality === "Ireland" ? "ie" :
+                        "un"
+                      }.png`}
+                      alt={official.nationality}
+                      class="w-4 h-3 object-cover"
+                      loading="lazy"
+                    />
+                    <span class="text-white/70">{official.nationality}</span>
+                  </div>
+                  <span class="text-white/50">Since {official.joinedYear}</span>
+                </div>
+              </div>
+              
+              <!-- Role Badge -->
+              <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-sm px-3 py-1.5 border border-yellow/30">
+                <span class="text-yellow text-[10px] font-bold uppercase tracking-wider">
+                  {official.role.includes("President") ? "Executive" : 
+                   official.role.includes("Director") ? "Management" : 
+                   "Operations"}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </Container>
   </section>
+
 </BaseLayout>
 
 <style>
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
   @keyframes slidePattern {
     0% {
       transform: translateX(0);

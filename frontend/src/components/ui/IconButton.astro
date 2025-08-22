@@ -1,0 +1,55 @@
+---
+export interface Props {
+  variant?: "solid" | "ghost" | "outline";
+  size?: "small" | "medium" | "large";
+  href?: string;
+  type?: "button" | "submit" | "reset";
+  ariaLabel: string;
+  className?: string;
+}
+
+const {
+  variant = "ghost",
+  size = "medium",
+  href,
+  type = "button",
+  ariaLabel,
+  className = "",
+} = Astro.props;
+
+const variantClasses = {
+  solid: "bg-yellow text-black hover:bg-yellow-400 hover:shadow-lg",
+  ghost: "bg-white/5 text-white/60 hover:bg-yellow hover:text-black",
+  outline: "border border-white/20 text-white/60 hover:border-yellow hover:text-yellow hover:bg-yellow/10",
+};
+
+const sizeClasses = {
+  small: "h-8 w-8",
+  medium: "h-10 w-10",
+  large: "h-12 w-12",
+};
+
+const baseClasses = "flex items-center justify-center transition-all duration-300 rounded-sm";
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  className,
+].join(" ");
+
+const Tag = href ? "a" : "button";
+const props = href 
+  ? { href, class: classes, "aria-label": ariaLabel }
+  : { type, class: classes, "aria-label": ariaLabel };
+---
+
+{href ? (
+  <a {...props}>
+    <slot />
+  </a>
+) : (
+  <button {...props}>
+    <slot />
+  </button>
+)}

@@ -160,34 +160,34 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
           {liveMatches.map((match) => (
             <div class="bg-black-900/90 backdrop-blur-sm border border-yellow/20 shadow-[0_0_50px_rgba(255,214,2,0.2)]">
               <!-- Live Match Header -->
-              <div class="bg-gradient-to-r from-black via-black-900 to-black border-b border-yellow/20 px-6 py-4">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-4">
-                    <div class="flex items-center gap-2 bg-red-600 px-3 py-1">
+              <div class="bg-gradient-to-r from-black via-black-900 to-black border-b border-yellow/20 px-4 sm:px-6 py-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                    <div class="flex items-center gap-2 bg-red-600 px-2 sm:px-3 py-1">
                       <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full bg-white opacity-75"></span>
                         <span class="relative inline-flex h-2 w-2 bg-white"></span>
                       </span>
-                      <span class="text-white font-bold text-sm uppercase tracking-wider">LIVE</span>
+                      <span class="text-white font-bold text-xs sm:text-sm uppercase tracking-wider">LIVE</span>
                     </div>
-                    <span class="text-white font-black text-lg">{match.minute}'</span>
-                    <span class="text-white/60 text-sm">{match.competition}</span>
+                    <span class="text-white font-black text-base sm:text-lg">{match.minute}'</span>
+                    <span class="text-white/60 text-xs sm:text-sm">{match.competition}</span>
                   </div>
-                  <button class="bg-yellow text-black px-6 py-2 font-bold uppercase hover:shadow-[0_0_30px_rgba(255,214,2,0.5)] transition-all">
+                  <button class="bg-yellow text-black px-4 sm:px-6 py-2 font-bold text-xs sm:text-sm uppercase hover:shadow-[0_0_30px_rgba(255,214,2,0.5)] transition-all w-full sm:w-auto">
                     Watch Live
                   </button>
                 </div>
               </div>
               
               <!-- Match Score Section -->
-              <div class="p-8">
-                <div class="grid md:grid-cols-3 gap-8 items-center">
+              <div class="p-4 sm:p-6 lg:p-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 items-center">
                   <!-- Home Team -->
-                  <div class="text-center md:text-right">
-                    <div class={`font-display text-2xl font-bold mb-3 ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                  <div class="text-center sm:text-right">
+                    <div class={`font-display text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
                       {match.homeTeam}
                     </div>
-                    <div class="text-7xl font-black text-white">{match.homeScore}</div>
+                    <div class="text-5xl sm:text-6xl lg:text-7xl font-black text-white">{match.homeScore}</div>
                   </div>
                   
                   <!-- Match Stats -->
@@ -221,20 +221,20 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
                   </div>
                   
                   <!-- Away Team -->
-                  <div class="text-center md:text-left">
-                    <div class={`font-display text-2xl font-bold mb-3 ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                  <div class="text-center sm:text-left">
+                    <div class={`font-display text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
                       {match.awayTeam}
                     </div>
-                    <div class="text-7xl font-black text-white">{match.awayScore}</div>
+                    <div class="text-5xl sm:text-6xl lg:text-7xl font-black text-white">{match.awayScore}</div>
                   </div>
                 </div>
               </div>
               
               <!-- Match Events Timeline -->
-              <div class="bg-black/50 border-t border-white/10 px-6 py-4">
-                <div class="flex items-center justify-between">
+              <div class="bg-black/50 border-t border-white/10 px-4 sm:px-6 py-4">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                   <div class="text-xs text-white/50 uppercase tracking-wider">Latest Events</div>
-                  <div class="flex gap-6">
+                  <div class="flex flex-wrap gap-3 sm:gap-6">
                     {match.events.slice(-3).map((event) => (
                       <div class="flex items-center gap-2 text-sm">
                         <span class="text-yellow font-bold">{event.minute}'</span>
@@ -266,16 +266,16 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
   <section class="bg-black border-b border-white/10 sticky top-20 z-40">
     <Container>
       <div class="py-4">
-        <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <!-- Filters -->
-          <div class="flex flex-wrap gap-2">
-            <select class="bg-black-900 border border-white/20 px-4 py-2 text-white focus:border-yellow focus:outline-none">
+          <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+            <select class="bg-black-900 border border-white/20 px-3 sm:px-4 py-2 text-sm sm:text-base text-white focus:border-yellow focus:outline-none flex-1 sm:flex-none">
               {competitions.map((comp) => <option>{comp}</option>)}
             </select>
-            <select class="bg-black-900 border border-white/20 px-4 py-2 text-white focus:border-yellow focus:outline-none">
+            <select class="bg-black-900 border border-white/20 px-3 sm:px-4 py-2 text-sm sm:text-base text-white focus:border-yellow focus:outline-none flex-1 sm:flex-none">
               {months.map((month) => <option>{month}</option>)}
             </select>
-            <select class="bg-black-900 border border-white/20 px-4 py-2 text-white focus:border-yellow focus:outline-none">
+            <select class="bg-black-900 border border-white/20 px-3 sm:px-4 py-2 text-sm sm:text-base text-white focus:border-yellow focus:outline-none flex-1 sm:flex-none">
               <option>All Venues</option>
               <option>Home</option>
               <option>Away</option>
@@ -284,13 +284,13 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
           
           <!-- View Toggle -->
           <div class="flex gap-1 bg-black-900 p-1">
-            <button class="bg-yellow text-black px-4 py-2 font-medium">
+            <button class="bg-yellow text-black px-3 sm:px-4 py-1.5 sm:py-2 font-medium text-xs sm:text-sm">
               List View
             </button>
-            <button class="bg-transparent text-white px-4 py-2 font-medium hover:bg-white/10">
+            <button class="bg-transparent text-white px-3 sm:px-4 py-1.5 sm:py-2 font-medium hover:bg-white/10 text-xs sm:text-sm">
               Calendar
             </button>
-            <button class="bg-transparent text-white px-4 py-2 font-medium hover:bg-white/10">
+            <button class="bg-transparent text-white px-3 sm:px-4 py-1.5 sm:py-2 font-medium hover:bg-white/10 text-xs sm:text-sm hidden sm:block">
               Timeline
             </button>
           </div>
@@ -302,8 +302,8 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
   <!-- Upcoming Matches -->
   <section class="bg-black py-16">
     <Container>
-      <div class="mb-8">
-        <h2 class="font-display text-3xl md:text-4xl font-black text-white uppercase mb-2">
+      <div class="mb-6 sm:mb-8">
+        <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mb-2">
           Upcoming Fixtures
         </h2>
         <div class="h-1 w-20 bg-yellow"></div>
@@ -323,8 +323,8 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
               </div>
             )}
             
-            <div class="p-6">
-              <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div class="p-4 sm:p-6">
+              <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
                 <!-- Match Info -->
                 <div class="flex-1">
                   <div class="flex items-center gap-4 mb-4">
@@ -334,19 +334,19 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
                   
                   <div class="flex items-center gap-8">
                     <!-- Teams -->
-                    <div class="flex items-center gap-6 flex-1">
+                    <div class="flex items-center gap-3 sm:gap-6 flex-1">
                       <div class="text-right flex-1">
-                        <div class={`font-display text-xl font-bold ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                        <div class={`font-display text-base sm:text-lg lg:text-xl font-bold ${match.homeTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
                           {match.homeTeam}
                         </div>
                       </div>
                       
                       <div class="text-center">
-                        <div class="text-white/30 text-2xl font-light">VS</div>
+                        <div class="text-white/30 text-lg sm:text-xl lg:text-2xl font-light">VS</div>
                       </div>
                       
                       <div class="flex-1">
-                        <div class={`font-display text-xl font-bold ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
+                        <div class={`font-display text-base sm:text-lg lg:text-xl font-bold ${match.awayTeam === "Motherland SC" ? "text-yellow" : "text-white"}`}>
                           {match.awayTeam}
                         </div>
                       </div>
@@ -386,13 +386,13 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
                 </div>
                 
                 <!-- Action Buttons -->
-                <div class="flex gap-3">
+                <div class="flex gap-2 sm:gap-3 w-full lg:w-auto">
                   {match.ticketsAvailable && (
-                    <button class="bg-yellow text-black px-6 py-3 font-bold uppercase hover:shadow-[0_0_20px_rgba(255,214,2,0.5)] transition-all">
+                    <button class="bg-yellow text-black px-4 sm:px-6 py-2 sm:py-3 font-bold text-xs sm:text-sm uppercase hover:shadow-[0_0_20px_rgba(255,214,2,0.5)] transition-all flex-1 lg:flex-none">
                       Buy Tickets
                     </button>
                   )}
-                  <button class="border border-white/30 text-white px-6 py-3 font-medium hover:border-yellow hover:text-yellow transition-all">
+                  <button class="border border-white/30 text-white px-4 sm:px-6 py-2 sm:py-3 font-medium text-xs sm:text-sm hover:border-yellow hover:text-yellow transition-all flex-1 lg:flex-none">
                     Details
                   </button>
                 </div>
@@ -410,14 +410,14 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
   <!-- Recent Results -->
   <section class="bg-gradient-to-b from-black to-black-900 py-16">
     <Container>
-      <div class="mb-8">
-        <h2 class="font-display text-3xl md:text-4xl font-black text-white uppercase mb-2">
+      <div class="mb-6 sm:mb-8">
+        <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mb-2">
           Recent Results
         </h2>
         <div class="h-1 w-20 bg-yellow"></div>
       </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {finishedMatches.map((match, index) => (
           <div 
             class="group bg-black-900 border border-white/10 overflow-hidden hover:border-yellow/30 transition-all animate-fadeInUp"
@@ -434,7 +434,7 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
                 : match.awayScore > match.homeScore ? "Victory" : match.awayScore < match.homeScore ? "Defeat" : "Draw"}
             </div>
             
-            <div class="p-6">
+            <div class="p-4 sm:p-6">
               <!-- Competition & Date -->
               <div class="flex justify-between items-center mb-4">
                 <span class="text-yellow text-xs font-medium uppercase">{match.competition}</span>
@@ -499,19 +499,19 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
   <!-- Season Calendar -->
   <section class="bg-black border-t border-white/10 py-16">
     <Container>
-      <div class="mb-8 flex items-center justify-between">
+      <div class="mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h2 class="font-display text-3xl md:text-4xl font-black text-white uppercase mb-2">
+          <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase mb-2">
             Season Calendar
           </h2>
           <div class="h-1 w-20 bg-yellow"></div>
         </div>
-        <button class="bg-yellow text-black px-6 py-3 font-bold uppercase hover:shadow-[0_0_20px_rgba(255,214,2,0.5)] transition-all">
+        <button class="bg-yellow text-black px-4 sm:px-6 py-2 sm:py-3 font-bold text-xs sm:text-sm uppercase hover:shadow-[0_0_20px_rgba(255,214,2,0.5)] transition-all">
           Download Calendar
         </button>
       </div>
       
-      <div class="bg-black-900 border border-white/10 p-8">
+      <div class="bg-black-900 border border-white/10 p-4 sm:p-6 lg:p-8">
         <div class="grid gap-8">
           {Object.entries(monthGroups).map(([month, matches]) => (
             <div>
@@ -519,24 +519,24 @@ const finishedMatches = allMatches.filter(m => m.status === "finished");
               {matches.length > 0 ? (
                 <div class="grid gap-2">
                   {matches.map((match) => (
-                    <div class="flex items-center justify-between p-4 bg-black hover:bg-white/5 transition-colors">
-                      <div class="flex items-center gap-6">
-                        <div class="text-white/50 text-sm w-20">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-black hover:bg-white/5 transition-colors gap-3">
+                      <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+                        <div class="text-white/50 text-xs sm:text-sm w-auto sm:w-20">
                           {new Date(match.date).toLocaleDateString('en-US', { weekday: 'short', day: 'numeric' })}
                         </div>
-                        <div class="flex items-center gap-4">
-                          <span class={match.homeTeam === "Motherland SC" ? "text-yellow font-bold" : "text-white"}>
+                        <div class="flex flex-wrap items-center gap-2 sm:gap-4">
+                          <span class={`text-sm sm:text-base ${match.homeTeam === "Motherland SC" ? "text-yellow font-bold" : "text-white"}`}>
                             {match.homeTeam}
                           </span>
-                          <span class="text-white/30">vs</span>
-                          <span class={match.awayTeam === "Motherland SC" ? "text-yellow font-bold" : "text-white"}>
+                          <span class="text-white/30 text-sm">vs</span>
+                          <span class={`text-sm sm:text-base ${match.awayTeam === "Motherland SC" ? "text-yellow font-bold" : "text-white"}`}>
                             {match.awayTeam}
                           </span>
                         </div>
                       </div>
-                      <div class="flex items-center gap-4">
-                        <span class="text-white/50 text-sm">{match.competition}</span>
-                        <span class="text-white/70">{match.time}</span>
+                      <div class="flex items-center gap-2 sm:gap-4">
+                        <span class="text-white/50 text-xs sm:text-sm">{match.competition}</span>
+                        <span class="text-white/70 text-xs sm:text-sm">{match.time}</span>
                       </div>
                     </div>
                   ))}
