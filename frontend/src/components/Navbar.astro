@@ -1,5 +1,6 @@
 ---
-const base = import.meta.env.BASE_URL;
+import motherlandLogo from '../assets/images/motherland-logo.png';
+
 const navItems = [
   { label: "News", href: "/news" },
   {
@@ -34,7 +35,7 @@ const navItems = [
       <div class="flex items-center">
         <a href="/" class="flex items-center space-x-3">
           <img
-            src={`${base}motherland-logo.png`}
+            src={motherlandLogo}
             alt="Motherland SC Logo"
             class="h-10 w-10 object-contain lg:h-12 lg:w-12"
           />

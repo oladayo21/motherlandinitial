@@ -1,6 +1,7 @@
 ---
+import motherlandLogo from '../assets/images/motherland-logo.png';
+
 const currentYear = new Date().getFullYear();
-const base = import.meta.env.BASE_URL;
 
 const footerLinks = {
   club: [
@@ -220,7 +221,7 @@ const legalLinks = [
         <!-- Copyright -->
         <div class="flex items-center gap-3">
           <img
-            src={`${base}motherland-logo.png`}
+            src={motherlandLogo}
             alt="Motherland SC Logo"
             class="h-8 w-8 object-contain"
           />
